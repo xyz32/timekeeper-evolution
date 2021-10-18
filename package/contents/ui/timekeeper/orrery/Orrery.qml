@@ -12,8 +12,10 @@ Item {
     property var showingDate: new Date();
 
     function setDateTime(date) {
-        if (Math.abs(showingDate - date) < 100){return} //limit framerate
-        showingDate = date;
+        for (var i = 0; i < planetarium.planets.length; i++) {
+            var planet = planetarium.planets[i];
+            planet.planetTrueAnomaly = 360 - Planets.getTrueAnomaly(i, date)
+        }
 
         var offest   = date.getTimezoneOffset();
         var hours    = date.getHours();
@@ -26,7 +28,7 @@ Item {
         id:planetarium
         width: parent.width
         height: parent.height
-        property var planets: [sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune]
+        property var planets: [mercury, venus, earth, mars, jupiter, saturn, uranus, neptune]
 
         Image {
             id: sun;
@@ -49,6 +51,7 @@ Item {
             id: mercury
 
             property int planetoffset: 38
+            property int planetTrueAnomaly: 0
 
             x: sun.x + (sun.width / 2) - (this.width / 2)
             y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
@@ -68,7 +71,7 @@ Item {
             transform: Rotation {
                 origin.x: mercury.width / 2
                 origin.y: mercury.height / 2 + mercury.planetoffset
-                angle: 360 - Planets.getTrueAnomaly(0, showingDate)
+                angle: mercury.planetTrueAnomaly
                 Behavior on angle {
                     SpringAnimation { spring: 2; damping: 0.2; modulus: 360}
                 }
@@ -79,6 +82,7 @@ Item {
             id: venus;
 
             property int planetoffset: 56
+            property int planetTrueAnomaly: 0
 
             x: sun.x + (sun.width / 2) - (this.width / 2)
             y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
@@ -98,7 +102,7 @@ Item {
             transform: Rotation {
                 origin.x: venus.width / 2
                 origin.y: venus.height / 2 + venus.planetoffset
-                angle: 360 - Planets.getTrueAnomaly(1, showingDate)
+                angle: venus.planetTrueAnomaly
                 Behavior on angle {
                     SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
                 }
@@ -108,10 +112,12 @@ Item {
         Image {
             id: earth;
 
-            property int  rot: 0
-            property int  earthNumFrames: 96
-            property int  framesPerHour: earthNumFrames / 24
-            property int  framesPerMin: 60 / framesPerHour
+            property int rot: 0
+            property int earthNumFrames: 96
+            property int planetTrueAnomaly: 0
+
+            property int framesPerHour: earthNumFrames / 24
+            property int framesPerMin: 60 / framesPerHour
 
             property int planetoffset: 74
 
@@ -136,7 +142,7 @@ Item {
             transform: Rotation {
                 origin.x: earth.width / 2
                 origin.y: earth.height / 2 + earth.planetoffset
-                angle: 360 - Planets.getTrueAnomaly(2, showingDate)
+                angle: earth.planetTrueAnomaly
                 Behavior on angle {
                     SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
                 }
@@ -147,6 +153,7 @@ Item {
             id: mars;
 
             property int planetoffset: 88
+            property int planetTrueAnomaly: 0
 
             x: sun.x + (sun.width / 2) - (this.width / 2)
             y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
@@ -166,7 +173,7 @@ Item {
             transform: Rotation {
                 origin.x: mars.width / 2
                 origin.y: mars.height / 2 + mars.planetoffset
-                angle: 360 - Planets.getTrueAnomaly(3, showingDate)
+                angle: mars.planetTrueAnomaly
                 Behavior on angle {
                     SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
                 }
@@ -177,6 +184,7 @@ Item {
             id: jupiter;
 
             property int planetoffset: 104
+            property int planetTrueAnomaly: 0
 
             x: sun.x + (sun.width / 2) - (this.width / 2)
             y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
@@ -196,7 +204,7 @@ Item {
             transform: Rotation {
                 origin.x: jupiter.width / 2
                 origin.y: jupiter.height / 2 + jupiter.planetoffset
-                angle: 360 - Planets.getTrueAnomaly(4, showingDate)
+                angle: jupiter.planetTrueAnomaly
                 Behavior on angle {
                     SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
                 }
@@ -208,6 +216,7 @@ Item {
             id: saturn;
 
             property int planetoffset: 118
+            property int planetTrueAnomaly: 0
 
             x: sun.x + (sun.width / 2) - (this.width / 2)
             y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
@@ -227,7 +236,7 @@ Item {
             transform: Rotation {
                 origin.x: saturn.width / 2
                 origin.y: saturn.height / 2 + saturn.planetoffset
-                angle: 360 - Planets.getTrueAnomaly(5, showingDate)
+                angle: saturn.planetTrueAnomaly
                 Behavior on angle {
                     SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
                 }
@@ -238,6 +247,7 @@ Item {
             id: uranus;
 
             property int planetoffset: 132
+            property int planetTrueAnomaly: 0
 
             x: sun.x + (sun.width / 2) - (this.width / 2)
             y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
@@ -257,7 +267,7 @@ Item {
             transform: Rotation {
                 origin.x: uranus.width / 2
                 origin.y: uranus.height / 2 + uranus.planetoffset
-                angle: 360 - Planets.getTrueAnomaly(6, showingDate)
+                angle: uranus.planetTrueAnomaly
                 Behavior on angle {
                     SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
                 }
@@ -268,6 +278,7 @@ Item {
             id: neptune;
 
             property int planetoffset: 144
+            property int planetTrueAnomaly: 0
 
             x: sun.x + (sun.width / 2) - (this.width / 2)
             y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
@@ -286,7 +297,7 @@ Item {
             transform: Rotation {
                 origin.x: neptune.width / 2
                 origin.y: neptune.height / 2 + neptune.planetoffset
-                angle: 360 - Planets.getTrueAnomaly(7, showingDate)
+                angle: neptune.planetTrueAnomaly
                 Behavior on angle {
                     SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
                 }
