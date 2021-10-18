@@ -2,6 +2,17 @@ import QtQuick 2.1
 
 import "planets.js" as Planets
 
+//planets
+import "sun"
+import "mercury"
+import "venus"
+import "earth"
+import "mars"
+import "jupiter"
+import "saturn"
+import "uranus"
+import "neptune"
+
 Item {
     id: home;
 
@@ -17,11 +28,7 @@ Item {
             planet.planetTrueAnomaly = 360 - Planets.getTrueAnomaly(i, date)
         }
 
-        var offest   = date.getTimezoneOffset();
-        var hours    = date.getHours();
-        var minutes  = date.getMinutes();
-
-        earth.rot = (hours * earth.framesPerHour + Math.round((minutes + offest) / earth.framesPerMin)) % earth.earthNumFrames;
+        earth.setDateTime(date);
     }
     
     Item {
@@ -30,74 +37,39 @@ Item {
         height: parent.height
         property var planets: [mercury, venus, earth, mars, jupiter, saturn, uranus, neptune]
 
-        Image {
+        Sun {
             id: sun;
             x: parent.width/2 - width/2;
             y: parent.height/2 - height/2;
-            smooth: true;
-            source: "./images/sun.png"
-
-            MouseArea {
-                anchors.fill: parent
-                visible: true;
-
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                }
-            }
         }
 
-        Image {
+        Mercury {
             id: mercury
 
-            property int planetoffset: 38
+            property int planetoffset: 36
             property int planetTrueAnomaly: 0
 
             x: sun.x + (sun.width / 2) - (this.width / 2)
             y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
-
-            smooth: true
-            source: "./images/mercury.png"
-
-            MouseArea {
-                anchors.fill: parent
-                visible: true;
-
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                }
-            }
 
             transform: Rotation {
                 origin.x: mercury.width / 2
                 origin.y: mercury.height / 2 + mercury.planetoffset
                 angle: mercury.planetTrueAnomaly
                 Behavior on angle {
-                    SpringAnimation { spring: 2; damping: 0.2; modulus: 360}
+                    SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
                 }
             }
         }
 
-        Image {
+        Venus {
             id: venus;
 
-            property int planetoffset: 56
+            property int planetoffset: 54
             property int planetTrueAnomaly: 0
 
             x: sun.x + (sun.width / 2) - (this.width / 2)
             y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
-
-            smooth: true;
-            source: "./images/venus.png"
-
-            MouseArea {
-                anchors.fill: parent
-                visible: true;
-
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                }
-            }
 
             transform: Rotation {
                 origin.x: venus.width / 2
@@ -109,35 +81,14 @@ Item {
             }
         }
 
-        Image {
+        Earth {
             id: earth;
 
-            property int rot: 0
-            property int earthNumFrames: 96
+            property int planetoffset: 72
             property int planetTrueAnomaly: 0
-
-            property int framesPerHour: earthNumFrames / 24
-            property int framesPerMin: 60 / framesPerHour
-
-            property int planetoffset: 74
 
             x: sun.x + (sun.width / 2) - (this.width / 2)
             y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
-
-            width: 15
-            height: 15
-
-            smooth: true;
-            source: "../../terra/animation/earth"+ rot + ".png"
-
-            MouseArea {
-                anchors.fill: parent
-                visible: true;
-
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                }
-            }
 
             transform: Rotation {
                 origin.x: earth.width / 2
@@ -149,7 +100,7 @@ Item {
             }
         }
 
-        Image {
+        Mars {
             id: mars;
 
             property int planetoffset: 88
@@ -157,18 +108,6 @@ Item {
 
             x: sun.x + (sun.width / 2) - (this.width / 2)
             y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
-
-            smooth: true;
-            source: "./images/mars.png"
-
-            MouseArea {
-                anchors.fill: parent
-                visible: true;
-
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                }
-            }
 
             transform: Rotation {
                 origin.x: mars.width / 2
@@ -180,7 +119,7 @@ Item {
             }
         }
 
-        Image {
+        Jupiter {
             id: jupiter;
 
             property int planetoffset: 104
@@ -188,18 +127,6 @@ Item {
 
             x: sun.x + (sun.width / 2) - (this.width / 2)
             y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
-
-            smooth: true;
-            source: "./images/jupiter.png"
-
-            MouseArea {
-                anchors.fill: parent
-                visible: true;
-
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                }
-            }
 
             transform: Rotation {
                 origin.x: jupiter.width / 2
@@ -209,10 +136,9 @@ Item {
                     SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
                 }
             }
-
         }
 
-        Image {
+        Saturn {
             id: saturn;
 
             property int planetoffset: 118
@@ -220,18 +146,6 @@ Item {
 
             x: sun.x + (sun.width / 2) - (this.width / 2)
             y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
-
-            smooth: true;
-            source: "./images/saturn.png"
-
-            MouseArea {
-                anchors.fill: parent
-                visible: true;
-
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                }
-            }
 
             transform: Rotation {
                 origin.x: saturn.width / 2
@@ -243,7 +157,7 @@ Item {
             }
         }
 
-        Image {
+        Uranus {
             id: uranus;
 
             property int planetoffset: 132
@@ -251,18 +165,6 @@ Item {
 
             x: sun.x + (sun.width / 2) - (this.width / 2)
             y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
-
-            smooth: true;
-            source: "./images/uranus.png"
-
-            MouseArea {
-                anchors.fill: parent
-                visible: true;
-
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                }
-            }
 
             transform: Rotation {
                 origin.x: uranus.width / 2
@@ -274,7 +176,7 @@ Item {
             }
         }
 
-        Image {
+        Neptune {
             id: neptune;
 
             property int planetoffset: 144
@@ -283,17 +185,6 @@ Item {
             x: sun.x + (sun.width / 2) - (this.width / 2)
             y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
 
-            smooth: true;
-            source: "./images/neptune.png"
-
-            MouseArea {
-                anchors.fill: parent
-                visible: true;
-
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                }
-            }
             transform: Rotation {
                 origin.x: neptune.width / 2
                 origin.y: neptune.height / 2 + neptune.planetoffset

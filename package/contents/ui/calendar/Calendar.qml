@@ -257,18 +257,7 @@ Item {
             cursorShape: Qt.PointingHandCursor
 
             Component.onCompleted: {
-                if (main.debug) {
-
-                    Qt.createQmlObject("
-                                    import QtQuick 2.0
-
-                                    Rectangle {
-                                        anchors.fill: parent
-                                        color: \"transparent\"
-                                        border.color: \"white\"
-                                    }
-                                ", this);
-                }
+                debugMouseArea(this);
             }
 
             onClicked: {
@@ -288,18 +277,7 @@ Item {
             cursorShape: Qt.PointingHandCursor
 
             Component.onCompleted: {
-                if (main.debug) {
-
-                    Qt.createQmlObject("
-                                    import QtQuick 2.0
-
-                                    Rectangle {
-                                        anchors.fill: parent
-                                        color: \"transparent\"
-                                        border.color: \"white\"
-                                    }
-                                ", this);
-                }
+                debugMouseArea(this);
             }
 
             onClicked: {
@@ -325,18 +303,7 @@ Item {
             cursorShape: Qt.PointingHandCursor
 
             Component.onCompleted: {
-                if (main.debug) {
-
-                    Qt.createQmlObject("
-                                    import QtQuick 2.0
-
-                                    Rectangle {
-                                        anchors.fill: parent
-                                        color: \"transparent\"
-                                        border.color: \"white\"
-                                    }
-                                ", this);
-                }
+                debugMouseArea(this);
             }
 
             // onClicked: { side.flipped = !side.flipped }
@@ -349,18 +316,7 @@ Item {
             cursorShape: Qt.PointingHandCursor
 
             Component.onCompleted: {
-                if (main.debug) {
-
-                    Qt.createQmlObject("
-                                    import QtQuick 2.0
-
-                                    Rectangle {
-                                        anchors.fill: parent
-                                        color: \"transparent\"
-                                        border.color: \"white\"
-                                    }
-                                ", this);
-                }
+                debugMouseArea(this);
             }
 
             onClicked: currentTime()
@@ -373,18 +329,7 @@ Item {
             cursorShape: Qt.PointingHandCursor
 
             Component.onCompleted: {
-                if (main.debug) {
-
-                    Qt.createQmlObject("
-                                    import QtQuick 2.0
-
-                                    Rectangle {
-                                        anchors.fill: parent
-                                        color: \"transparent\"
-                                        border.color: \"white\"
-                                    }
-                                ", this);
-                }
+                debugMouseArea(this);
             }
 
             onClicked: {

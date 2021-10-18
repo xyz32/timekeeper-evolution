@@ -271,18 +271,7 @@ Item {
         visible: true
 
         Component.onCompleted: {
-            if (main.debug) {
-
-                Qt.createQmlObject("
-                                import QtQuick 2.0
-
-                                Rectangle {
-                                    anchors.fill: parent
-                                    color: \"transparent\"
-                                    border.color: \"white\"
-                                }
-                            ", this);
-            }
+            debugMouseArea(this);
         }
 
         cursorShape: Qt.PointingHandCursor

@@ -44,6 +44,21 @@ Item {
         clock.state              = clockState
     }
 
+    function debugMouseArea(dbgParent) {
+        if (main.debug) {
+
+            Qt.createQmlObject("
+                            import QtQuick 2.0
+
+                            Rectangle {
+                                anchors.fill: parent
+                                color: \"transparent\"
+                                border.color: \"white\"
+                            }
+                        ", dbgParent);
+        }
+    }
+
     FontLoader {
         id:   fixedFont;
         name: fontName;
