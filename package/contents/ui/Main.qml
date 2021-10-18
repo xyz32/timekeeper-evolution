@@ -40,6 +40,8 @@ Item {
 
     Component.onCompleted: {
         currentTime();
+
+        clock.state              = clockState
     }
 
     FontLoader {
