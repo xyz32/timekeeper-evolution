@@ -6,6 +6,8 @@ Item {
     id: clock
     width: 182; height: 182
 
+    opacity: plasmoid.configuration.clockOpacity
+
     property int hours
     property int minutes
     property int seconds

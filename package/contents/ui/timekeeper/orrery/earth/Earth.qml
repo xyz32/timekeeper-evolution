@@ -1,5 +1,8 @@
 import QtQuick 2.1
 
+//moon
+import "moon"
+
 Item {
     id: earth;
 
@@ -15,18 +18,33 @@ Item {
     }
 
     function setDateTime(date) {
+        moon.setDateTime(date);
+
         var offest   = date.getTimezoneOffset();
         var hours    = date.getHours();
         var minutes  = date.getMinutes();
 
         earth.rot = (hours * earth.framesPerHour + Math.round((minutes + offest) / earth.framesPerMin)) % earth.earthNumFrames;
+
+        moon.planetTrueAnomaly = 180 + 12.41 * moon.phase;
     }
 
     Image {
+        x: 0
+        y: - shadowOffset
+        width: parent.width
+        height: parent.height
+
+        smooth: true
+        source: "../underShadow.png"
+    }
+
+    Image {
+        id: terra
         anchors.fill: parent
 
         smooth: true
-        source: "./animation/earth"+ rot + ".png"
+        source: "./earth_big.png" //"./animation/earth"+ rot + ".png"
 
         MouseArea {
 
@@ -40,6 +58,25 @@ Item {
             }
 
             onClicked: {
+            }
+        }
+    }
+
+    Moon {
+        id: moon
+
+        property int planetoffset: 10
+        property int planetTrueAnomaly: 0
+
+        x: terra.x + (terra.width / 2) - (moon.width / 2)
+        y: terra.y + (terra.height / 2) - (moon.height / 2) + planetoffset
+
+        transform: Rotation {
+            origin.x: moon.width / 2
+            origin.y: moon.height / 2 - moon.planetoffset
+            angle: moon.planetTrueAnomaly
+            Behavior on angle {
+                SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
             }
         }
     }

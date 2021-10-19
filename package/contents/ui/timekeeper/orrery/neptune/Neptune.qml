@@ -10,10 +10,20 @@ Item {
     }
 
     Image {
+        x: 0
+        y: - shadowOffset
+        width: parent.width
+        height: parent.height
+
+        smooth: true
+        source: "../underShadow.png"
+    }
+
+    Image {
         anchors.fill: parent
 
         smooth: true
-        source: "./neptune.png"
+        source: "./neptune_big.png"
 
         MouseArea {
 

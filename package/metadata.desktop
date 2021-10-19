@@ -19,7 +19,7 @@ X-KDE-PluginInfo-Name=kde.plasma.timekeeper
 X-KDE-ServiceTypes=Plasma/Applet
 
 X-Plasma-API=declarativeappletscript
-X-Plasma-DefaultSize=450,450
+X-Plasma-DefaultSize=540,478
 X-Plasma-StandAloneApp=true
 X-Plasma-MainScript=ui/Main.qml
 

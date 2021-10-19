@@ -16,11 +16,12 @@ import "neptune"
 Item {
     id: home;
 
+    property int shadowOffset: 5;
+    property var showingDate: new Date();
+
     Component.onCompleted: {
 
     }
-
-    property var showingDate: new Date();
 
     function setDateTime(date) {
         for (var i = 0; i < planetarium.planets.length; i++) {

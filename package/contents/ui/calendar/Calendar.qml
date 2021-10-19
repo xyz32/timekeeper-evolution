@@ -4,6 +4,8 @@ Item {
     id: calendar
     width: 193; height: 131
 
+    opacity: plasmoid.configuration.calendarOpacity
+
     property string day:   "31"
     property string month: "NOV"
     property string year:  "54"

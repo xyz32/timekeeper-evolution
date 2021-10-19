@@ -3,17 +3,27 @@ import QtQuick 2.1
 Item {
     id: jupiter;
 
-    width: 34
-    height: 15
+    width: 24
+    height: 24
 
     Component.onCompleted: {
+    }
+
+    Image {
+        x: 0 //(parent.width - parent.height) / 2
+        y: - shadowOffset
+        width: parent.height
+        height: parent.height
+
+        smooth: true
+        source: "../underShadow.png"
     }
 
     Image {
         anchors.fill: parent
 
         smooth: true
-        source: "./saturn.png"
+        source: "./saturn_big.png"
 
         MouseArea {
 
