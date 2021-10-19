@@ -11,22 +11,20 @@ ColumnLayout {
     property alias cfg_calendarOpacity:  calendarOpacity.value
 
     GridLayout {
-        anchors.verticalCenter:   parent.verticalCenter
-        anchors.horizontalCenter: parent.horizontalCenter
+        Layout.alignment: Qt.AlignTop
         columns: 1
 
         GroupBox {
 
-            title: i18n("Background image")
+            title: i18n("Custom background image")
             Layout.fillWidth:  true
 
             GridLayout {
-                anchors.verticalCenter:   parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
+                Layout.alignment: Qt.AlignCenter
                 columns: 3
 
                 Label {
-                    text: i18n("Background image:")
+                    text: i18n("Image path:")
                     Layout.alignment: Qt.AlignRight
                     anchors.verticalCenter: backImg.verticalCenter
                 }
@@ -55,8 +53,7 @@ ColumnLayout {
             Layout.fillWidth:  true
 
             GridLayout {
-                anchors.verticalCenter:   parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
+                Layout.alignment: Qt.AlignCenter
                 columns: 3
                 rows: 2
 
@@ -76,6 +73,8 @@ ColumnLayout {
                     value: 1
                     to: 1
 
+
+
                     onMoved: {
                         clockOpacityValue.text = clockOpacity.value.toFixed(2);
                     }
@@ -83,9 +82,11 @@ ColumnLayout {
 
                 Label {
                     id: clockOpacityValue
-                    text: "1.00"
                     Layout.alignment: Qt.AlignRight
                     anchors.verticalCenter: clockOpacity.verticalCenter
+                    text: {
+                        return clockOpacity.value.toFixed(2);
+                    }
                 }
 
 
@@ -112,9 +113,11 @@ ColumnLayout {
 
                 Label {
                     id: calendarOpacityValue
-                    text: "1.00"
                     Layout.alignment: Qt.AlignRight
                     anchors.verticalCenter: calendarOpacity.verticalCenter
+                    text: {
+                        return calendarOpacity.value.toFixed(2);
+                    }
                 }
             }
         }

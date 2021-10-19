@@ -6,54 +6,25 @@ xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
 	<kcfgfile name=""/>
 
 	<group name="General">
-		<entry name="mainState" type="String">
-			<label>mainState</label>
-			<default></default>
-		</entry>
 		<entry name="clockState" type="String">
 			<label>clockState</label>
 			<default></default>
 		</entry>
-        <entry name="calendarLock" type="Bool">
-			<label>calendarLock</label>
-			<default>false</default>
-		</entry>
-        <entry name="whellLock" type="Bool">
-			<label>whellLock</label>
-			<default>false</default>
-		</entry>
-
-		<entry name="stainedglassState" type="String">
-			<label>stainedglassState</label>
-			<default></default>
-		</entry>
-
-		<entry name="terraState" type="String">
-			<label>terraState</label>
-			<default></default>
-		</entry>
-
-		<entry name="yearState" type="String">
-			<label>yearState</label>
-			<default></default>
-		</entry>
-
-		<entry name="backgroundImage" type="String">
-			<default>backgrounds/glassImmage.png</default>
+        
+		<entry name="backgroundImage" type="path">
+			<default>frame/backgrounds/glassImmage.png</default>
 		</entry>
         
-        <entry name="userBackgroundImage" type="String">
+        <entry name="userBackgroundImage" type="path">
 			<default></default>
 		</entry>
+        
+        <entry name="clockOpacity" type="Double">
+			<default>1.00</default>
+		</entry>
 		
-		<entry name="fontName" type="String">
-			<default>Engravers MT</default>
-		</entry>
-		<entry name="fontWeekSize" type="Int">
-			<default>11</default>
-		</entry>
-		<entry name="fontMonthSize" type="Int">
-			<default>14</default>
+		<entry name="calendarOpacity" type="Double">
+			<default>1.00</default>
 		</entry>
 	</group>
 </kcfg>

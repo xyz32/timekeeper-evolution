@@ -7,6 +7,7 @@ Item {
     height: 5
 
     property int phase: 28;
+    property real degreesPerPhase: 12.41
 
     Component.onCompleted: {
     }

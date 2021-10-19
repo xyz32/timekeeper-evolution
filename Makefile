@@ -21,7 +21,7 @@ version:
 
 
 plasmoid: version
-			cd package; zip -r ../timekeeper-$(VER).plasmoid *
+			cd package; zip -9 -r ../timekeeper-$(VER).plasmoid *
 7z: version
 			cd package; 7z a -tzip ../timekeeper-$(VER).plasmoid *
 
