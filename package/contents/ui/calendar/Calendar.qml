@@ -206,10 +206,10 @@ Item {
         id:tk_img
         x: 0
         y: 0
-        source: "timekeeper_yyyy.png"
+        source: "calendar_yyyy.png"
 
         Text {
-            x: 102; y: 14
+            x: 99; y: 14
             width: 28; height: 22
             text: day
             verticalAlignment: Text.AlignVCenter
@@ -248,7 +248,7 @@ Item {
                 name: "yy"
                 PropertyChanges { target: yy; text: year; x:100; width:28; }
                 PropertyChanges { target: yearBackground; x:95; width:36; }
-                PropertyChanges { target: tk_img; source: "timekeeper.png"; }
+                PropertyChanges { target: tk_img; source: "calendar.png"; }
             }
         }
 

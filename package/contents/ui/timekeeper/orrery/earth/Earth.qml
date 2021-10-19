@@ -26,7 +26,7 @@ Item {
 
         earth.rot = (hours * earth.framesPerHour + Math.round((minutes + offest) / earth.framesPerMin)) % earth.earthNumFrames;
 
-        moon.planetTrueAnomaly = 180 + 12.41 * moon.phase;
+        moon.planetTrueAnomaly = 360 - (12.41 * moon.phase);
     }
 
     Image {
