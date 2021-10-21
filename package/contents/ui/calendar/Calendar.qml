@@ -11,7 +11,7 @@ Item {
     property string year:  "54"
     property string yyyy:  "1854"
 
-    property int ang: 0
+    property int cogAngle: 0
 
     property alias stained_glass: stglass.state
     property alias color:         color.extend
@@ -21,8 +21,35 @@ Item {
 
     property string yearState: plasmoid.configuration.yearState
 
+    states: [
+       State {
+            name: "out"
+            PropertyChanges { target: calendar; x: 354;}
+            PropertyChanges { target: cogAnimationTimer; dirrection: 1}
+        },
+        State {
+             name: "in"
+             PropertyChanges { target: calendar;}
+             PropertyChanges { target: cogAnimationTimer; dirrection: -1}
+         }
+    ]
+
+    transitions: [
+        Transition {
+            SequentialAnimation {
+                PropertyAction  { target: cogAnimationTimer; property: "running"; value: "true"  }
+                NumberAnimation { properties: "x"; duration: 1000                      }
+                PropertyAction  { target: cogAnimationTimer; property: "running"; value: "false" }
+            }
+        }
+    ]
+
     Component.onCompleted: {
         yy.state = yearState
+    }
+
+    Behavior on x {
+        SpringAnimation { spring: 1; damping: 0.2; modulus: 360 }
     }
 
     function setDateTime(date) {
@@ -35,18 +62,18 @@ Item {
     }
 
     Item {
-        id:cog_with_shadow
+        id:cogWithShadow
         x: 29;     y: 13
         width: 84; height: 84
 
         Image {
-            id: cog
+            id: cogShadowImage
             x: -6; y: -5;
             source: "monthCogShadow.png"
             smooth: true;
             transform: Rotation {
-                angle: ang
-                origin.x: cog.width/2; origin.y: cog.height/2;
+                angle: cogAngle
+                origin.x: cogShadowImage.width/2; origin.y: cogShadowImage.height/2;
                 Behavior on angle {
                     SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
                 }
@@ -54,14 +81,14 @@ Item {
         }
 
         Image {
-            id: cog_sh
+            id: cogImage
             x: 1; y: 0;
             width: 82; height: 84;
             source: "monthCog.png"
             smooth: true;
             transform: Rotation {
-                angle: ang
-                origin.x: cog_sh.width/2; origin.y: cog_sh.height/2;
+                angle: cogAngle
+                origin.x: cogImage.width/2; origin.y: cogImage.height/2;
                 Behavior on angle {
                     SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
                 }
@@ -69,10 +96,13 @@ Item {
         }
 
         Timer {
-            id: cog_ani
-            property int a: 12
-            interval: 1000; repeat: true;
-            onTriggered: { if(ang >= 360 || ang <= -360){ ang = 0; }; ang += a; }
+            id: cogAnimationTimer
+            property int angleStep: 12
+            property int dirrection: 1
+            triggeredOnStart: true
+            interval: 100
+            repeat: true
+            onTriggered: { cogAngle = (cogAngle + (angleStep * dirrection)) % 360; }
         }
     }
 
@@ -144,7 +174,7 @@ Item {
             rotation: 270
         }
         Rectangle {
-            id: rectangle_glass
+            id: rectangleLookingGlass
             x: 139; y: 36
             opacity: 0.53
             visible: false
@@ -162,7 +192,7 @@ Item {
                 PropertyChanges { target: gradientstop7; position: 0.51; color: "#8ac0a6" }
                 PropertyChanges { target: gradientstop8; position: 0.7 ; color: "#ffffff" }
 
-                PropertyChanges { target: rectangle_glass;  color: "#206f4a"; visible: true }
+                PropertyChanges { target: rectangleLookingGlass;  color: "#206f4a"; visible: true }
 
                 PropertyChanges { target: clock.week_glass; visible: true }
                 PropertyChanges { target: clock.week_bgd;   visible: false }
@@ -182,7 +212,7 @@ Item {
                 PropertyChanges { target: gradientstop7; position: 0.51; color: "#66b7c2" }
                 PropertyChanges { target: gradientstop8; position: 0.68; color: "#ffffff" }
 
-                PropertyChanges { target: rectangle_glass;  color: "#187c8b"; visible: true }
+                PropertyChanges { target: rectangleLookingGlass;  color: "#187c8b"; visible: true }
 
                 PropertyChanges { target: clock.week_glass; visible: true }
                 PropertyChanges { target: clock.week_bgd;   visible: false }
@@ -273,7 +303,7 @@ Item {
         }
 
         MouseArea {
-            id: color_ma
+            id: colorSwitch
             x: 131; y: 25
             width: 9; height: 11
             cursorShape: Qt.PointingHandCursor
@@ -299,7 +329,7 @@ Item {
         }
 
         MouseArea {
-            id: flip_ma
+            id: setCurrentTime
             x: 154; y: 96
             width: 10; height: 24
             cursorShape: Qt.PointingHandCursor
@@ -308,11 +338,13 @@ Item {
                 debugMouseArea(this);
             }
 
-            // onClicked: { side.flipped = !side.flipped }
+            onClicked: {
+                currentTime()
+            }
         }
 
         MouseArea {
-            id: setCurrentTime
+            id: topButtonSwitch
             x: 178; y: 32
             width: 12; height: 14
             cursorShape: Qt.PointingHandCursor
@@ -321,11 +353,13 @@ Item {
                 debugMouseArea(this);
             }
 
-            onClicked: currentTime()
+            onClicked: {
+
+            }
         }
 
         MouseArea {
-            id: solarSystem_ma
+            id: inOutSwitch
             x: 0; y: 49
             width: 13; height: 14
             cursorShape: Qt.PointingHandCursor
@@ -335,31 +369,9 @@ Item {
             }
 
             onClicked: {
-                if(main.state != "solarSystem") {
-                    main.state = "solarSystem";
-                } else {
-                    main.state = ""; timekeeper.state = ""
-                }
-
-                plasmoid.configuration.mainState = main.state
+                calendar.state === "out" ? calendar.state = "in" : calendar.state = "out";
+                plasmoid.configuration.calendarState = calendar.state
             }
         }
     }
-
-    states: State {
-                name: "out"
-                PropertyChanges { target: timekeeper; x: 354;}
-                PropertyChanges { target: timekeeper;}
-            }
-
-    transitions: [
-        Transition {
-            SequentialAnimation {
-                PropertyAction  { target: cog_ani; property: "running"; value: "true"  }
-                NumberAnimation { properties: "x"; duration: 1000                      }
-                PropertyAction  { target: cog_ani; property: "running"; value: "false" }
-                ScriptAction    { script: { cog_ani.a = cog_ani.a * -1 }               }
-            }
-        }
-    ]
 }

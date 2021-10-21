@@ -7,6 +7,7 @@ Item {
     width: parent.width
     height: parent.height
 
+    property bool realTime: true
     property int count: 0
     
     property var backgroundImages: [
@@ -26,7 +27,7 @@ Item {
     property alias  startAngle  : mouse_rotate.start_angle
 
     function setDateTime(date) {
-        if (frame.count == 0) {
+        if (frame.realTime) {
             orrery.setDateTime(date);
 
             var MM = [0, -31, -62, -93, -123, -153, -182.5, -212, -241.5, -270.5, -299.5, -329.2]
@@ -37,6 +38,8 @@ Item {
     }
 
     Component.onCompleted: {
+
+        //set the background based on what is stored in the configs, and remove the user defined backgorund if empoty.
         for (var i = 0; i < frame.backgroundImages.length; i++) {
             if (frame.backgroundImages[i] && plasmoid.configuration.backgroundImage === frame.backgroundImages[i]) {
                 backgroundImgAnimator.selectedImg = i;
@@ -70,7 +73,6 @@ Item {
         width: 298
         height: 298
         anchors.centerIn: parent
-        //color: "steelblue"
         color: "black"
 
         property int selectedImg: 0

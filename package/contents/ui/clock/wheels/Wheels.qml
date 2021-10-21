@@ -91,15 +91,15 @@ Item{
                     whell.ang = -10
                     whell.lock = !whell.lock
                 } else if(!timekeeper.lock){
-                    timekeeper.count_angle = 10
+                    timekeeper.countAngle = 10
                     timekeeper.lock = !timekeeper.lock
                 } else {
                     whell.lock = !whell.lock
                     timekeeper.lock = !timekeeper.lock
 
                     whell.ang = 0
-                    calendar.ang = 0
-                    timekeeper.count_angle = 0
+                    calendar.cogAngle = 0
+                    timekeeper.countAngle = 0
                 }
                 plasmoid.configuration.calendarLock = timekeeper.lock
                 plasmoid.configuration.whellLock = whell.lock

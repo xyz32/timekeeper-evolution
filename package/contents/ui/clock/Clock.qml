@@ -17,6 +17,16 @@ Item {
     property alias  week_glass : glass
     property string gradient   : "#206f4a"
 
+    states: [
+        State { name: "out"; PropertyChanges { target: clock; x: -9; y: 42; } },
+        State { name: "in";  PropertyChanges { target: clock; x: 29; y: 60; } }
+    ]
+
+    transitions: Transition {
+        NumberAnimation { properties: "x"; duration: 1000 }
+        NumberAnimation { properties: "y"; duration: 700  }
+    }
+
     function setDateTime(date) {
         clock.hours    = date.getHours();
         clock.minutes  = date.getMinutes();
@@ -50,7 +60,7 @@ Item {
         source: "clock.png"
 
         MouseArea {
-            id: in_out_ma
+            id: inOutSwitch
             x: 62; y: 86
             z: 7
             width: 11; height: 12
@@ -67,7 +77,7 @@ Item {
         }
 
         MouseArea {
-            id: hide_ma
+            id: hideClockMechanismSwitch
             x: 101; y: 86
             z: 7
             width: 11; height: 12
@@ -84,7 +94,13 @@ Item {
         }
     }
 
-    Image { id: week_bg; x: 64; y: 102; z: 5;    source: "week_bg.png" }
+    Image {
+        id: week_bg;
+        x: 64;
+        y: 102;
+        z: 5;
+        source: "week_bg.png"
+    }
 
     Text {
         x: 66; y: 104; z: 5
@@ -106,7 +122,7 @@ Item {
         source: "center.png"
 
         MouseArea {
-            id: center_ma
+            id: centerSwitch
             x: 3
             y: 3
             z: 7
@@ -119,9 +135,6 @@ Item {
             }
 
             onClicked:{
-                if(main.state == "marble") timekeeper.state = ""
-                if(main.state == "small") {main.state = "big"; luna.state = "home3"} else main.state = "small";
-                plasmoid.configuration.mainState = main.state
             }
         }
     }
@@ -172,13 +185,4 @@ Item {
     }
 
     Image { x: 26; y: 10; z: 5; source: "clockglass.png"}
-
-    states: [
-        State { name: "out"; PropertyChanges { target: clock; x: -9; y: 42; } },
-        State { name: "in";  PropertyChanges { target: clock; x: 29; y: 60; } }
-    ]
-    transitions: Transition {
-        NumberAnimation { properties: "x"; duration: 1000 }
-        NumberAnimation { properties: "y"; duration: 700  }
-    }
 }

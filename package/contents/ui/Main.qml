@@ -15,18 +15,18 @@ Item {
 
     readonly property bool debug: false
 
-    readonly property int main_width: 478 * units.devicePixelRatio //540
-    readonly property int main_height: 478 * units.devicePixelRatio
+    readonly property int mainWidth: 478 * units.devicePixelRatio //540
+    readonly property int mainHeight: 478 * units.devicePixelRatio
 
-    width: main_width
-    height: main_height
+    width: mainWidth
+    height: mainHeight
 
-    Layout.minimumWidth: main_width
-    Layout.minimumHeight: main_height
-    Layout.preferredWidth: main_width
-    Layout.preferredHeight: main_height
-    Layout.maximumWidth: main_width
-    Layout.maximumHeight: main_height
+    Layout.minimumWidth: mainWidth
+    Layout.minimumHeight: mainHeight
+    Layout.preferredWidth: mainWidth
+    Layout.preferredHeight: mainHeight
+    Layout.maximumWidth: mainWidth
+    Layout.maximumHeight: mainHeight
 
     Plasmoid.backgroundHints: "NoBackground"
 
@@ -107,8 +107,8 @@ Item {
         anchors.bottom: parent.bottom
 
         front: Item {
-            width: main_width;
-            height: main_height
+            width: mainWidth;
+            height: mainHeight
 
             Timekeeper{ // frame backgroound
                 id: timekeeper;
