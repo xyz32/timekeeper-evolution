@@ -1,4 +1,5 @@
 import QtQuick 2.1
+import QtGraphicalEffects 1.0
 
 import "wheels"
 
@@ -13,7 +14,7 @@ Item {
     property int seconds
 
     property string week_day
-    property alias  week_bgd   : week_bg
+    property alias  week_bgd   : weekBackgroundImage
     property alias  week_glass : glass
     property string gradient   : "#206f4a"
 
@@ -57,6 +58,7 @@ Item {
     Image {
         id: background;
         z: 5
+        smooth: true
         source: "clock.png"
 
         MouseArea {
@@ -95,10 +97,11 @@ Item {
     }
 
     Image {
-        id: week_bg;
+        id: weekBackgroundImage;
         x: 64;
         y: 102;
         z: 5;
+        smooth: true
         source: "week_bg.png"
     }
 
@@ -119,6 +122,7 @@ Item {
         x: 77
         y: 74
         z: 5
+        smooth: true
         source: "center.png"
 
         MouseArea {
@@ -184,5 +188,11 @@ Item {
         }
     }
 
-    Image { x: 26; y: 10; z: 5; source: "clockglass.png"}
+    Image {
+        x: 26; y
+        : 10;
+        z: 5;
+        source: "clockglass.png"
+        smooth: true
+    }
 }

@@ -75,6 +75,7 @@ Item{
         x: 26
         y: 2
         source: "driveBand.png"
+        smooth: true
 
         MouseArea {
             id: tiktak_ma

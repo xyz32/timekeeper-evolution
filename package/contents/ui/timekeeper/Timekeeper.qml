@@ -51,7 +51,7 @@ Item {
         backgroundImg.selected = frame.backgroundImages[backgroundImgAnimator.selectedImg];
     }
     
-    Image  {
+    Image {
         id: backgroundImg
         x: 0
         y: 0
@@ -122,7 +122,7 @@ Item {
 
     }
     
-    Image  {
+    Image {
         id: innerMetalFrame
         x: 92
         y: 94
@@ -134,7 +134,7 @@ Item {
         smooth: true
     }
     
-    Image  {
+    Image {
         x: 0
         y: 0
         source: "frame/innerFrame.png"

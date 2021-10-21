@@ -233,9 +233,11 @@ Item {
     }
 
     Image {
-        id:tk_img
+        id:calendarImage
         x: 0
         y: 0
+
+        smooth: true
         source: "calendar_yyyy.png"
 
         Text {
@@ -278,7 +280,7 @@ Item {
                 name: "yy"
                 PropertyChanges { target: yy; text: year; x:100; width:28; }
                 PropertyChanges { target: yearBackground; x:95; width:36; }
-                PropertyChanges { target: tk_img; source: "calendar.png"; }
+                PropertyChanges { target: calendarImage; source: "calendar.png"; }
             }
         }
 
