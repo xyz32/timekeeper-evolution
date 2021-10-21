@@ -7,8 +7,7 @@ Item {
     width: parent.width
     height: parent.height
 
-    property bool realTime: true
-    property int count: 0
+    property bool isRealTime: true
     
     property var backgroundImages: [
         "frame/backgrounds/glassImmage.png",
@@ -21,20 +20,20 @@ Item {
         "frame/backgrounds/glassTransparent.png"
     ]
 
+    property int count: 0
     property double ring_degree
     property int    count_angle
     property bool   lock: false
     property alias  startAngle  : mouse_rotate.start_angle
 
-    function setDateTime(date) {
-        if (frame.realTime) {
-            orrery.setDateTime(date);
+    property var monthRingAngles: [0, -31, -62, -93, -123, -153, -182.5, -212, -241.5, -270.5, -299.5, -329.2]
 
-            var MM = [0, -31, -62, -93, -123, -153, -182.5, -212, -241.5, -270.5, -299.5, -329.2]
-            var month = date.getMonth()
-            var dayOfMonth  = date.getDate()-1
-            frame.ring_degree = MM[month] - dayOfMonth;
-        }
+    function setDateTime(date) {
+        orrery.setDateTime(date);
+
+        var month = date.getMonth()
+        var dayOfMonth  = date.getDate()-1
+        frame.ring_degree = monthRingAngles[month] - dayOfMonth;
     }
 
     Component.onCompleted: {
@@ -210,6 +209,7 @@ Item {
 
             orrery.setDateTime(today);
             calendar.setDateTime(today);
+            clock.setDate(today);
         }
 
         function tri_angle(x,y) {

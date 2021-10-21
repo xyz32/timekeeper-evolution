@@ -13,8 +13,6 @@ import "calendar"
 Item {
     id: main
 
-    readonly property bool debug: false
-
     readonly property int mainWidth: 478 * units.devicePixelRatio //540
     readonly property int mainHeight: 478 * units.devicePixelRatio
 
@@ -39,8 +37,6 @@ Item {
     property string stainedglassState: plasmoid.configuration.stainedglassState
 
     Component.onCompleted: {
-        currentTime();
-
         clock.state              = clockState
     }
 
@@ -71,31 +67,34 @@ Item {
 
     Timer {
         id: secondTimer
-        interval: 1000; running: true; repeat: true;
+        interval: 1000
+        running: true
+        repeat: true
+        triggeredOnStart: true
+
         onTriggered: {
             var date = new Date;
-            clock.setDateTime(date);
+            clock.setTime(date);
         }
     }
 
     Timer {
         id: minuteTimer
-        interval: 60000; running: true; repeat: true;
+        interval: 60000
+        running: true
+        repeat: true
+        triggeredOnStart: true
+
         onTriggered: {
+            if (!timekeeper.isRealTime) {
+                return;
+            }
+
             var date = new Date;
             timekeeper.setDateTime(date);
             calendar.setDateTime(date);
+            clock.setDate(date);
         }
-    }
-
-    function currentTime() {
-        var date = new Date;
-
-        timekeeper.count = 0;
-
-        clock.setDateTime(date);
-        timekeeper.setDateTime(date);
-        calendar.setDateTime(date);
     }
 
     Flipable { //main container

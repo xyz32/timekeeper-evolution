@@ -28,10 +28,13 @@ Item {
         NumberAnimation { properties: "y"; duration: 700  }
     }
 
-    function setDateTime(date) {
+    function setTime(date) {
         clock.hours    = date.getHours();
         clock.minutes  = date.getMinutes();
         clock.seconds  = date.getSeconds();
+    }
+
+    function setDate(date) {
         clock.week_day = Qt.formatDateTime(date, "ddd");
     }
 
