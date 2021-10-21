@@ -8,8 +8,8 @@ Item {
 
     property string day:   "31"
     property string month: "NOV"
-    property string year:  "54"
-    property string yyyy:  "1854"
+    property string shortYear:  "54"
+    property string fullYear:  "1854"
 
     property int cogAngle: 0
 
@@ -45,7 +45,7 @@ Item {
     ]
 
     Component.onCompleted: {
-        yy.state = yearState
+        yearText.state = yearState
     }
 
     Behavior on x {
@@ -57,8 +57,8 @@ Item {
         var now = dtime.toString().split(",")
         calendar.day   = now[0]
         calendar.month = now[1]
-        calendar.year  = now[2]
-        calendar.yyyy  = now[3]
+        calendar.shortYear  = now[2]
+        calendar.fullYear  = now[3]
     }
 
     Item {
@@ -108,79 +108,6 @@ Item {
 
     Item {
         id:stglass
-
-        Rectangle {
-            id: yearBackground
-            x: 65;y: 70
-            width: 66;height: 36
-            radius: width*0.5
-            gradient: Gradient {
-                GradientStop {
-                    id: gradientstop5
-                    position: 0.16
-                    color: "#766139"
-                }
-                GradientStop {
-                    id: gradientstop6
-                    position: 0.68
-                    color: "#ffffff"
-                }
-            }
-        }
-        Rectangle {
-            id: dayBackground
-            x: 95;y: 5
-            width: 36;height: 36
-            radius: width*0.5
-            gradient: Gradient {
-                GradientStop {
-                    id: gradientstop7
-                    position: 0.46
-                    color: "#b8a38b"
-                }
-                GradientStop {
-                    id: gradientstop8
-                    position: 1
-                    color: "#ffffff"
-                }
-            }
-        }
-        Rectangle {
-            id: monthBackground
-            x: 50;y: 17
-            width: 21;height: 76
-            gradient: Gradient {
-                GradientStop {
-                    id: gradientstop1
-                    position: 0
-                    color: "#766139"
-                }
-                GradientStop {
-                    id: gradientstop2
-                    position: 0.35
-                    color: "#ffffff"
-                }
-                GradientStop {
-                    id: gradientstop3
-                    position: 0.58
-                    color: "#ffffff"
-                }
-                GradientStop {
-                    id: gradientstop4
-                    position: 1
-                    color: "#766139"
-                }
-            }
-            rotation: 270
-        }
-        Rectangle {
-            id: rectangleLookingGlass
-            x: 139; y: 36
-            opacity: 0.53
-            visible: false
-            width: 40;height: 40
-            radius: width*0.5
-        }
 
         states: [
             State {
@@ -236,52 +163,159 @@ Item {
         id:calendarImage
         x: 0
         y: 0
-
         smooth: true
         source: "calendar_yyyy.png"
 
-        Text {
-            x: 99; y: 14
-            width: 28; height: 22
-            text: day
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            font.pointSize: 15
-            font.family: fixedFont.name
-            color: "#333333"
+        Item {
+            id: dayItem
+            z: -1 //show below the frame
 
-        }
-
-        Text {
-            x: 25; y: 45
-            width: 69; height: 19
-            text: month
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            font.pointSize: 15
-            font.family: fixedFont.name
-            color: "#333333"
-
-        }
-
-        Text {
-            id: yy
-            x: 71; y: 78
-            width: 58; height: 22
-            text: yyyy
-
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-
-            font.pointSize: 15
-            font.family: fixedFont.name
-            color: "#333333"
-            states: State {
-                name: "yy"
-                PropertyChanges { target: yy; text: year; x:100; width:28; }
-                PropertyChanges { target: yearBackground; x:95; width:36; }
-                PropertyChanges { target: calendarImage; source: "calendar.png"; }
+            Rectangle {
+                id: dayBackground
+                x: 95
+                y: 5
+                z: 1
+                width: 36
+                height: 36
+                radius: width*0.5
+                gradient: Gradient {
+                    GradientStop {
+                        id: gradientstop7
+                        position: 0.46
+                        color: "#b8a38b"
+                    }
+                    GradientStop {
+                        id: gradientstop8
+                        position: 1
+                        color: "#ffffff"
+                    }
+                }
             }
+
+            Text {
+                x: 99
+                y: 14
+                z: 2
+                width: 28;
+                height: 22
+                text: day
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+                font.pointSize: 15
+                font.family: fixedFont.name
+                color: "#333333"
+
+            }
+        }
+
+        Item {
+            id: monthItem
+            z: -1
+
+            Rectangle {
+                id: monthBackground
+                x: 50
+                y: 17
+                width: 21
+                height: 76
+
+                gradient: Gradient {
+                    GradientStop {
+                        id: gradientstop1
+                        position: 0
+                        color: "#766139"
+                    }
+                    GradientStop {
+                        id: gradientstop2
+                        position: 0.35
+                        color: "#ffffff"
+                    }
+                    GradientStop {
+                        id: gradientstop3
+                        position: 0.58
+                        color: "#ffffff"
+                    }
+                    GradientStop {
+                        id: gradientstop4
+                        position: 1
+                        color: "#766139"
+                    }
+                }
+                rotation: 270
+            }
+
+            Text {
+                x: 25; y: 45
+                width: 69; height: 19
+                text: month
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+                font.pointSize: 15
+                font.family: fixedFont.name
+                color: "#333333"
+
+            }
+        }
+
+        Item {
+            id: yearItem
+            z: -1
+
+            Rectangle {
+                    id: yearBackground
+                    x: 65;y: 70
+                    width: 66;height: 36
+                    radius: width*0.5
+                    gradient: Gradient {
+                        GradientStop {
+                            id: gradientstop5
+                            position: 0.16
+                            color: "#766139"
+                        }
+                        GradientStop {
+                            id: gradientstop6
+                            position: 0.68
+                            color: "#ffffff"
+                        }
+                    }
+                }
+
+            Text {
+                id: yearText
+                x: 71; y: 78
+                width: 58; height: 22
+                text: fullYear
+
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+
+                font.pointSize: 15
+                font.family: fixedFont.name
+                color: "#333333"
+                states: [
+                    State {
+                        name: "yy"
+                        PropertyChanges { target: yearText; text: shortYear; x:100; width:28; }
+                        PropertyChanges { target: yearBackground; x:95; width:36; }
+                        PropertyChanges { target: calendarImage; source: "calendar.png"; }
+                    },
+                    State {
+                        name: "yyyy"
+                        PropertyChanges { target: yearText; text: fullYear; x:71; width:58; }
+                        PropertyChanges { target: yearBackground; x:65; width:66; }
+                        PropertyChanges { target: calendarImage; source: "calendar_yyyy.png"; }
+                    }
+                ]
+            }
+        }
+
+        Rectangle {
+            id: rectangleLookingGlass
+            x: 139; y: 36
+            opacity: 0.53
+            visible: false
+            width: 40;height: 40
+            radius: width*0.5
         }
 
         MouseArea {
@@ -295,12 +329,12 @@ Item {
             }
 
             onClicked: {
-                if(sw) yy.state = "yy"
-                else   yy.state = ""
+                if(sw) yearText.state = "yy"
+                else   yearText.state = "yyyy"
 
                 sw = !sw
 
-                plasmoid.configuration.yearState = yy.state
+                plasmoid.configuration.yearState = yearText.state
             }
         }
 
