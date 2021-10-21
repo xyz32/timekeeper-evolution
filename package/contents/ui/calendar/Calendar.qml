@@ -375,7 +375,7 @@ Item {
             }
 
             onClicked: {
-                main.setCurrentTime()
+                main.setToRealTime()
             }
         }
 

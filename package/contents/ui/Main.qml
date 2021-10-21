@@ -31,14 +31,8 @@ Item {
 
     readonly property string fontName:   "Engravers MT"
 
-    property string mainState:         plasmoid.configuration.mainState
-    property string clockState:        plasmoid.configuration.clockState
-    property bool calendarLock:      plasmoid.configuration.calendarLock
-    property bool whellLock:         plasmoid.configuration.whellLock
-    property string stainedglassState: plasmoid.configuration.stainedglassState
-
     Component.onCompleted: {
-        clock.state              = clockState
+        clock.state              = plasmoid.configuration.clockState
     }
 
     function debugMouseArea(dbgParent) {
@@ -98,7 +92,9 @@ Item {
         }
     }
 
-    function setCurrentTime() {
+    function setToRealTime() {
+        //used to reset time to realtime
+
         timekeeper.isRealTime = true;
         timekeeper.count = 0;
 
