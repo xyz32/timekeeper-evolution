@@ -13,6 +13,7 @@ import "calendar"
 Item {
     id: main
 
+
     readonly property int mainWidth: 478 * units.devicePixelRatio //540
     readonly property int mainHeight: 478 * units.devicePixelRatio
 
@@ -95,6 +96,17 @@ Item {
             calendar.setDateTime(date);
             clock.setDate(date);
         }
+    }
+
+    function setCurrentTime() {
+        timekeeper.isRealTime = true;
+        timekeeper.count = 0;
+
+        var date = new Date;
+        clock.setTime(date);
+        clock.setDate(date);
+        timekeeper.setDateTime(date);
+        calendar.setDateTime(date);
     }
 
     Flipable { //main container

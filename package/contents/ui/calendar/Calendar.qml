@@ -365,7 +365,7 @@ Item {
         }
 
         MouseArea {
-            id: setCurrentTime
+            id: realTimeSwitch
             x: 154; y: 96
             width: 10; height: 24
             cursorShape: Qt.PointingHandCursor
@@ -375,7 +375,7 @@ Item {
             }
 
             onClicked: {
-                currentTime()
+                main.setCurrentTime()
             }
         }
 
