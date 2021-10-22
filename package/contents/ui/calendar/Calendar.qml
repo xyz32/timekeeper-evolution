@@ -135,26 +135,28 @@ Item {
         id: calendarFrame
         state: plasmoid.configuration.calendarGlassState
 
+        property double glassOpacity: 0.65
+
         states: [
             State {
                 name: "infoTransparent"
 
                 PropertyChanges {
                     target: monthBackground
-                    opacity: 0.65
+                    opacity: calendarFrame.glassOpacity
                 }
                 PropertyChanges {
                     target: dayBackground
-                    opacity: 0.65
+                    opacity: calendarFrame.glassOpacity
                 }
                 PropertyChanges {
                     target: yearBackground
-                    opacity: 0.65
+                    opacity: calendarFrame.glassOpacity
                 }
 
                 PropertyChanges {
                     target: clock.weekBackgroundImage
-                    opacity: 0.65
+                    opacity: calendarFrame.glassOpacity
                 }
             },
 
@@ -197,8 +199,8 @@ Item {
                     id: rectangleDayBackground
                     anchors.fill: dayBackground
                     visible: !timekeeper.isRealTime
-                    color: "#ff0000"
-                    opacity: 0.3
+                    color: timekeeper.nonRealTimeColour
+                    opacity: timekeeper.nonRealTimeOpacity
                     radius: width * 0.5
                 }
             }
@@ -230,9 +232,8 @@ Item {
                     id: rectangleMonthBackground
                     anchors.fill: monthBackground
                     visible: !timekeeper.isRealTime
-                    color: "#ff0000"
-                    opacity: 0.3
-                    radius: width * 0.5
+                    color: timekeeper.nonRealTimeColour
+                    opacity: timekeeper.nonRealTimeOpacity
                 }
             }
 
@@ -303,8 +304,8 @@ Item {
                     id: rectangleYearBackground
                     anchors.fill: yearBackground
                     visible: !timekeeper.isRealTime
-                    color: "#ff0000"
-                    opacity: 0.3
+                    color: timekeeper.nonRealTimeColour
+                    opacity: timekeeper.nonRealTimeOpacity
                     radius: width * 0.5
                 }
             }

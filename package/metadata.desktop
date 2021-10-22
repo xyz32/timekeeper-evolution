@@ -1,6 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
-Name=Time Keeper
+Name=Time Keeper Evolution
 Comment=It provides a clock and calendar functions via a steampunk interface.
 
 Icon=desktop
@@ -8,9 +8,9 @@ Type=Service
 ServiceTypes=Plasma/Applet
 
 X-KDE-ParentApp=
-X-KDE-PluginInfo-Author=Joker
-X-KDE-PluginInfo-Email=nice.way@live.com
-X-KDE-PluginInfo-Website=https://github.com/Joker/timekeeper
+X-KDE-PluginInfo-Author=xyz
+X-KDE-PluginInfo-Email=xyz.relativity@gmail.com
+X-KDE-PluginInfo-Website=https://github.com/xyz32/timekeeper
 X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-Category=Date and Time
 X-KDE-PluginInfo-License=GPLv3

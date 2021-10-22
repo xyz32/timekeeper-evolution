@@ -55,9 +55,8 @@ Item {
             id: rectangleWeekBackgroundImage
             anchors.fill: weekBackgroundImage
             visible: !timekeeper.isRealTime
-            color: "#ff0000"
-            opacity: 0.3
-            radius: width * 0.5
+            color: timekeeper.nonRealTimeColour
+            opacity: timekeeper.nonRealTimeOpacity
         }
     }
 
