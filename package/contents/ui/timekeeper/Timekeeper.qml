@@ -207,6 +207,8 @@ Item {
             var today = new Date();
             today.setDate(today.getDate() + count);
 
+            isRealTime = false;
+
             orrery.setDateTime(today);
             calendar.setDateTime(today);
             clock.setDate(today);

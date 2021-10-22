@@ -13,10 +13,9 @@ Item {
     property int minutes
     property int seconds
 
-    property string week_day
-    property alias  week_bgd   : weekBackgroundImage
-    property alias  week_glass : glass
-    property string gradient   : "#206f4a"
+    property string weekDay
+
+    property alias weekBackgroundImage: weekBackgroundImage
 
     states: [
         State { name: "out"; PropertyChanges { target: clock; x: -9; y: 42; } },
@@ -35,7 +34,7 @@ Item {
     }
 
     function setDate(date) {
-        clock.week_day = Qt.formatDateTime(date, "ddd");
+        clock.weekDay = Qt.formatDateTime(date, "ddd");
     }
 
     Wheels {
@@ -43,19 +42,37 @@ Item {
         x: -26;y: 137;
     }
 
-    Rectangle {
-        id: glass
-        x: 77; y: 89; z: 5
-        width: 20; height: 46
-        opacity: 0.65
-        visible: false
-        gradient: Gradient {
-            GradientStop { position: 0;    color: gradient  }
-            GradientStop { position: 0.38; color: "#ffffff" }
-            GradientStop { position: 0.57; color: "#ffffff" }
-            GradientStop { position: 1;    color: gradient  }
+    Image {
+        id: weekBackgroundImage;
+        x: 65;
+        y: 102;
+        width: 45;
+        height: 20
+        smooth: true
+        source: "textBackground.png"
+
+        Rectangle {
+            id: rectangleWeekBackgroundImage
+            anchors.fill: weekBackgroundImage
+            visible: !timekeeper.isRealTime
+            color: "#ff0000"
+            opacity: 0.3
+            radius: width * 0.5
         }
-        rotation: 270
+    }
+
+    Text {
+        anchors.fill: weekBackgroundImage
+
+        text: clock.weekDay
+
+        verticalAlignment: Text.AlignVCenter
+        horizontalAlignment: Text.AlignHCenter
+
+        font.pointSize: 9
+        font.family: fixedFont.name
+        font.bold: true
+        color: "#333333"
     }
 
     Image {
@@ -97,28 +114,6 @@ Item {
                 plasmoid.configuration.whellState = whell.hide
             }
         }
-    }
-
-    Image {
-        id: weekBackgroundImage;
-        x: 64;
-        y: 102;
-        z: 5;
-        smooth: true
-        source: "week_bg.png"
-    }
-
-    Text {
-        x: 66; y: 104; z: 5
-        width: 42; height: 17
-        text: clock.week_day
-
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
-
-        font.pointSize: 10
-        font.family: fixedFont.name
-        color: "#333333"
     }
 
     Image {

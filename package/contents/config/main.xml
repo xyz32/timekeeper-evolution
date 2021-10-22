@@ -31,5 +31,16 @@ xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
 			<label>calendarState</label>
 			<default>in</default>
 		</entry>
+        
+        <entry name="calendarGlassState" type="String">
+			<label>calendarGlassState</label>
+			<default>infoOpaque</default>
+		</entry>
+        
+        <entry name="yearState" type="String">
+			<label>yearState</label>
+			<default>yyyy</default>
+		</entry>
+        
 	</group>
 </kcfg>
