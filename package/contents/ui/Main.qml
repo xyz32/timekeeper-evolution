@@ -31,10 +31,8 @@ Item {
     Plasmoid.backgroundHints: "NoBackground"
 
     readonly property string fontName:   "Engravers MT"
-
-    Component.onCompleted: {
-        clock.state              = plasmoid.configuration.clockState
-    }
+    readonly property bool playSounds: plasmoid.configuration.playSounds
+    readonly property double soundVolume: plasmoid.configuration.soundVolume
 
     function debugMouseArea(dbgParent) {
         if (main.debug) {
@@ -55,6 +53,13 @@ Item {
         var janDate = new Date((new Date).getFullYear(), 0, 1);
         var julDate = new Date((new Date).getFullYear(), 6, 1);
         return Math.max(janDate.getTimezoneOffset(), julDate.getTimezoneOffset());
+    }
+
+    function playSound(soundEfect) {
+        if (main.playSounds) {
+            soundEfect.volume = soundVolume;
+            soundEfect.play();
+        }
     }
 
     FontLoader {

@@ -1,4 +1,5 @@
 import QtQuick 2.1
+import QtMultimedia 5.15
 
 Item{
     id:clockCogs
@@ -9,14 +10,30 @@ Item{
     width: 132; height: 93
 
     function setDateTime(date) {
-        if (Math.abs(showingDate - date) < 100){return} //limit framerate
-        showingDate = date;
+        if (!clockCogs.lock) {
+            ang = (ang + 10) % 360
+        }
+    }
 
-        var offest   = date.getTimezoneOffset();
-        var hours    = date.getHours();
-        var minutes  = date.getMinutes();
+    state: "in"
 
-        earth.rot = (hours * earth.framesPerHour + Math.round((minutes + offest) / earth.framesPerMin)) % earth.earthNumFrames;
+    states: [
+        State {
+            name: "hide"; PropertyChanges { target: clockCogs; x: 10;  y: 25; }
+            when: hide
+        },
+        State {
+            name: "in";   PropertyChanges { target: clockCogs; x: -26; y: 137; }
+            when: {clock.state === "in" && !hide}
+        },
+        State {
+            name: "out";  PropertyChanges { target: clockCogs; x: -5; }
+            when: {clock.state === "out" && !hide}
+        }
+    ]
+    transitions: Transition {
+        NumberAnimation { properties: "x"; duration: 1500 }
+        NumberAnimation { properties: "y"; duration: 800  }
     }
 
     Image {
@@ -25,7 +42,7 @@ Item{
         source: "cogShadow.png"
         smooth: true;
         transform: Rotation {
-            angle: ang * -1
+            angle: 360 - ang
             origin.x: cogShadow.width/2; origin.y: cogShadow.height/2;
             Behavior on angle {
                 SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
@@ -38,11 +55,27 @@ Item{
         width: 82; height: 84;
         source: "cog.png"
         smooth: true;
+
+        SoundEffect {
+            id: wheelCogSound
+            source: "clockWheelCog.wav"
+        }
+
         transform: Rotation {
-            angle: ang * -1
+            angle: 360 - ang
             origin.x: cog.width/2; origin.y: cog.height/2;
             Behavior on angle {
-                SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
+                ParallelAnimation {
+                    SpringAnimation {
+                        spring: 2;
+                        damping: 0.2;
+                        modulus: 360
+                    }
+                    ScriptAction { script: {
+                            playSound(wheelCogSound);
+                        }
+                    }
+                }
             }
         }
     }
@@ -88,45 +121,23 @@ Item{
             }
 
             onClicked: {
-                if(!whell.lock){
-                    whell.ang = -10
-                    whell.lock = !whell.lock
+                if(!wheels.lock){
+                    wheels.ang = -10
+                    wheels.lock = !wheels.lock
                 } else if(!timekeeper.lock){
                     timekeeper.countAngle = 10
                     timekeeper.lock = !timekeeper.lock
                 } else {
-                    whell.lock = !whell.lock
+                    wheels.lock = !wheels.lock
                     timekeeper.lock = !timekeeper.lock
 
-                    whell.ang = 0
+                    wheels.ang = 0
                     calendar.cogAngle = 0
                     timekeeper.countAngle = 0
                 }
                 plasmoid.configuration.calendarLock = timekeeper.lock
-                plasmoid.configuration.whellLock = whell.lock
+                plasmoid.configuration.whellLock = wheels.lock
             }
         }
-    }
-
-
-    state: "in"
-
-    states: [
-        State {
-            name: "hide"; PropertyChanges { target: clockCogs; x: 10;  y: 25; }
-            when: hide
-        },
-        State {
-            name: "in";   PropertyChanges { target: clockCogs; x: -26; y: 137; }
-            when: {clock.state === "in" && !hide}
-        },
-        State {
-            name: "out";  PropertyChanges { target: clockCogs; x: -5; }
-            when: {clock.state === "out" && !hide}
-        }
-    ]
-    transitions: Transition {
-        NumberAnimation { properties: "x"; duration: 1500 }
-        NumberAnimation { properties: "y"; duration: 800  }
     }
 }

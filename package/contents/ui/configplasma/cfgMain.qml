@@ -9,6 +9,7 @@ ColumnLayout {
     property alias cfg_userBackgroundImage:  backImg.text
     property alias cfg_clockOpacity:  clockOpacity.value
     property alias cfg_calendarOpacity:  calendarOpacity.value
+    property alias cfg_soundVolume: soundVolume.value
 
     GridLayout {
         Layout.alignment: Qt.AlignTop
@@ -117,6 +118,48 @@ ColumnLayout {
                     anchors.verticalCenter: calendarOpacity.verticalCenter
                     text: {
                         return calendarOpacity.value.toFixed(2);
+                    }
+                }
+            }
+        }
+
+        GroupBox {
+
+            title: i18n("Sound")
+            Layout.fillWidth:  true
+
+            GridLayout {
+                Layout.alignment: Qt.AlignCenter
+                columns: 3
+                rows: 2
+
+                Label {
+                    text: i18n("Sound volume:")
+                    Layout.alignment: Qt.AlignRight
+                    anchors.verticalCenter: soundVolume.verticalCenter
+                }
+
+                Slider {
+                    id: soundVolume
+                    Layout.minimumWidth: 300
+                    live:true
+                    snapMode: "SnapAlways"
+                    stepSize: 0.05
+                    from: 0
+                    value: 1
+                    to: 1
+
+                    onMoved: {
+                        soundVolumeValue.text = soundVolume.value.toFixed(2);
+                    }
+                }
+
+                Label {
+                    id: soundVolumeValue
+                    Layout.alignment: Qt.AlignRight
+                    anchors.verticalCenter: soundVolume.verticalCenter
+                    text: {
+                        return soundVolume.value.toFixed(2);
                     }
                 }
             }

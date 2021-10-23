@@ -1,5 +1,5 @@
 import QtQuick 2.1
-import QtGraphicalEffects 1.0
+import QtMultimedia 5.15
 
 import "wheels"
 
@@ -8,6 +8,7 @@ Item {
     width: 182; height: 182
 
     opacity: plasmoid.configuration.clockOpacity
+    state: plasmoid.configuration.clockState
 
     property int hours
     property int minutes
@@ -31,6 +32,8 @@ Item {
         clock.hours    = date.getHours();
         clock.minutes  = date.getMinutes();
         clock.seconds  = date.getSeconds();
+
+        wheels.setDateTime(date);
     }
 
     function setDate(date) {
@@ -38,7 +41,7 @@ Item {
     }
 
     Wheels {
-        id: whell
+        id: wheels
         x: -26;y: 137;
     }
 
@@ -109,8 +112,8 @@ Item {
             }
 
             onClicked: {
-                whell.hide = !whell.hide
-                plasmoid.configuration.whellState = whell.hide
+                wheels.hide = !wheels.hide
+                plasmoid.configuration.whellState = wheels.hide
             }
         }
     }
@@ -141,16 +144,63 @@ Item {
     }
 
     Image {
+        x: 85; y: 32; z: 5
+        source: "second.png"
+        smooth: true
+
+        SoundEffect {
+            id: secondsCogSound
+            source: "./sounds/secondsCog.wav"
+        }
+
+        transform: Rotation {
+            id: secondRotation
+            origin.x: 2; origin.y: 21;
+            angle: clock.seconds * 6
+            Behavior on angle {
+                ParallelAnimation {
+                    SpringAnimation {
+                        spring: 2;
+                        damping: 0.2;
+                        modulus: 360
+                    }
+                    ScriptAction {
+                        script: {
+                            playSound(secondsCogSound);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    Image {
         x: 75; y: 29; z: 5
         source: "hour.png"
         smooth: true
+
+        SoundEffect {
+            id: hourCogSound
+            source: "./sounds/hourCog.wav"
+        }
 
         transform: Rotation {
             id: hourRotation
             origin.x: 12; origin.y: 53;
             angle: (clock.hours * 30) + (clock.minutes * 0.5)
             Behavior on angle {
-                SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
+                ParallelAnimation {
+                    SpringAnimation {
+                        spring: 2;
+                        damping: 0.2;
+                        modulus: 360
+                    }
+                    ScriptAction {
+                        script: {
+                            playSound(hourCogSound);
+                        }
+                    }
+                }
             }
         }
     }
@@ -160,27 +210,28 @@ Item {
         source: "minute.png"
         smooth: true
 
+        SoundEffect {
+            id: minutesCogSound
+            source: "./sounds/minutesCog.wav"
+        }
+
         transform: Rotation {
             id: minuteRotation
             origin.x: 8; origin.y: 69;
             angle: clock.minutes * 6
             Behavior on angle {
-                SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
-            }
-        }
-    }
-
-    Image {
-        x: 85; y: 32; z: 5
-        source: "second.png"
-        smooth: true
-
-        transform: Rotation {
-            id: secondRotation
-            origin.x: 2; origin.y: 21;
-            angle: clock.seconds * 6
-            Behavior on angle {
-                SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
+                ParallelAnimation {
+                    SpringAnimation {
+                        spring: 2;
+                        damping: 0.2;
+                        modulus: 360
+                    }
+                    ScriptAction {
+                        script: {
+                            playSound(minutesCogSound);
+                        }
+                    }
+                }
             }
         }
     }

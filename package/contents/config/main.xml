@@ -6,12 +6,22 @@ xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
 	<kcfgfile name=""/>
 
 	<group name="General">
-		<entry name="backgroundImage" type="path">
+		<entry name="backgroundImage" type="Path">
 			<default>frame/backgrounds/glassImmage.png</default>
 		</entry>
         
-        <entry name="userBackgroundImage" type="path">
+        <entry name="userBackgroundImage" type="Path">
 			<default></default>
+		</entry>
+        
+        <entry name="playSounds" type="Bool">
+			<label>playSounds</label>
+			<default>true</default>
+		</entry>
+        
+        <entry name="soundVolume" type="Double">
+			<label>soundVolume</label>
+			<default>1.00</default>
 		</entry>
         
         <entry name="clockOpacity" type="Double">
