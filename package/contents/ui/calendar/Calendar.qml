@@ -46,6 +46,16 @@ Item {
                 target: cogAnimationTimer
                 dirrection: -1
             }
+
+            PropertyChanges {
+                target: lookingGlassImageRotation
+                angle: 0
+            }
+
+            PropertyChanges {
+                target: lookingGlassShadowImageRotation
+                angle: 0
+            }
         }
     ]
 

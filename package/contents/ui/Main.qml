@@ -138,7 +138,6 @@ Item {
                 id: clock;
                 x: 29; y: 60;
                 z: 10
-                state: "in"
             }
 
             Calendar{

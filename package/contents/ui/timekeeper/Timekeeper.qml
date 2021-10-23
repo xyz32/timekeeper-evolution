@@ -24,7 +24,7 @@ Item {
 
     property int count: 0
     property double ring_degree
-    property int    count_angle
+    property int    countAngle
     property bool   lock: false
     property alias  startAngle  : mouse_rotate.start_angle
 
@@ -175,7 +175,7 @@ Item {
         smooth: true
         transform: Rotation {
             origin.x: 170.5; origin.y: 170.5;
-            angle: frame.count_angle * -1
+            angle: frame.countAngle * -1
             Behavior on angle {
                 SpringAnimation {
                     spring: 2
@@ -247,7 +247,7 @@ Item {
 
                 b = ostanov + (a - start_angle)
                 frame.ring_degree = b
-                frame.count_angle = b
+                frame.countAngle = b
 
                 c = (a_pred - a)
                 if(c < 90 && -90 < c ) count += c

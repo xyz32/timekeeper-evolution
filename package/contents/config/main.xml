@@ -37,6 +37,11 @@ xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
 			<default>in</default>
 		</entry>
         
+        <entry name="cogsState" type="String">
+			<label>cogsState</label>
+			<default>hide</default>
+		</entry>
+        
         <entry name="calendarState" type="String">
 			<label>calendarState</label>
 			<default>in</default>

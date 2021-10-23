@@ -3,32 +3,49 @@ import QtMultimedia 5.15
 
 Item{
     id:clockCogs
+    width: 132;
+    height: 93
+
+    state: plasmoid.configuration.cogsState
+
     property int ang: 0
-    property bool hide: false
     property bool lock: false
 
-    width: 132; height: 93
-
     function setDateTime(date) {
-        if (!clockCogs.lock) {
+        if (!clockCogs.lock && clockCogs.state !== "hide") {
             ang = (ang + 10) % 360
         }
     }
 
-    state: "in"
-
     states: [
         State {
-            name: "hide"; PropertyChanges { target: clockCogs; x: 10;  y: 25; }
-            when: hide
+            name: "hide";
+            PropertyChanges {
+                target: clockCogs;
+                x: 10;
+                y: 25;
+            }
         },
         State {
-            name: "in";   PropertyChanges { target: clockCogs; x: -26; y: 137; }
-            when: {clock.state === "in" && !hide}
+            name: "in";
+            PropertyChanges {
+                target: clockCogs;
+                x: -26;
+                y: 137;
+            }
+            when: {
+                clock.state === "in" && clockCogs.state != "hide"
+            }
         },
         State {
-            name: "out";  PropertyChanges { target: clockCogs; x: -5; }
-            when: {clock.state === "out" && !hide}
+            name: "out";
+            PropertyChanges {
+                target: clockCogs;
+                x: -5;
+            }
+            when: {
+                clock.state === "out" && clockCogs.state != "hide"
+            }
         }
     ]
     transitions: Transition {
@@ -121,22 +138,22 @@ Item{
             }
 
             onClicked: {
-                if(!wheels.lock){
-                    wheels.ang = -10
-                    wheels.lock = !wheels.lock
+                if(!cogs.lock){
+                    cogs.ang = -10
+                    cogs.lock = !cogs.lock
                 } else if(!timekeeper.lock){
                     timekeeper.countAngle = 10
                     timekeeper.lock = !timekeeper.lock
                 } else {
-                    wheels.lock = !wheels.lock
+                    cogs.lock = !cogs.lock
                     timekeeper.lock = !timekeeper.lock
 
-                    wheels.ang = 0
+                    cogs.ang = 0
                     calendar.cogAngle = 0
                     timekeeper.countAngle = 0
                 }
                 plasmoid.configuration.calendarLock = timekeeper.lock
-                plasmoid.configuration.whellLock = wheels.lock
+                plasmoid.configuration.whellLock = cogs.lock
             }
         }
     }

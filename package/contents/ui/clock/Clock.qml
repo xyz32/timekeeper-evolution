@@ -1,7 +1,7 @@
 import QtQuick 2.1
 import QtMultimedia 5.15
 
-import "wheels"
+import "cogs"
 
 Item {
     id: clock
@@ -13,14 +13,28 @@ Item {
     property int hours
     property int minutes
     property int seconds
-
     property string weekDay
 
     property alias weekBackgroundImage: weekBackgroundImage
 
     states: [
-        State { name: "out"; PropertyChanges { target: clock; x: -9; y: 42; } },
-        State { name: "in";  PropertyChanges { target: clock; x: 29; y: 60; } }
+        State {
+            name: "out";
+            PropertyChanges {
+                target: clock;
+                x: -9;
+                y: 42;
+            }
+        },
+
+        State {
+            name: "in";
+            PropertyChanges {
+                target: clock;
+                x: 29;
+                y: 60;
+            }
+        }
     ]
 
     transitions: Transition {
@@ -33,15 +47,15 @@ Item {
         clock.minutes  = date.getMinutes();
         clock.seconds  = date.getSeconds();
 
-        wheels.setDateTime(date);
+        cogs.setDateTime(date);
     }
 
     function setDate(date) {
         clock.weekDay = Qt.formatDateTime(date, "ddd");
     }
 
-    Wheels {
-        id: wheels
+    Cogs {
+        id: cogs
         x: -26;y: 137;
     }
 
@@ -112,8 +126,8 @@ Item {
             }
 
             onClicked: {
-                wheels.hide = !wheels.hide
-                plasmoid.configuration.whellState = wheels.hide
+                cogs.state = cogs.state == "hide"? clock.state : "hide";
+                plasmoid.configuration.cogsState = cogs.state;
             }
         }
     }
