@@ -1,7 +1,7 @@
 import QtQuick 2.1
 
 Item{
-    id:wh
+    id:clockCogs
     property int ang: 0
     property bool hide: false
     property bool lock: false
@@ -113,15 +113,15 @@ Item{
 
     states: [
         State {
-            name: "hide"; PropertyChanges { target: wh; x: 10;  y: 25; }
+            name: "hide"; PropertyChanges { target: clockCogs; x: 10;  y: 25; }
             when: hide
         },
         State {
-            name: "in";   PropertyChanges { target: wh; x: -26; y: 137; }
+            name: "in";   PropertyChanges { target: clockCogs; x: -26; y: 137; }
             when: {clock.state === "in" && !hide}
         },
         State {
-            name: "out";  PropertyChanges { target: wh; x: -5; }
+            name: "out";  PropertyChanges { target: clockCogs; x: -5; }
             when: {clock.state === "out" && !hide}
         }
     ]

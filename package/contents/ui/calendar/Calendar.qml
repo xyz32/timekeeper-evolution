@@ -83,13 +83,13 @@ Item {
         id: cogWithShadow
         x: 29
         y: 13
-        width: 84
-        height: 84
 
         Image {
             id: cogShadowImage
-            x: -6
-            y: -5
+            x: 4
+            y: 4
+            width: 84
+            height: 84
             source: "monthCogShadow.png"
             smooth: true
             transform: Rotation {
@@ -108,9 +108,9 @@ Item {
 
         Image {
             id: cogImage
-            x: 1
+            x: 0
             y: 0
-            width: 82
+            width: 84
             height: 84
             source: "monthCog.png"
             smooth: true
@@ -278,7 +278,7 @@ Item {
                     }
                     PropertyChanges {
                         target: calendarImage
-                        source: "calendar.png"
+                        source: "calendarShorYear.png"
                     }
                 },
                 State {
@@ -296,7 +296,7 @@ Item {
                     }
                     PropertyChanges {
                         target: calendarImage
-                        source: "calendar_yyyy.png"
+                        source: "calendar.png"
                     }
                 }
             ]
@@ -339,7 +339,7 @@ Item {
             x: 0
             y: 0
             smooth: true
-            source: "calendar_yyyy.png"
+            source: "calendar.png"
 
             MouseArea {
                 id: yearFormat
@@ -407,8 +407,11 @@ Item {
 
             Image {
                 id: lookingGlassShadowImage
-                x: 2
-                y: 2
+                x: 4
+                y: 4
+
+                width: 70
+                height: 95
 
                 smooth: true
                 source: "lookingGlassShadow.png"
@@ -416,7 +419,7 @@ Item {
                 transform: Rotation {
                     id: lookingGlassShadowImageRotation
                     origin.x: lookingGlassShadowImage.width / 2
-                    origin.y: 39
+                    origin.y: 33
                     angle: 0
                     Behavior on angle {
                         SpringAnimation { spring: 4; damping: 0.3; modulus: 360 }
@@ -440,6 +443,9 @@ Item {
                 id: lookingGlassImage
                 smooth: true
                 source: "lookingGlass.png"
+
+                width: 70
+                height: 95
 
                 transform: Rotation {
                     id: lookingGlassImageRotation
