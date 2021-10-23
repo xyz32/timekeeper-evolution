@@ -3,8 +3,8 @@ import "phase.js" as Luna
 
 Item {
     id: moon
-    width: 5
-    height: 5
+    width: 80
+    height: 80
 
     property int phase: 28;
     property real degreesPerPhase: 12.41

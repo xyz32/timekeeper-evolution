@@ -13,6 +13,7 @@ import "calendar"
 Item {
     id: main
 
+    readonly property bool debug: false
 
     readonly property int mainWidth: 478 * units.devicePixelRatio //540
     readonly property int mainHeight: 478 * units.devicePixelRatio
@@ -48,6 +49,12 @@ Item {
                             }
                         ", dbgParent);
         }
+    }
+
+    function stdTimezoneOffset () {
+        var janDate = new Date((new Date).getFullYear(), 0, 1);
+        var julDate = new Date((new Date).getFullYear(), 6, 1);
+        return Math.max(janDate.getTimezoneOffset(), julDate.getTimezoneOffset());
     }
 
     FontLoader {

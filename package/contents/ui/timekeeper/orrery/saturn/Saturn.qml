@@ -9,6 +9,10 @@ Item {
     Component.onCompleted: {
     }
 
+    function setDateTime(date) {
+
+    }
+
     Image {
         x: 0 //(parent.width - parent.height) / 2
         y: - shadowOffset

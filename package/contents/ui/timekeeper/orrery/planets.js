@@ -12,11 +12,11 @@ var pname = ["Mercury", "Venus  ", "Earth  ",
 
 function getTrueAnomaly(planet, date)
 {
-    var c = get_coord(planet, day_number(date))
-    return tri_angle(c.x, c.y)
+    var c = getCoord(planet, dayNumber(date))
+    return triAngle(c.x, c.y)
 }
 
-function tri_angle(x,y){
+function triAngle(x,y){
     if(x === 0) return (y>0) ? 180 : 0;
     var a = Math.atan(y/x)*180/Math.PI;
     a = (x > 0) ? a+90 : a+270;
@@ -33,7 +33,7 @@ function dms2real( deg, min, sec )
     return rv;
 }
 // day number to/from J2000 (Jan 1.5, 2000)
-function day_number(now)
+function dayNumber(now)
 {
     if(!now) now = new Date();
     var y    = now.getUTCFullYear();
@@ -51,7 +51,7 @@ function day_number(now)
 
 // compute RA, DEC, and distance of planet-p for day number-d
 // result returned in structure obj in degrees and astronomical units
-function get_coord( i, d )
+function getCoord( i, d )
 {
     // orbital element structure
     var p = {
@@ -62,7 +62,7 @@ function get_coord( i, d )
         w : parseFloat("0"),    // longitude of perihelion [deg]
         L : parseFloat("0")     // mean longitude [deg]
     }
-    mean_elements(p, i, d);
+    meanElements(p, i, d);
 
     // position of planet in its orbit
     var mp = mod2pi(p.L - p.w);
@@ -80,7 +80,7 @@ function get_coord( i, d )
 
 // Compute the elements of the orbit for planet-i at day number-d
 // result is returned in structure p
-function mean_elements( p, i, d )
+function meanElements( p, i, d )
 {
     var cy = d/36525;                    // centuries since J2000
 
@@ -204,10 +204,6 @@ function true_anomaly( M, e )
 
     return V;
 }
-
-
-
-
 
 /*
 var p, zxc;

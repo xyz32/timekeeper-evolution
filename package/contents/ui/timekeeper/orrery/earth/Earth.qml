@@ -6,13 +6,53 @@ import "moon"
 Item {
     id: earth;
 
-    property int rot: 0
+    property int daytimeRotation: 0
     property int earthNumFrames: 96
     property int framesPerHour: earthNumFrames / 24
     property int framesPerMin: 60 / framesPerHour
 
+    state: "small"
+
     width: 15
     height: 15
+
+    Behavior on width {
+        NumberAnimation { duration: 100 }
+    }
+    Behavior on height {
+        NumberAnimation { duration: 100 }
+    }
+
+    states: [
+        State {
+            name: "small"
+            PropertyChanges {
+                target: earth
+                width: 15;
+                height: 15;
+                z: 0
+            }
+
+            PropertyChanges {
+                target: rotation
+                angle: 0
+            }
+        },
+        State {
+            name: "big"
+            PropertyChanges {
+                target: earth
+                width: 100;
+                height: 100;
+                z: 7
+            }
+
+            PropertyChanges {
+                target: rotation
+                angle: 180
+            }
+        }
+    ]
 
     Component.onCompleted: {
     }
@@ -20,11 +60,11 @@ Item {
     function setDateTime(date) {
         moon.setDateTime(date);
 
-        var offest   = date.getTimezoneOffset();
+        var offest   = stdTimezoneOffset();
         var hours    = date.getHours();
         var minutes  = date.getMinutes();
 
-        earth.rot = (hours * earth.framesPerHour + Math.round((minutes + offest) / earth.framesPerMin)) % earth.earthNumFrames;
+        earth.daytimeRotation = (hours * earth.framesPerHour + Math.round((minutes + offest) / earth.framesPerMin)) % earth.earthNumFrames;
 
         moon.planetTrueAnomaly = 360 - (moon.degreesPerPhase * moon.phase);
     }
@@ -39,12 +79,37 @@ Item {
         source: "../underShadow.png"
     }
 
-    Image {
+    Flipable {
         id: terra
         anchors.fill: parent
 
-        smooth: true
-        source: "./earth_big.png" //"./animation/earth"+ rot + ".png"
+        transform: Rotation {
+            id: rotation
+            origin.x: terra.width/2
+            origin.y: terra.height/2
+            axis.x: 0; axis.y: 1; axis.z: 0     // set axis.y to 1 to rotate around y-axis
+            angle: 0    // the default angle
+        }
+
+        transitions: Transition {
+            NumberAnimation { target: rotation; property: "angle"; duration: 1000 }
+        }
+
+        front: Image {
+            id: terraTop
+            anchors.fill: parent
+
+            smooth: true
+            source: "./earth_big.png"
+        }
+
+        back: Image {
+            id: terra24
+            anchors.fill: parent
+
+            smooth: true
+            source: "./animation/earth"+ daytimeRotation + ".png"
+        }
 
         MouseArea {
 
@@ -58,18 +123,21 @@ Item {
             }
 
             onClicked: {
+                earth.state = earth.state === "small" ? "big" : "small"
             }
         }
     }
 
     Moon {
         id: moon
+        width: terra.width / 3
+        height: terra.width / 3
 
-        property int planetoffset: 10
+        property int planetoffset: (terra.width / 2) + (moon.width / 2)
         property int planetTrueAnomaly: 0
 
         x: terra.x + (terra.width / 2) - (moon.width / 2)
-        y: terra.y + (terra.height / 2) - (moon.height / 2) + planetoffset
+        y: terra.y + (terra.height / 2) - (moon.height / 2) + moon.planetoffset
 
         transform: Rotation {
             origin.x: moon.width / 2
