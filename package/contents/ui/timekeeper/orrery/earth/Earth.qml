@@ -16,12 +16,31 @@ Item {
     width: 15
     height: 15
 
-    Behavior on width {
-        NumberAnimation { duration: 100 }
-    }
-    Behavior on height {
-        NumberAnimation { duration: 100 }
-    }
+    transitions: [
+        Transition {
+            SequentialAnimation {
+                ParallelAnimation {
+                    NumberAnimation {
+                        target: earth
+                        property: "width"
+                        duration: zoomAnimationDurationMS / 2
+                    }
+
+                    NumberAnimation {
+                        target: earth
+                        property: "height"
+                        duration: zoomAnimationDurationMS / 2
+                    }
+                }
+
+                NumberAnimation {
+                    target: rotation;
+                    property: "angle";
+                    duration: zoomAnimationDurationMS / 2
+                }
+            }
+        }
+    ]
 
     states: [
         State {
@@ -89,10 +108,6 @@ Item {
             origin.y: terra.height/2
             axis.x: 0; axis.y: 1; axis.z: 0     // set axis.y to 1 to rotate around y-axis
             angle: 0    // the default angle
-        }
-
-        transitions: Transition {
-            NumberAnimation { target: rotation; property: "angle"; duration: 1000 }
         }
 
         front: Image {

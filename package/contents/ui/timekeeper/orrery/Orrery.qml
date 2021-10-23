@@ -17,6 +17,7 @@ Item {
     id: home;
 
     property int shadowOffset: 5;
+    property int zoomAnimationDurationMS: 500
     property var showingDate: new Date();
 
     Component.onCompleted: {
