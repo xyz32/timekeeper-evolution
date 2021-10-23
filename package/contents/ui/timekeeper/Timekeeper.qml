@@ -8,8 +8,8 @@ Item {
     height: parent.height
 
     property bool isRealTime: true
-    property string nonRealTimeColour: "#ff0000"
-    property double nonRealTimeOpacity: 0.35
+    property string nonRealTimeColour: "#ffff00"
+    property double nonRealTimeOpacity: 0.3
     
     property var backgroundImages: [
         "frame/backgrounds/glassImmage.png",

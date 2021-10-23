@@ -26,6 +26,16 @@ Item {
                 target: cogAnimationTimer
                 dirrection: 1
             }
+
+            PropertyChanges {
+                target: lookingGlassImageRotation
+                angle: 90
+            }
+
+            PropertyChanges {
+                target: lookingGlassShadowImageRotation
+                angle: 90
+            }
         },
         State {
             name: "in"
@@ -324,17 +334,6 @@ Item {
             }
         }
 
-        Rectangle {
-            id: rectangleLookingGlass
-            x: 139
-            y: 36
-            opacity: 0.53
-            visible: false
-            width: 40
-            height: 40
-            radius: width * 0.5
-        }
-
         Image {
             id: calendarImage
             x: 0
@@ -355,14 +354,12 @@ Item {
                 }
 
                 onClicked: {
-                    if (sw)
-                        yearText.state = "yy"
+                    if (yearItem.state === "yyyy")
+                        yearItem.state = "yy"
                     else
-                        yearText.state = "yyyy"
+                        yearItem.state = "yyyy"
 
-                    sw = !sw
-
-                    plasmoid.configuration.yearState = yearText.state
+                    plasmoid.configuration.yearState = yearItem.state
                 }
             }
 
@@ -371,7 +368,7 @@ Item {
                 x: 131
                 y: 25
                 width: 9
-                height: 11
+                height: 9
                 cursorShape: Qt.PointingHandCursor
 
                 Component.onCompleted: {
@@ -387,40 +384,6 @@ Item {
 
             MouseArea {
                 id: realTimeSwitch
-                x: 154
-                y: 96
-                width: 10
-                height: 24
-                cursorShape: Qt.PointingHandCursor
-
-                Component.onCompleted: {
-                    debugMouseArea(this)
-                }
-
-                onClicked: {
-                    main.setToRealTime()
-                }
-            }
-
-            MouseArea {
-                id: topButtonSwitch
-                x: 178
-                y: 32
-                width: 12
-                height: 14
-                cursorShape: Qt.PointingHandCursor
-
-                Component.onCompleted: {
-                    debugMouseArea(this)
-                }
-
-                onClicked: {
-
-                }
-            }
-
-            MouseArea {
-                id: inOutSwitch
                 x: 0
                 y: 49
                 width: 13
@@ -432,8 +395,95 @@ Item {
                 }
 
                 onClicked: {
-                    calendar.state === "in" ? calendar.state = "out" : calendar.state = "in"
-                    plasmoid.configuration.calendarState = calendar.state
+                    main.setToRealTime();
+                }
+            }
+        }
+
+        Item {
+            id: lookingGlassItem
+            x: 123
+            y: 23
+
+            Image {
+                id: lookingGlassShadowImage
+                x: 2
+                y: 2
+
+                smooth: true
+                source: "lookingGlassShadow.png"
+
+                transform: Rotation {
+                    id: lookingGlassShadowImageRotation
+                    origin.x: lookingGlassShadowImage.width / 2
+                    origin.y: 39
+                    angle: 0
+                    Behavior on angle {
+                        SpringAnimation { spring: 4; damping: 0.3; modulus: 360 }
+                    }
+                }
+            }
+
+            Image {
+                id: lookingGlassGlassImage
+                x: 12
+                y: 10
+
+                width: 46
+                height: 30
+
+                smooth: true
+                source: "../clock/clockglass.png"
+            }
+
+            Image {
+                id: lookingGlassImage
+                smooth: true
+                source: "lookingGlass.png"
+
+                transform: Rotation {
+                    id: lookingGlassImageRotation
+                    origin.x: lookingGlassImage.width / 2
+                    origin.y: 33
+                    angle: 0
+                    Behavior on angle {
+                        SpringAnimation { spring: 4; damping: 0.3; modulus: 360 }
+                    }
+                }
+
+                MouseArea {
+                    id: lookingGlassHandleSwitch
+                    x: 31
+                    y: 70
+                    width: 10
+                    height: 24
+                    cursorShape: Qt.PointingHandCursor
+
+                    Component.onCompleted: {
+                        debugMouseArea(this)
+                    }
+
+                    onClicked: {
+                        calendar.state === "in" ? calendar.state = "out" : calendar.state = "in"
+                        plasmoid.configuration.calendarState = calendar.state
+                    }
+                }
+
+                MouseArea {
+                    id: lookingGlassButtonSwitch
+                    x: 54
+                    y: 10
+                    width: 12
+                    height: 12
+                    cursorShape: Qt.PointingHandCursor
+
+                    Component.onCompleted: {
+                        debugMouseArea(this)
+                    }
+
+                    onClicked: {
+
+                    }
                 }
             }
         }
