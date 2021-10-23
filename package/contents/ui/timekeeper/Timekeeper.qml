@@ -269,7 +269,7 @@ Item {
         /*
          * Background switch button
          */
-        id: marble_latlon
+        id: backgroundPictureSwitch
         x: 331
         y: 85
         width: 11
@@ -283,6 +283,28 @@ Item {
         cursorShape: Qt.PointingHandCursor
         onClicked: {
             backgroundImgAnimator.changeImage();
+        }
+    }
+
+    MouseArea {
+        /*
+         * Background switch button
+         */
+        id: soundSwitch
+        x: 136
+        y: 387
+        width: 11
+        height: 11
+        visible: true
+
+        Component.onCompleted: {
+            debugMouseArea(this);
+        }
+
+        cursorShape: Qt.PointingHandCursor
+        onClicked: {
+            playSounds = !playSounds;
+            plasmoid.configuration.playSounds = playSounds;
         }
     }
 

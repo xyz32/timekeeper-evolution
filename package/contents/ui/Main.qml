@@ -31,8 +31,8 @@ Item {
     Plasmoid.backgroundHints: "NoBackground"
 
     readonly property string fontName:   "Engravers MT"
-    readonly property bool playSounds: plasmoid.configuration.playSounds
-    readonly property double soundVolume: plasmoid.configuration.soundVolume
+    property bool playSounds: plasmoid.configuration.playSounds
+    property double soundVolume: plasmoid.configuration.soundVolume
 
     function debugMouseArea(dbgParent) {
         if (main.debug) {
