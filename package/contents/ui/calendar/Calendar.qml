@@ -103,7 +103,7 @@ Item {
             source: "monthCogShadow.png"
             smooth: true
             transform: Rotation {
-                angle: cogAngle
+                angle: {return (cogAngle + 360) % 360;}
                 origin.x: cogShadowImage.width / 2
                 origin.y: cogShadowImage.height / 2
                 Behavior on angle {
@@ -125,7 +125,7 @@ Item {
             source: "monthCog.png"
             smooth: true
             transform: Rotation {
-                angle: cogAngle
+                angle: {return (cogAngle + 360) % 360;}
                 origin.x: cogImage.width / 2
                 origin.y: cogImage.height / 2
                 Behavior on angle {
@@ -146,7 +146,7 @@ Item {
             interval: 20
             repeat: true
             onTriggered: {
-                cogAngle = (cogAngle + (angleStep * dirrection)) % 360
+                cogAngle += angleStep * dirrection
             }
         }
     }
@@ -492,6 +492,8 @@ Item {
                     width: 12
                     height: 12
                     cursorShape: Qt.PointingHandCursor
+
+                    visible: false
 
                     Component.onCompleted: {
                         debugMouseArea(this)

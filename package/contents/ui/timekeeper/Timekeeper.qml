@@ -165,7 +165,7 @@ Item {
         rotation: 122
         transform: Rotation {
             origin.x: 223; origin.y: 223;
-            angle: frame.ringDegree
+            angle: {return (frame.ringDegree + 360) % 360;}
             Behavior on angle {
                 SpringAnimation { 
                     spring: 2
@@ -189,7 +189,7 @@ Item {
 
         transform: Rotation {
             origin.x: 170.5; origin.y: 170.5;
-            angle: 360 - frame.countAngle
+            angle: {return (360 - frame.countAngle + 360) % 360;}
             Behavior on angle {
                 ParallelAnimation {
                     SpringAnimation {
@@ -249,8 +249,6 @@ Item {
 
         onPressed: {
             if( inner(mouse.x, mouse.y) ){
-                frame.lock  = false;
-
                 start_angle = tri_angle(mouse.x, mouse.y)
                 ostanov     = frame.ringDegree
                 a_pred      = start_angle
@@ -269,6 +267,7 @@ Item {
                 b = ostanov + (a - start_angle)
                 frame.ringDegree = b
                 frame.countAngle = b
+                calendar.cogAngle = b
 
                 c = (a_pred - a)
                 if(c < 90 && -90 < c ) count += c

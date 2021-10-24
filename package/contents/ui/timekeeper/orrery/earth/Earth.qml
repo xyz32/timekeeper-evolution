@@ -79,11 +79,10 @@ Item {
     function setDateTime(date) {
         moon.setDateTime(date);
 
-        var offest   = stdTimezoneOffset();
         var hours    = date.getHours();
         var minutes  = date.getMinutes();
 
-        earth.daytimeRotation = (hours * earth.framesPerHour + Math.round((minutes + offest) / earth.framesPerMin)) % earth.earthNumFrames;
+        earth.daytimeRotation = (hours * earth.framesPerHour + Math.round((minutes + standardTimezoneOffset) / earth.framesPerMin)) % earth.earthNumFrames;
 
         moon.planetTrueAnomaly = 360 - (moon.degreesPerPhase * moon.phase);
     }
@@ -115,7 +114,7 @@ Item {
             anchors.fill: parent
 
             smooth: true
-            source: "./earth_big.png"
+            source: "./earthTop.png"
         }
 
         back: Image {

@@ -35,6 +35,9 @@ Item {
     readonly property string fontName:   "Engravers MT"
     property bool playSounds: plasmoid.configuration.playSounds
     property double soundVolume: plasmoid.configuration.soundVolume
+    property int standardTimezoneOffset: {
+        stdTimezoneOffset(); //solve for daylight saving time gap.
+    }
 
     states: [
             State {

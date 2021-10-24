@@ -27,7 +27,7 @@ Item {
         anchors.fill: parent
 
         smooth: true
-        source: "./saturn_big.png"
+        source: "./saturnTop.png"
 
         MouseArea {
 
