@@ -1,4 +1,5 @@
 import QtQuick 2.1
+import QtMultimedia 5.15
 
 import "orrery"
 
@@ -39,9 +40,9 @@ Item {
     }
 
     function setTime(date) {
-        if (!frame.lock && date.getSeconds() % 11 == 0) {
+        if (!frame.lock && parseInt(date.getTime()/1000) % 7 == 0) {
             frame.countAngle = (frame.countAngle + 10) % 360;
-            calendar.cogAngle = (frame.cogAngle + 5) % 360;
+            calendar.cogAngle = (calendar.cogAngle + 10) % 360;
         }
     }
 
@@ -121,7 +122,7 @@ Item {
                     if (backgroundImgAnimator.state != "onChangeIn") return;
 
                     backgroundImg.source = backgroundImg.selected;
-                    plasmoid.configuration.backgroundImage = backgroundImg.source;
+                    plasmoid.configuration.backgroundImage = backgroundImg.selected;
 
                     backgroundImgAnimator.state = "onChangeOut";
                 }
@@ -180,14 +181,27 @@ Item {
         y: 71
         source: "frame/counterWheel.png"
         smooth: true
+
+        SoundEffect {
+            id: secondsCogSound
+            source: "./frame/sounds/bigWheelcog.wav"
+        }
+
         transform: Rotation {
             origin.x: 170.5; origin.y: 170.5;
             angle: 360 - frame.countAngle
             Behavior on angle {
-                SpringAnimation {
-                    spring: 2
-                    damping: 0.2
-                    modulus: 360
+                ParallelAnimation {
+                    SpringAnimation {
+                        spring: 2;
+                        damping: 0.2;
+                        modulus: 360
+                    }
+                    ScriptAction {
+                        script: {
+                            playSound(secondsCogSound);
+                        }
+                    }
                 }
             }
         }
