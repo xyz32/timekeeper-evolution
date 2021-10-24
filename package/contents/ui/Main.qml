@@ -18,6 +18,8 @@ Item {
     readonly property int mainWidth: 478 * units.devicePixelRatio //540
     readonly property int mainHeight: 478 * units.devicePixelRatio
 
+    state: plasmoid.configuration.mainState
+
     width: mainWidth
     height: mainHeight
 

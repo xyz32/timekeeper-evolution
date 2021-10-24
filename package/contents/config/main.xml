@@ -6,6 +6,11 @@ xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
 	<kcfgfile name=""/>
 
 	<group name="General">
+        <entry name="mainState" type="String">
+            <label>mainState</label>
+			<default></default>
+		</entry>
+        
 		<entry name="backgroundImage" type="Path">
             <label>backgroundImage</label>
 			<default>frame/backgrounds/glassImmage.png</default>

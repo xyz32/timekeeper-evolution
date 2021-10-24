@@ -154,6 +154,7 @@ Item {
 
             onClicked:{
                 main.state = main.state == "small" ? "" : "small";
+                plasmoid.configuration.mainState = main.state;
             }
         }
     }
