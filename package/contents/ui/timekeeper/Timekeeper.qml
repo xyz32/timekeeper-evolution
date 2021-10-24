@@ -23,19 +23,26 @@ Item {
     ]
 
     property int count: 0
-    property double ring_degree
+    property double ringDegree
     property int    countAngle
-    property bool   lock: false
+    property bool   lock: plasmoid.configuration.timekeeprLock
     property alias  startAngle  : mouse_rotate.start_angle
 
     property var monthRingAngles: [0, -31, -62, -93, -123, -153, -182.5, -212, -241.5, -270.5, -299.5, -329.2]
 
-    function setDateTime(date) {
+    function setDate(date) {
         orrery.setDateTime(date);
 
         var month = date.getMonth()
         var dayOfMonth  = date.getDate()-1
-        frame.ring_degree = monthRingAngles[month] - dayOfMonth;
+        frame.ringDegree = monthRingAngles[month] - dayOfMonth;
+    }
+
+    function setTime(date) {
+        if (!frame.lock && date.getSeconds() % 11 == 0) {
+            frame.countAngle = (frame.countAngle + 10) % 360;
+            calendar.cogAngle = (frame.cogAngle + 5) % 360;
+        }
     }
 
     Component.onCompleted: {
@@ -157,7 +164,7 @@ Item {
         rotation: 122
         transform: Rotation {
             origin.x: 223; origin.y: 223;
-            angle: frame.ring_degree
+            angle: frame.ringDegree
             Behavior on angle {
                 SpringAnimation { 
                     spring: 2
@@ -175,7 +182,7 @@ Item {
         smooth: true
         transform: Rotation {
             origin.x: 170.5; origin.y: 170.5;
-            angle: frame.countAngle * -1
+            angle: 360 - frame.countAngle
             Behavior on angle {
                 SpringAnimation {
                     spring: 2
@@ -231,7 +238,7 @@ Item {
                 frame.lock  = false;
 
                 start_angle = tri_angle(mouse.x, mouse.y)
-                ostanov     = frame.ring_degree
+                ostanov     = frame.ringDegree
                 a_pred      = start_angle
             }
         }
@@ -246,7 +253,7 @@ Item {
                 a = tri_angle(mouse.x, mouse.y)
 
                 b = ostanov + (a - start_angle)
-                frame.ring_degree = b
+                frame.ringDegree = b
                 frame.countAngle = b
 
                 c = (a_pred - a)
@@ -256,7 +263,7 @@ Item {
                 ringUpdated(count)
             } else {
                 start_angle = tri_angle(mouse.x, mouse.y)
-                ostanov     = frame.ring_degree
+                ostanov     = frame.ringDegree
                 a_pred      = start_angle
             }
             if(ostanov >  360) ostanov -= 360;

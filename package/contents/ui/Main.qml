@@ -82,6 +82,7 @@ Item {
         onTriggered: {
             var date = new Date;
             clock.setTime(date);
+            timekeeper.setTime(date);
         }
     }
 
@@ -98,7 +99,7 @@ Item {
             }
 
             var date = new Date;
-            timekeeper.setDateTime(date);
+            timekeeper.setDate(date);
             calendar.setDateTime(date);
             clock.setDate(date);
         }
@@ -113,7 +114,7 @@ Item {
         var date = new Date;
         clock.setTime(date);
         clock.setDate(date);
-        timekeeper.setDateTime(date);
+        timekeeper.setDate(date);
         calendar.setDateTime(date);
     }
 

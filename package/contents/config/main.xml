@@ -14,6 +14,10 @@ xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
 			<default></default>
 		</entry>
         
+        <entry name="timekeeprLock" type="Bool">
+			<default>true</default>
+		</entry>
+        
         <entry name="playSounds" type="Bool">
 			<label>playSounds</label>
 			<default>true</default>
@@ -40,6 +44,11 @@ xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
         <entry name="cogsState" type="String">
 			<label>cogsState</label>
 			<default>hide</default>
+		</entry>
+        
+        <entry name="cogsLock" type="Bool">
+			<label>cogsLock</label>
+			<default>true</default>
 		</entry>
         
         <entry name="calendarState" type="String">

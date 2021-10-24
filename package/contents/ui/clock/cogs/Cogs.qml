@@ -9,7 +9,7 @@ Item{
     state: plasmoid.configuration.cogsState
 
     property int ang: 0
-    property bool lock: false
+    property bool lock: plasmoid.configuration.cogsLock
 
     function setDateTime(date) {
         if (!clockCogs.lock && clockCogs.state !== "hide") {
@@ -138,22 +138,21 @@ Item{
             }
 
             onClicked: {
-                if(!cogs.lock){
-                    cogs.ang = -10
+                if(cogs.lock){
+                    cogs.ang = (cogs.ang - 10) % 360
                     cogs.lock = !cogs.lock
-                } else if(!timekeeper.lock){
-                    timekeeper.countAngle = 10
+                } else if(timekeeper.lock){
+                    timekeeper.countAngle = (timekeeper.countAngle + 10) % 360
                     timekeeper.lock = !timekeeper.lock
                 } else {
-                    cogs.lock = !cogs.lock
-                    timekeeper.lock = !timekeeper.lock
+                    cogs.lock = true;
+                    timekeeper.lock = true;
 
-                    cogs.ang = 0
-                    calendar.cogAngle = 0
-                    timekeeper.countAngle = 0
+                    cogs.ang = (cogs.ang - 10) % 360
+                    timekeeper.countAngle = (timekeeper.countAngle - 10) % 360;
                 }
-                plasmoid.configuration.calendarLock = timekeeper.lock
-                plasmoid.configuration.whellLock = cogs.lock
+                plasmoid.configuration.timekeeprLock = timekeeper.lock
+                plasmoid.configuration.cogsLock = cogs.lock
             }
         }
     }
