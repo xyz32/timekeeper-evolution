@@ -153,6 +153,7 @@ Item {
             }
 
             onClicked:{
+                main.state = main.state == "small" ? "" : "small";
             }
         }
     }

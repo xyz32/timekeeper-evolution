@@ -34,6 +34,39 @@ Item {
     property bool playSounds: plasmoid.configuration.playSounds
     property double soundVolume: plasmoid.configuration.soundVolume
 
+    states: [
+            State {
+                name: "small"
+                PropertyChanges {
+                    target: timekeeper
+                    scale: 0.3
+                    rotation: 360
+                    x: -119; y: -88
+                }
+
+                PropertyChanges {
+                    target: calendar;
+                    state: "in"
+                    scale: 0.3
+                    x: 29;
+                    y: 60;
+                }
+            }
+        ]
+
+    transitions: [
+            Transition {
+                from: "small"; to: "*"
+                NumberAnimation { properties: "scale"; duration: 2700 } //InOutBack
+                NumberAnimation { properties: "x, y "; duration: 700 }
+            },
+            Transition {
+                from: "*"; to: "small"
+                NumberAnimation { properties: "scale"; duration: 1000 }
+                NumberAnimation { properties: "rotation, x, y "; duration: 2700 }
+            }
+        ]
+
     function debugMouseArea(dbgParent) {
         if (main.debug) {
 
@@ -118,34 +151,25 @@ Item {
         calendar.setDateTime(date);
     }
 
-    Flipable { //main container
-        id: container
-        property bool flipped: false
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
+    Item { //main container
+        width: mainWidth;
+        height: mainHeight
 
-        front: Item {
-            width: mainWidth;
-            height: mainHeight
+        Timekeeper{ // frame backgroound
+            id: timekeeper;
+            z: 1
+        }
 
-            Timekeeper{ // frame backgroound
-                id: timekeeper;
-                z: 1
-            }
+        Clock {
+            id: clock;
+            x: 29; y: 60;
+            z: 10
+        }
 
-            Clock {
-                id: clock;
-                x: 29; y: 60;
-                z: 10
-            }
-
-            Calendar{
-                id: calendar;
-                x: 285;y: 186;
-                z: 10
-            }
+        Calendar{
+            id: calendar;
+            x: 285;y: 186;
+            z: 7
         }
     }
 }
