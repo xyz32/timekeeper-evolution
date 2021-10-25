@@ -5,7 +5,6 @@ import "cogs"
 
 Item {
     id: clock
-    width: 182; height: 182
 
     opacity: plasmoid.configuration.clockOpacity
     state: plasmoid.configuration.clockState

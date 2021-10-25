@@ -1,9 +1,7 @@
 import QtQuick 2.1
 
 Item {
-    id: calendar
-    width: 193
-    height: 131
+    id: calendarView
 
     opacity: plasmoid.configuration.calendarOpacity
     state: plasmoid.configuration.calendarState
@@ -19,8 +17,9 @@ Item {
         State {
             name: "out"
             PropertyChanges {
-                target: calendar
-                x: 354
+                target: calendarView
+                x: 345
+                y: 186
             }
             PropertyChanges {
                 target: cogAnimationTimer
@@ -40,7 +39,9 @@ Item {
         State {
             name: "in"
             PropertyChanges {
-                target: calendar
+                target: calendarView
+                x: 285
+                y: 186
             }
             PropertyChanges {
                 target: cogAnimationTimer

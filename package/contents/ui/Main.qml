@@ -57,15 +57,16 @@ Item {
                     target: timekeeper
                     scale: 0.3
                     rotation: 360
-                    x: -119; y: -88
+                    x: -119;
+                    y: -88
                 }
 
                 PropertyChanges {
                     target: calendar;
                     state: "in"
                     scale: 0.3
-                    x: 29;
-                    y: 60;
+                    x: 40;
+                    y: 100;
                 }
             }
         ]
@@ -175,13 +176,11 @@ Item {
 
         Clock {
             id: clock;
-            x: 29; y: 60;
             z: 10
         }
 
         Calendar{
             id: calendar;
-            x: 285;y: 186;
             z: 7
         }
     }
