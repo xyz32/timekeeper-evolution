@@ -55,12 +55,12 @@ Item {
 
     SoundEffect {
         id: bigWheelCogSound
-        source: "./" + soundTheem + "/bigWheelcog.wav"
+        source: "./" + soundTheem + "/bigWheelCog.wav"
     }
 
     SoundEffect {
         id: springSound
-        source: "./" + soundTheem + "/bigWheelcog.wav"
+        source: "./" + soundTheem + "/bigWheelCog.wav"
     }
 
 }
