@@ -6,11 +6,11 @@ Item {
     width: smallWidth
     height: smallHeight
 
-    readonly property int smallWidth: 24
-    readonly property int smallHeight: 24
+    readonly property int smallWidth: 26 //bigger then jupiter if we include rings
+    readonly property int smallHeight: 26
 
-    readonly property int largeWidth: smallWidth * planetSmallLargeRasio * 2.8985
-    readonly property int largeHeight: smallHeight * planetSmallLargeRasio
+    readonly property int largeWidth: smallWidth * (planetSmallLargeRasio - 1) * 2.8985
+    readonly property int largeHeight: smallHeight * (planetSmallLargeRasio - 1)
 
     state: "small"
 
