@@ -73,5 +73,45 @@ xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
 			<default>yyyy</default>
 		</entry>
         
+        <entry name="mercuryState" type="String">
+            <label>mercuryState</label>
+			<default>small</default>
+		</entry>
+        
+        <entry name="venusState" type="String">
+            <label>venusState</label>
+			<default>small</default>
+		</entry>
+        
+        <entry name="earthState" type="String">
+            <label>earthState</label>
+			<default>small</default>
+		</entry>
+        
+        <entry name="marsState" type="String">
+            <label>marsState</label>
+			<default>small</default>
+		</entry>
+        
+        <entry name="jupiterState" type="String">
+            <label>jupiterState</label>
+			<default>small</default>
+		</entry>
+        
+        <entry name="saturnState" type="String">
+            <label>saturnState</label>
+			<default>small</default>
+		</entry>
+        
+        <entry name="uranusState" type="String">
+            <label>uranusState</label>
+			<default>small</default>
+		</entry>
+        
+        <entry name="neptuneState" type="String">
+            <label>neptuneState</label>
+			<default>small</default>
+		</entry>
+        
 	</group>
 </kcfg>

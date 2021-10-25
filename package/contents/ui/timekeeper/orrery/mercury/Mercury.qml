@@ -12,7 +12,7 @@ Item {
     readonly property int largeWidth: smallWidth * planetSmallLargeRasio
     readonly property int largeHeight: smallHeight * planetSmallLargeRasio
 
-    state: "small"
+    state: plasmoid.configuration.mercuryState
 
     transitions: [
         Transition {
@@ -127,6 +127,7 @@ Item {
 
             onClicked: {
                 mercury.state = mercury.state === "small" ? "big" : "small"
+                plasmoid.configuration.mercuryState = mercury.state;
             }
         }
     }

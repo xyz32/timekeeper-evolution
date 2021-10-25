@@ -12,7 +12,7 @@ Item {
     readonly property int largeWidth: smallWidth * planetSmallLargeRasio
     readonly property int largeHeight: smallHeight * planetSmallLargeRasio
 
-    state: "small"
+    state: plasmoid.configuration.uranusState
 
     transitions: [
         Transition {
@@ -127,6 +127,7 @@ Item {
 
             onClicked: {
                 uranus.state = uranus.state === "small" ? "big" : "small"
+                plasmoid.configuration.uranusState = uranus.state;
             }
         }
     }

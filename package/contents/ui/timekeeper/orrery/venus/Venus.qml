@@ -12,7 +12,7 @@ Item {
     readonly property int largeWidth: smallWidth * planetSmallLargeRasio
     readonly property int largeHeight: smallHeight * planetSmallLargeRasio
 
-    state: "small"
+    state: plasmoid.configuration.venusState
 
     transitions: [
         Transition {
@@ -127,6 +127,7 @@ Item {
 
             onClicked: {
                 venus.state = venus.state === "small" ? "big" : "small"
+                plasmoid.configuration.venusState = venus.state;
             }
         }
     }
