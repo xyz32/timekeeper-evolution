@@ -71,9 +71,9 @@ Item {
         Rectangle {
             id: rectangleWeekBackgroundImage
             anchors.fill: weekBackgroundImage
-            visible: !timekeeper.isRealTime
-            color: timekeeper.nonRealTimeColour
-            opacity: timekeeper.nonRealTimeOpacity
+            visible: !main.isRealTime
+            color: main.nonRealTimeColour
+            opacity: main.nonRealTimeOpacity
         }
     }
 
@@ -88,7 +88,7 @@ Item {
         font.pointSize: 9
         font.family: fixedFont.name
         font.bold: true
-        color: "#333333"
+        color: main.textColour
     }
 
     Image {

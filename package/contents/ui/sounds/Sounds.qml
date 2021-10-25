@@ -4,7 +4,13 @@ import QtMultimedia 5.15
 Item {
     id: sounds
 
-    readonly property string soundTheem: "grandfather-clock"
+    readonly property var soundTheems: [
+        "smooth-clock",
+        "grandfather-clock",
+        "wooden-clock"
+    ]
+
+    property int soundTheem: plasmoid.configuration.soundTheme
 
     //exported sounds:
     property alias secondsCogSoundOdd: secondsCogSoundOdd
@@ -16,51 +22,58 @@ Item {
     property alias bigWheelCogSound: bigWheelCogSound
     property alias springSound: springSound
 
+    property string soundTheemPath: soundTheems[soundTheem]
+
     function playSound(soundEfect) {
-        if (main.playSounds) {
+        if (main.playSounds && soundEfect && soundEfect.source) {
             soundEfect.volume = soundVolume;
             soundEfect.play();
         }
     }
 
+    function nextSounfTheme() {
+        soundTheem = (soundTheem + 1) % soundTheems.length
+        plasmoid.configuration.soundTheme = soundTheem;
+    }
+
     SoundEffect {
         id: secondsCogSoundOdd
-        source: "./" + soundTheem + "/secondsCogOdd.wav"
+        source: "./" + soundTheemPath + "/secondsCogOdd.wav"
     }
 
     SoundEffect {
         id: secondsCogSoundEven
-        source: "./" + soundTheem + "/secondsCogEven.wav"
+        source: "./" + soundTheemPath + "/secondsCogEven.wav"
     }
 
     SoundEffect {
         id: hourCogSound
-        source: "./" + soundTheem + "/hourCog.wav"
+        source: "./" + soundTheemPath + "/hourCog.wav"
     }
 
     SoundEffect {
         id: minutesCogSound
-        source: "./" + soundTheem + "/minutesCog.wav"
+        source: "./" + soundTheemPath + "/minutesCog.wav"
     }
 
     SoundEffect {
         id: bellSound
-        source: "./" + soundTheem + "/minutesCog.wav"
+        source: "./" + soundTheemPath + "/minutesCog.wav"
     }
 
     SoundEffect {
         id: clockMechanismCogSound
-        source: "./" + soundTheem + "/clockMechanismCogSound.wav"
+        source: "./" + soundTheemPath + "/clockMechanismCog.wav"
     }
 
     SoundEffect {
         id: bigWheelCogSound
-        source: "./" + soundTheem + "/bigWheelCog.wav"
+        source: "./" + soundTheemPath + "/bigWheelCog.wav"
     }
 
     SoundEffect {
         id: springSound
-        source: "./" + soundTheem + "/bigWheelCog.wav"
+        source: "./" + soundTheemPath + "/switching.wav"
     }
 
 }

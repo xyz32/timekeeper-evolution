@@ -8,11 +8,7 @@ Item {
     width: parent.width
     height: parent.height
 
-    property bool isRealTime: true
-    property string nonRealTimeColour: "#ffff00"
-    property double nonRealTimeOpacity: 0.3
-    
-    property var backgroundImages: [
+    readonly property var backgroundImages: [
         "frame/backgrounds/glassImmage.png",
         "frame/backgrounds/glassImmage1.png",
         "frame/backgrounds/glassImmage2.png",
@@ -336,8 +332,7 @@ Item {
 
         cursorShape: Qt.PointingHandCursor
         onClicked: {
-            playSounds = !playSounds;
-            plasmoid.configuration.playSounds = playSounds;
+            sounds.nextSounfTheme();
         }
     }
 

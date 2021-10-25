@@ -36,6 +36,14 @@ Item {
     Plasmoid.backgroundHints: "NoBackground"
 
     readonly property string fontName:   "Engravers MT"
+    readonly property string textColour:   "#111111"
+
+    readonly property double glassOpacity: 0.3
+
+    property bool isRealTime: true
+    property string nonRealTimeColour: "#ffff00"
+    property double nonRealTimeOpacity: 1
+
     property bool playSounds: plasmoid.configuration.playSounds
     property double soundVolume: plasmoid.configuration.soundVolume
     property int standardTimezoneOffset: {
@@ -128,7 +136,7 @@ Item {
         triggeredOnStart: true
 
         onTriggered: {
-            if (!timekeeper.isRealTime) {
+            if (!main.isRealTime) {
                 return;
             }
 
@@ -146,7 +154,7 @@ Item {
     function setToRealTime() {
         //used to reset time to realtime
 
-        timekeeper.isRealTime = true;
+        main.isRealTime = true;
         timekeeper.count = 0;
 
         var date = new Date;

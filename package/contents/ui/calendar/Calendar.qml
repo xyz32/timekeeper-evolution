@@ -130,8 +130,8 @@ Item {
                 origin.y: cogImage.height / 2
                 Behavior on angle {
                     SpringAnimation {
-                        spring: 2
-                        damping: 0.2
+                        spring: 2;
+                        damping: 0.2;
                         modulus: 360
                     }
                 }
@@ -154,8 +154,6 @@ Item {
     Item {
         id: calendarFrame
         state: plasmoid.configuration.calendarGlassState
-
-        property double glassOpacity: 0.65
 
         states: [
             State {
@@ -218,9 +216,9 @@ Item {
                 Rectangle {
                     id: rectangleDayBackground
                     anchors.fill: dayBackground
-                    visible: !timekeeper.isRealTime
-                    color: timekeeper.nonRealTimeColour
-                    opacity: timekeeper.nonRealTimeOpacity
+                    visible: !main.isRealTime
+                    color: main.nonRealTimeColour
+                    opacity: main.nonRealTimeOpacity
                     radius: width * 0.5
                 }
             }
@@ -232,7 +230,7 @@ Item {
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize: 13
                 font.family: fixedFont.name
-                color: "#333333"
+                color: main.textColour
             }
         }
 
@@ -251,9 +249,9 @@ Item {
                 Rectangle {
                     id: rectangleMonthBackground
                     anchors.fill: monthBackground
-                    visible: !timekeeper.isRealTime
-                    color: timekeeper.nonRealTimeColour
-                    opacity: timekeeper.nonRealTimeOpacity
+                    visible: !main.isRealTime
+                    color: main.nonRealTimeColour
+                    opacity: main.nonRealTimeOpacity
                 }
             }
 
@@ -264,7 +262,7 @@ Item {
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize: 14
                 font.family: fixedFont.name
-                color: "#333333"
+                color: main.textColour
             }
         }
 
@@ -323,9 +321,9 @@ Item {
                 Rectangle {
                     id: rectangleYearBackground
                     anchors.fill: yearBackground
-                    visible: !timekeeper.isRealTime
-                    color: timekeeper.nonRealTimeColour
-                    opacity: timekeeper.nonRealTimeOpacity
+                    visible: !main.isRealTime
+                    color: main.nonRealTimeColour
+                    opacity: main.nonRealTimeOpacity
                     radius: width * 0.5
                 }
             }
@@ -340,7 +338,7 @@ Item {
 
                 font.pointSize: 14
                 font.family: fixedFont.name
-                color: "#333333"
+                color: main.textColour
             }
         }
 
@@ -463,7 +461,18 @@ Item {
                     origin.y: 33
                     angle: 0
                     Behavior on angle {
-                        SpringAnimation { spring: 4; damping: 0.3; modulus: 360 }
+                        ParallelAnimation {
+                            SpringAnimation {
+                                spring: 4;
+                                damping: 0.3;
+                                modulus: 360
+                            }
+                            ScriptAction {
+                                script: {
+                                    sounds.playSound(sounds.springSound);
+                                }
+                            }
+                        }
                     }
                 }
 
