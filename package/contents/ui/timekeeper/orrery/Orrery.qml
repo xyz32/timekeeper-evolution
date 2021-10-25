@@ -18,6 +18,7 @@ Item {
 
     property int shadowOffset: 5;
     property int zoomAnimationDurationMS: 500
+    property int planetSmallLargeRasio: 5
     property var showingDate: new Date();
 
     Component.onCompleted: {

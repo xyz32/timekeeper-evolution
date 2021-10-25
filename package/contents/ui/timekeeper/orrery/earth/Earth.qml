@@ -5,16 +5,21 @@ import "moon"
 
 Item {
     id: earth;
+    width: smallWidth
+    height: smallHeight
 
     property int daytimeRotation: 0
     property int earthNumFrames: 96
     property int framesPerHour: earthNumFrames / 24
     property int framesPerMin: 60 / framesPerHour
 
-    state: "small"
+    readonly property int smallWidth: 15
+    readonly property int smallHeight: 15
 
-    width: 15
-    height: 15
+    readonly property int largeWidth: smallWidth * planetSmallLargeRasio
+    readonly property int largeHeight: smallHeight * planetSmallLargeRasio
+
+    state: "small"
 
     transitions: [
         Transition {
@@ -47,8 +52,8 @@ Item {
             name: "small"
             PropertyChanges {
                 target: earth
-                width: 15;
-                height: 15;
+                width: smallWidth;
+                height: smallHeight;
                 z: 0
             }
 
@@ -61,8 +66,8 @@ Item {
             name: "big"
             PropertyChanges {
                 target: earth
-                width: 100;
-                height: 100;
+                width: largeWidth;
+                height: largeHeight;
                 z: 7
             }
 
@@ -98,13 +103,13 @@ Item {
     }
 
     Flipable {
-        id: terra
+        id: earthFlip
         anchors.fill: parent
 
         transform: Rotation {
             id: rotation
-            origin.x: terra.width/2
-            origin.y: terra.height/2
+            origin.x: earthFlip.width/2
+            origin.y: earthFlip.height/2
             axis.x: 0; axis.y: 1; axis.z: 0     // set axis.y to 1 to rotate around y-axis
             angle: 0    // the default angle
         }
@@ -144,14 +149,14 @@ Item {
 
     Moon {
         id: moon
-        width: terra.width / 3
-        height: terra.width / 3
+        width: earthFlip.width / 3
+        height: earthFlip.width / 3
 
-        property int planetoffset: (terra.width / 2) + (moon.width / 2)
+        property int planetoffset: (earthFlip.width / 2) + (moon.width / 2)
         property int planetTrueAnomaly: 0
 
-        x: terra.x + (terra.width / 2) - (moon.width / 2)
-        y: terra.y + (terra.height / 2) - (moon.height / 2) + moon.planetoffset
+        x: earthFlip.x + (earthFlip.width / 2) - (moon.width / 2)
+        y: earthFlip.y + (earthFlip.height / 2) - (moon.height / 2) + moon.planetoffset
 
         transform: Rotation {
             origin.x: moon.width / 2
