@@ -161,20 +161,20 @@ Item {
 
                 PropertyChanges {
                     target: monthBackground
-                    opacity: calendarFrame.glassOpacity
+                    opacity: main.glassOpacity
                 }
                 PropertyChanges {
                     target: dayBackground
-                    opacity: calendarFrame.glassOpacity
+                    opacity: main.glassOpacity
                 }
                 PropertyChanges {
                     target: yearBackground
-                    opacity: calendarFrame.glassOpacity
+                    opacity: main.glassOpacity
                 }
 
                 PropertyChanges {
                     target: clock.weekBackgroundImage
-                    opacity: calendarFrame.glassOpacity
+                    opacity: main.glassOpacity
                 }
             },
 

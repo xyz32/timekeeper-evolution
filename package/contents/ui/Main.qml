@@ -38,11 +38,11 @@ Item {
     readonly property string fontName:   "Engravers MT"
     readonly property string textColour:   "#111111"
 
-    readonly property double glassOpacity: 0.3
+    readonly property double glassOpacity: 0.65
 
     property bool isRealTime: true
     property string nonRealTimeColour: "#ffff00"
-    property double nonRealTimeOpacity: 1
+    property double nonRealTimeOpacity: 0.2
 
     property bool playSounds: plasmoid.configuration.playSounds
     property double soundVolume: plasmoid.configuration.soundVolume
