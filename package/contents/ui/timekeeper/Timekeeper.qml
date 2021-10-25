@@ -182,11 +182,6 @@ Item {
         source: "frame/counterWheel.png"
         smooth: true
 
-        SoundEffect {
-            id: secondsCogSound
-            source: "./frame/sounds/bigWheelcog.wav"
-        }
-
         transform: Rotation {
             origin.x: 170.5; origin.y: 170.5;
             angle: {return (360 - frame.countAngle + 360) % 360;}
@@ -199,7 +194,7 @@ Item {
                     }
                     ScriptAction {
                         script: {
-                            playSound(secondsCogSound);
+                            sounds.playSound(sounds.bigWheelCogSound);
                         }
                     }
                 }

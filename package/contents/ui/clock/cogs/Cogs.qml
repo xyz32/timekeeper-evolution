@@ -73,11 +73,6 @@ Item{
         source: "cog.png"
         smooth: true;
 
-        SoundEffect {
-            id: wheelCogSound
-            source: "clockWheelCog.wav"
-        }
-
         transform: Rotation {
             angle: 360 - ang
             origin.x: cog.width/2; origin.y: cog.height/2;
@@ -89,7 +84,7 @@ Item{
                         modulus: 360
                     }
                     ScriptAction { script: {
-                            playSound(wheelCogSound);
+                            sounds.playSound(sounds.clockMechanismCogSound);
                         }
                     }
                 }

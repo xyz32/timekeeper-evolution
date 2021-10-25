@@ -164,11 +164,6 @@ Item {
         source: "second.png"
         smooth: true
 
-        SoundEffect {
-            id: secondsCogSound
-            source: "./sounds/secondsCog.wav"
-        }
-
         transform: Rotation {
             id: secondRotation
             origin.x: 2; origin.y: 21;
@@ -182,7 +177,11 @@ Item {
                     }
                     ScriptAction {
                         script: {
-                            playSound(secondsCogSound);
+                            if (clock.seconds % 2 == 0) {
+                                sounds.playSound(sounds.secondsCogSoundEven);
+                            } else {
+                                sounds.playSound(sounds.secondsCogSoundOdd);
+                            }
                         }
                     }
                 }
@@ -194,11 +193,6 @@ Item {
         x: 75; y: 29; z: 5
         source: "hour.png"
         smooth: true
-
-        SoundEffect {
-            id: hourCogSound
-            source: "./sounds/hourCog.wav"
-        }
 
         transform: Rotation {
             id: hourRotation
@@ -213,7 +207,7 @@ Item {
                     }
                     ScriptAction {
                         script: {
-                            playSound(hourCogSound);
+                            sounds.playSound(sounds.hourCogSound);
                         }
                     }
                 }
@@ -225,11 +219,6 @@ Item {
         x: 79; y: 13; z: 5
         source: "minute.png"
         smooth: true
-
-        SoundEffect {
-            id: minutesCogSound
-            source: "./sounds/minutesCog.wav"
-        }
 
         transform: Rotation {
             id: minuteRotation
@@ -244,7 +233,7 @@ Item {
                     }
                     ScriptAction {
                         script: {
-                            playSound(minutesCogSound);
+                            sounds.playSound(sounds.minutesCogSound);
                         }
                     }
                 }

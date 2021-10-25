@@ -10,6 +10,9 @@ import "timekeeper"
 import "clock"
 import "calendar"
 
+//Sounds
+import "sounds"
+
 Item {
     id: main
 
@@ -93,13 +96,6 @@ Item {
         return Math.max(janDate.getTimezoneOffset(), julDate.getTimezoneOffset());
     }
 
-    function playSound(soundEfect) {
-        if (main.playSounds) {
-            soundEfect.volume = soundVolume;
-            soundEfect.play();
-        }
-    }
-
     FontLoader {
         id:   fixedFont;
         name: fontName;
@@ -141,6 +137,10 @@ Item {
             calendar.setDateTime(date);
             clock.setDate(date);
         }
+    }
+
+    Sounds {
+        id: sounds
     }
 
     function setToRealTime() {
