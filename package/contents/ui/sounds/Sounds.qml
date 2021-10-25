@@ -5,8 +5,8 @@ Item {
     id: sounds
 
     readonly property var soundTheems: [
-        "smooth-clock",
         "grandfather-clock",
+        "smooth-clock",
         "wooden-clock"
     ]
 
