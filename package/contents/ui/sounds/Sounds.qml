@@ -5,9 +5,9 @@ Item {
     id: sounds
 
     readonly property var soundTheems: [
-        "grandfather-clock",
+        "wooden-clock",
         "smooth-clock",
-        "wooden-clock"
+        "grandfather-clock"
     ]
 
     property int soundTheem: plasmoid.configuration.soundTheme
@@ -17,16 +17,20 @@ Item {
     property alias secondsCogSoundEven: secondsCogSoundEven
     property alias hourCogSound: hourCogSound
     property alias minutesCogSound: minutesCogSound
-    property alias bellSound: bellSound
+    property alias chimeSound: chimeSound
     property alias clockMechanismCogSound: clockMechanismCogSound
     property alias bigWheelCogSound: bigWheelCogSound
-    property alias springSound: springSound
+    property alias switchingSound: switchingSound
 
     property string soundTheemPath: soundTheems[soundTheem]
 
-    function playSound(soundEfect) {
+    function playSound(soundEfect, repeat) {
         if (main.playSounds && soundEfect && soundEfect.source) {
             soundEfect.volume = soundVolume;
+            if (repeat) {
+                soundEfect.loops = repeat;
+            }
+
             soundEfect.play();
         }
     }
@@ -57,8 +61,8 @@ Item {
     }
 
     SoundEffect {
-        id: bellSound
-        source: "./" + soundTheemPath + "/minutesCog.wav"
+        id: chimeSound
+        source: "./" + soundTheemPath + "/chime.wav"
     }
 
     SoundEffect {
@@ -72,8 +76,8 @@ Item {
     }
 
     SoundEffect {
-        id: springSound
-        source: "./" + soundTheemPath + "/switching.wav"
+        id: switchingSound
+        source: "./switching.wav"
     }
 
 }

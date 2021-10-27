@@ -470,7 +470,7 @@ Item {
                             }
                             ScriptAction {
                                 script: {
-                                    sounds.playSound(sounds.springSound);
+                                    sounds.playSound(sounds.switchingSound);
                                 }
                             }
                         }
