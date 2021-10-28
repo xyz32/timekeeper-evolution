@@ -25,7 +25,7 @@ Item {
     property string soundTheemPath: soundTheems[soundTheem]
 
     function playSound(soundEfect, repeat) {
-        if (main.playSounds && soundEfect && soundEfect.source) {
+        if (main.playSounds && soundEfect && soundEfect.source && soundEfect.hasSound) {
             soundEfect.volume = soundVolume;
             if (repeat) {
                 soundEfect.loops = repeat;
@@ -42,42 +42,49 @@ Item {
 
     SoundEffect {
         id: secondsCogSoundOdd
+        property bool hasSound: plasmoid.configuration.secondHandSound
         source: "./" + soundTheemPath + "/secondsCogOdd.wav"
     }
 
     SoundEffect {
         id: secondsCogSoundEven
+        property bool hasSound: plasmoid.configuration.secondHandSound
         source: "./" + soundTheemPath + "/secondsCogEven.wav"
     }
 
     SoundEffect {
-        id: hourCogSound
-        source: "./" + soundTheemPath + "/hourCog.wav"
-    }
-
-    SoundEffect {
         id: minutesCogSound
+        property bool hasSound: plasmoid.configuration.minuteHandSound
         source: "./" + soundTheemPath + "/minutesCog.wav"
     }
 
     SoundEffect {
+        id: hourCogSound
+        property bool hasSound: plasmoid.configuration.hourHandSound
+        source: "./" + soundTheemPath + "/hourCog.wav"
+    }
+
+    SoundEffect {
         id: chimeSound
+        property bool hasSound: plasmoid.configuration.chimeSound
         source: "./" + soundTheemPath + "/chime.wav"
     }
 
     SoundEffect {
         id: clockMechanismCogSound
+        property bool hasSound: plasmoid.configuration.cogsSound
         source: "./" + soundTheemPath + "/clockMechanismCog.wav"
     }
 
     SoundEffect {
         id: bigWheelCogSound
+        property bool hasSound: plasmoid.configuration.cogsSound
         source: "./" + soundTheemPath + "/bigWheelCog.wav"
     }
 
     SoundEffect {
         id: switchingSound
+        property bool hasSound: true
         source: "./switching.wav"
     }
-
 }

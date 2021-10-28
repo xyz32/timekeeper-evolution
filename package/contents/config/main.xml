@@ -21,21 +21,6 @@ xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
 			<default></default>
 		</entry>
         
-        <entry name="playSounds" type="Bool">
-			<label>playSounds</label>
-			<default>false</default>
-		</entry>
-        
-        <entry name="soundTheme" type="Int">
-			<label>soundTheme</label>
-			<default>0</default>
-		</entry>
-        
-        <entry name="soundVolume" type="Double">
-			<label>soundVolume</label>
-			<default>1.00</default>
-		</entry>
-        
         <entry name="clockOpacity" type="Double">
 			<default>1.00</default>
 		</entry>
@@ -118,5 +103,46 @@ xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
 			<default>small</default>
 		</entry>
         
+        <!-- Sounds settings -->
+        <entry name="playSounds" type="Bool">
+			<label>playSounds</label>
+			<default>false</default>
+		</entry>
+        
+        <entry name="soundTheme" type="Int">
+			<label>soundTheme</label>
+			<default>0</default>
+		</entry>
+        
+        <entry name="soundVolume" type="Double">
+			<label>soundVolume</label>
+			<default>1.00</default>
+		</entry>
+        
+        
+        <entry name="secondHandSound" type="Bool">
+			<label>secondHandSound</label>
+			<default>true</default>
+		</entry>
+        
+        <entry name="minuteHandSound" type="Bool">
+			<label>minuteHandSound</label>
+			<default>true</default>
+		</entry>
+        
+        <entry name="hourHandSound" type="Bool">
+			<label>hourHandSound</label>
+			<default>true</default>
+		</entry>
+        
+        <entry name="cogsSound" type="Bool">
+			<label>cogsSound</label>
+			<default>true</default>
+		</entry>
+        
+        <entry name="chimeSound" type="Bool">
+			<label>chimeSound</label>
+			<default>true</default>
+		</entry>
 	</group>
 </kcfg>
