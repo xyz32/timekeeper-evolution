@@ -27,9 +27,11 @@ Item {
     function playSound(soundEfect, repeat) {
         if (main.playSounds && soundEfect && soundEfect.source && soundEfect.hasSound) {
             soundEfect.volume = soundVolume;
-            if (repeat) {
-                soundEfect.loops = repeat;
+            if (!repeat) {
+                repeat = 0;
             }
+
+            soundEfect.loops = repeat;
 
             soundEfect.play();
         }

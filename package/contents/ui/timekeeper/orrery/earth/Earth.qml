@@ -103,13 +103,13 @@ Item {
     }
 
     Flipable {
-        id: earthFlip
+        id: planetFlip
         anchors.fill: parent
 
         transform: Rotation {
             id: rotation
-            origin.x: earthFlip.width/2
-            origin.y: earthFlip.height/2
+            origin.x: planetFlip.width/2
+            origin.y: planetFlip.height/2
             axis.x: 0; axis.y: 1; axis.z: 0     // set axis.y to 1 to rotate around y-axis
             angle: 0    // the default angle
         }
@@ -150,14 +150,14 @@ Item {
 
     Moon {
         id: moon
-        width: earthFlip.width / 3
-        height: earthFlip.width / 3
+        width: planetFlip.width / 3
+        height: planetFlip.width / 3
 
-        property int planetoffset: (earthFlip.width / 2) + (moon.width / 2)
+        property int planetoffset: (planetFlip.height / 2) + (moon.height / 2)
         property int planetTrueAnomaly: 0
 
-        x: earthFlip.x + (earthFlip.width / 2) - (moon.width / 2)
-        y: earthFlip.y + (earthFlip.height / 2) - (moon.height / 2) + moon.planetoffset
+        x: planetFlip.x + (planetFlip.width / 2) - (moon.width / 2)
+        y: planetFlip.y + (planetFlip.height / 2) - (moon.height / 2) + moon.planetoffset
 
         transform: Rotation {
             origin.x: moon.width / 2

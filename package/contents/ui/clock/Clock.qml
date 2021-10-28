@@ -233,12 +233,10 @@ Item {
                     ScriptAction {
                         script: {
                             sounds.playSound(sounds.minutesCogSound);
-                            if (clock.minutes % 30 == 0) {
-                                sounds.playSound(sounds.chimeSound);
-                            }
-
                             if (clock.minutes % 60 == 0) {
                                 sounds.playSound(sounds.chimeSound, (clock.hours) % 12);
+                            } else if (clock.minutes % 30 == 0) {
+                                sounds.playSound(sounds.chimeSound);
                             }
                         }
                     }
