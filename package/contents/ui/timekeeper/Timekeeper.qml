@@ -276,63 +276,120 @@ Item {
         }
     }
 
-    MouseArea {
-        /*
-         * Background switch button
-         */
-        id: backgroundPictureSwitch
+    Image {
+        id: backgroundSwitchImage
+        source: "./frame/knob.png"
         x: 331
         y: 85
         width: 11
         height: 11
-        visible: true
 
-        Component.onCompleted: {
-            debugMouseArea(this);
+        transform: Rotation {
+            origin.x: backgroundSwitchImage.width / 2
+            origin.y: backgroundSwitchImage.height / 2
+            angle: (backgroundImgAnimator.selectedImg * (360 / backgroundImages.length)) % 360
+            Behavior on angle {
+                SpringAnimation {
+                    spring: 2;
+                    damping: 0.2;
+                    modulus: 360
+                }
+            }
         }
 
-        cursorShape: Qt.PointingHandCursor
-        onClicked: {
-            backgroundImgAnimator.changeImage();
+        MouseArea {
+            /*
+             * Background switch button
+             */
+            id: backgroundPictureSwitch
+            anchors.fill: parent
+            visible: true
+
+            Component.onCompleted: {
+                debugMouseArea(this);
+            }
+
+            cursorShape: Qt.PointingHandCursor
+            onClicked: {
+                backgroundImgAnimator.changeImage();
+            }
         }
     }
 
-    MouseArea {
-        // turn sounds on and off
-        id: soundSwitch
+    Image {
+        id: soundSwitchImage
+        source: "./frame/knob.png"
         x: 136
         y: 387
         width: 11
         height: 11
-        visible: true
 
-        Component.onCompleted: {
-            debugMouseArea(this);
+        transform: Rotation {
+            origin.x: backgroundSwitchImage.width / 2
+            origin.y: backgroundSwitchImage.height / 2
+            angle: playSounds ? 0 : 180
+            Behavior on angle {
+                SpringAnimation {
+                    spring: 2;
+                    damping: 0.2;
+                    modulus: 360
+                }
+            }
         }
 
-        cursorShape: Qt.PointingHandCursor
-        onClicked: {
-            playSounds = !playSounds;
-            plasmoid.configuration.playSounds = playSounds;
+        MouseArea {
+            // turn sounds on and off
+            id: soundSwitch
+            anchors.fill: parent
+            visible: true
+
+            Component.onCompleted: {
+                debugMouseArea(this);
+            }
+
+            cursorShape: Qt.PointingHandCursor
+            onClicked: {
+                playSounds = !playSounds;
+                plasmoid.configuration.playSounds = playSounds;
+            }
         }
     }
 
-    MouseArea {
-        // switch sound theme
-        id: soundThemeSwitch
+    Image {
+        id: soundThemeSwitchImage
+        source: "./frame/knob.png"
         x: 331
         y: 387
         width: 11
         height: 11
-        visible: true
 
-        Component.onCompleted: {
-            debugMouseArea(this);
+        transform: Rotation {
+            origin.x: backgroundSwitchImage.width / 2
+            origin.y: backgroundSwitchImage.height / 2
+            angle: (sounds.soundTheem * (360 / sounds.soundTheems.length)) % 360
+            Behavior on angle {
+                SpringAnimation {
+                    spring: 2;
+                    damping: 0.2;
+                    modulus: 360
+                }
+            }
         }
 
-        cursorShape: Qt.PointingHandCursor
-        onClicked: {
-            sounds.nextSounfTheme();
+        MouseArea {
+            // switch sound theme
+            id: soundThemeSwitch
+            anchors.fill: parent
+            visible: true
+
+            Component.onCompleted: {
+                debugMouseArea(this);
+            }
+
+            cursorShape: Qt.PointingHandCursor
+            onClicked: {
+                sounds.nextSounfTheme();
+            }
         }
     }
 
