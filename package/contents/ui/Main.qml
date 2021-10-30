@@ -117,7 +117,7 @@ Item {
 
     Timer {
         id: secondTimer
-        interval: 1000
+        interval: (playSounds && sounds.secondsCogSoundOdd.hasSound) ? 250 : 1000
         running: true
         repeat: true
         triggeredOnStart: true
