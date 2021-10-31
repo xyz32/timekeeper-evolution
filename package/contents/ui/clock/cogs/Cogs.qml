@@ -11,7 +11,7 @@ Item{
     property int ang: 0
     property bool lock: plasmoid.configuration.cogsLock
 
-    function setDateTime(date) {
+    function onTick() {
         if (!clockCogs.lock && clockCogs.state !== "hide") {
             ang = (ang + 10) % 360
         }

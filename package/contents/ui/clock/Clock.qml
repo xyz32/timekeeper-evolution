@@ -45,8 +45,6 @@ Item {
         clock.hours    = date.getHours();
         clock.minutes  = date.getMinutes();
         clock.seconds  = date.getSeconds();
-
-        cogs.setDateTime(date);
     }
 
     function setDate(date) {
@@ -176,6 +174,8 @@ Item {
                     }
                     ScriptAction {
                         script: {
+                            cogs.onTick();
+
                             if (clock.seconds % 2 == 0) {
                                 sounds.playSound(sounds.secondsCogSoundEven);
                             } else {
