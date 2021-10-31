@@ -47,7 +47,10 @@ Item {
     property bool playSounds: plasmoid.configuration.playSounds
     property double soundVolume: plasmoid.configuration.soundVolume
     property int standardTimezoneOffset: {
-        stdTimezoneOffset(); //solve for daylight saving time gap.
+        //solve for daylight saving time gap.
+        var janDate = new Date((new Date).getFullYear(), 0, 1);
+        var julDate = new Date((new Date).getFullYear(), 6, 1);
+        return Math.max(janDate.getTimezoneOffset(), julDate.getTimezoneOffset());
     }
 
     states: [
@@ -99,12 +102,6 @@ Item {
         }
     }
 
-    function stdTimezoneOffset () {
-        var janDate = new Date((new Date).getFullYear(), 0, 1);
-        var julDate = new Date((new Date).getFullYear(), 6, 1);
-        return Math.max(janDate.getTimezoneOffset(), julDate.getTimezoneOffset());
-    }
-
     FontLoader {
         id:   fixedFont;
         name: fontName;
@@ -117,7 +114,7 @@ Item {
 
     Timer {
         id: secondTimer
-        interval: (playSounds && sounds.secondsCogSoundOdd.hasSound) ? 250 : 1000
+        interval: 10 //(playSounds && sounds.secondsCogSoundOdd.hasSound) ? 250 : 1000
         running: true
         repeat: true
         triggeredOnStart: true
