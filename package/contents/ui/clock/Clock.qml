@@ -8,10 +8,6 @@ Item {
 
     opacity: plasmoid.configuration.clockOpacity
     state: plasmoid.configuration.clockState
-
-    property int hours
-    property int minutes
-    property int seconds
     property string weekDay
 
     property alias weekBackgroundImage: weekBackgroundImage
@@ -39,12 +35,6 @@ Item {
     transitions: Transition {
         NumberAnimation { properties: "x"; duration: 1000 }
         NumberAnimation { properties: "y"; duration: 700  }
-    }
-
-    function setTime(date) {
-        clock.hours    = date.getHours();
-        clock.minutes  = date.getMinutes();
-        clock.seconds  = date.getSeconds();
     }
 
     function setDate(date) {
@@ -164,7 +154,7 @@ Item {
         transform: Rotation {
             id: secondRotation
             origin.x: 2; origin.y: 21;
-            angle: clock.seconds * 6
+            angle: main.seconds * 6
             Behavior on angle {
                 ParallelAnimation {
                     SpringAnimation {
@@ -176,7 +166,7 @@ Item {
                         script: {
                             cogs.onTick();
 
-                            if (clock.seconds % 2 == 0) {
+                            if (main.seconds % 2 == 0) {
                                 sounds.playSound(sounds.secondsCogSoundEven);
                             } else {
                                 sounds.playSound(sounds.secondsCogSoundOdd);
@@ -196,7 +186,7 @@ Item {
         transform: Rotation {
             id: hourRotation
             origin.x: 12; origin.y: 53;
-            angle: (clock.hours * 30) + (clock.minutes * 0.5)
+            angle: (main.hours * 30) + (main.minutes * 0.5)
             Behavior on angle {
                 ParallelAnimation {
                     SpringAnimation {
@@ -222,7 +212,7 @@ Item {
         transform: Rotation {
             id: minuteRotation
             origin.x: 8; origin.y: 69;
-            angle: clock.minutes * 6
+            angle: main.minutes * 6
             Behavior on angle {
                 ParallelAnimation {
                     SpringAnimation {
@@ -233,9 +223,9 @@ Item {
                     ScriptAction {
                         script: {
                             sounds.playSound(sounds.minutesCogSound);
-                            if (clock.minutes % 60 == 0) {
-                                sounds.playSound(sounds.chimeSound, ((clock.hours) % 12) || 12);
-                            } else if (clock.minutes % 30 == 0) {
+                            if (main.minutes % 60 == 0) {
+                                sounds.playSound(sounds.chimeSound, ((main.hours) % 12) || 12);
+                            } else if (main.minutes % 30 == 0) {
                                 sounds.playSound(sounds.chimeSound);
                             }
                         }

@@ -25,7 +25,7 @@ Item {
     property string soundTheemPath: soundTheems[soundTheem]
 
     function playSound(soundEfect, repeat) {
-        if (main.playSounds && soundEfect && soundEfect.source && !soundEfect.playing && soundEfect.hasSound) {
+        if (main.playSounds && soundEfect && soundEfect.source && soundEfect.hasSound) {
             soundEfect.volume = soundVolume;
             if (!repeat) {
                 repeat = 0;

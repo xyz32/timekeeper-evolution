@@ -40,17 +40,61 @@ Item {
 
     readonly property double glassOpacity: 0.65
 
-    property bool isRealTime: true
     property string nonRealTimeColour: "#ffff00"
     property double nonRealTimeOpacity: 0.2
 
+    property bool isRealTime: true
+    property var currentDateTime
+    property int hours
+    property int minutes
+    property int seconds
+    property int dayOfMonthNumber
+
     property bool playSounds: plasmoid.configuration.playSounds
     property double soundVolume: plasmoid.configuration.soundVolume
+
     property int standardTimezoneOffset: {
         //solve for daylight saving time gap.
         var janDate = new Date((new Date).getFullYear(), 0, 1);
         var julDate = new Date((new Date).getFullYear(), 6, 1);
         return Math.max(janDate.getTimezoneOffset(), julDate.getTimezoneOffset());
+    }
+
+    Timer {
+        id: tickTimer
+        interval: (playSounds && sounds.secondsCogSoundOdd.hasSound) ? 500 : 1000
+        running: true
+        repeat: true
+        triggeredOnStart: true
+
+        onTriggered: {
+            currentDateTime = new Date();
+
+            var tmpSeconds = currentDateTime.getSeconds();
+            var tmpMinutes = currentDateTime.getMinutes();
+            var tmpHours = currentDateTime.getHours();
+            var tmpDate = currentDateTime.getDate()
+
+            if (seconds !== tmpSeconds) {
+                seconds  = tmpSeconds;
+                timekeeper.onTick();
+            }
+
+            if (minutes !== tmpMinutes) {
+                minutes  = tmpMinutes;
+                timekeeper.setDate(currentDateTime);
+            }
+
+            if (hours !== tmpHours) {
+                hours  = tmpHours;
+            }
+
+            if (dayOfMonthNumber !== tmpDate) {
+                dayOfMonthNumber = tmpDate;
+                calendar.setDateTime(currentDateTime);
+                clock.setDate(currentDateTime);
+            }
+        }
     }
 
     states: [
@@ -112,39 +156,6 @@ Item {
         }
     }
 
-    Timer {
-        id: secondTimer
-        interval: 10 //(playSounds && sounds.secondsCogSoundOdd.hasSound) ? 250 : 1000
-        running: true
-        repeat: true
-        triggeredOnStart: true
-
-        onTriggered: {
-            var date = new Date;
-            clock.setTime(date);
-            timekeeper.setTime(date);
-        }
-    }
-
-    Timer {
-        id: minuteTimer
-        interval: 60000
-        running: true
-        repeat: true
-        triggeredOnStart: true
-
-        onTriggered: {
-            if (!main.isRealTime) {
-                return;
-            }
-
-            var date = new Date;
-            timekeeper.setDate(date);
-            calendar.setDateTime(date);
-            clock.setDate(date);
-        }
-    }
-
     Sounds {
         id: sounds
     }
@@ -155,11 +166,9 @@ Item {
         main.isRealTime = true;
         timekeeper.count = 0;
 
-        var date = new Date;
-        clock.setTime(date);
-        clock.setDate(date);
-        timekeeper.setDate(date);
-        calendar.setDateTime(date);
+        clock.setDate(currentDateTime);
+        timekeeper.setDate(currentDateTime);
+        calendar.setDateTime(currentDateTime);
     }
 
     Item { //main container

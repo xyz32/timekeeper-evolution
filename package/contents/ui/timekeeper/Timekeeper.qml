@@ -28,6 +28,10 @@ Item {
     property var monthRingAngles: [0, -31, -62, -93, -123, -153, -182.5, -212, -241.5, -270.5, -299.5, -329.2]
 
     function setDate(date) {
+        if (!main.isRealTime) {
+            return;
+        }
+
         orrery.setDateTime(date);
 
         var month = date.getMonth()
@@ -35,8 +39,8 @@ Item {
         frame.ringDegree = monthRingAngles[month] - dayOfMonth;
     }
 
-    function setTime(date) {
-        if (!frame.lock && parseInt(date.getTime()/1000) % 7 == 0) {
+    function onTick() {
+        if (!frame.lock && parseInt(currentDateTime.getTime()/1000) % 7 == 0) {
             frame.countAngle = (frame.countAngle + 10) % 360;
             calendar.cogAngle = (calendar.cogAngle + 10) % 360;
         }
