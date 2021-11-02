@@ -45,10 +45,10 @@ Item {
 
     property bool isRealTime: true
     property var currentDateTime
-    property int hours
-    property int minutes
-    property int seconds
-    property int dayOfMonthNumber
+    property int hours: -1
+    property int minutes: -1
+    property int seconds: -1
+    property int dayOfMonthNumber: -1
 
     property bool playSounds: plasmoid.configuration.playSounds
     property double soundVolume: plasmoid.configuration.soundVolume

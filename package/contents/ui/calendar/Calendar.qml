@@ -326,6 +326,7 @@ Item {
                     SpringAnimation {
                         spring: 4
                         damping: 0.3
+                        epsilon: 2
                         modulus: 360
                         onRunningChanged: {
                             if (!running) {

@@ -158,8 +158,9 @@ Item {
             Behavior on angle {
                 ParallelAnimation {
                     SpringAnimation {
-                        spring: 2;
-                        damping: 0.2;
+                        spring: 2
+                        damping: 0.2
+                        epsilon: 20
                         modulus: 360
                     }
                     ScriptAction {
