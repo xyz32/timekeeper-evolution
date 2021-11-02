@@ -224,9 +224,9 @@ Item {
                     ScriptAction {
                         script: {
                             sounds.playSound(sounds.minutesCogSound);
-                            if (main.minutes % 60 == 0) {
+                            if (main.minutes % 60 == 0 && main.seconds == 0) {
                                 sounds.playSound(sounds.chimeSound, ((main.hours) % 12) || 12);
-                            } else if (main.minutes % 30 == 0) {
+                            } else if (main.minutes % 30 == 0 && main.seconds == 0) {
                                 sounds.playSound(sounds.chimeSound);
                             }
                         }

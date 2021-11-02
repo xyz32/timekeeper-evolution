@@ -64,7 +64,7 @@ Item {
 
     Timer {
         id: tickTimer
-        interval: (playSounds && sounds.secondsCogSoundOdd.hasSound) ? 500 : 1000
+        interval: (playSounds && sounds.secondsCogSoundOdd.hasSound) ? 100 : 1000
         running: true
         repeat: true
         triggeredOnStart: true
