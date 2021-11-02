@@ -91,8 +91,10 @@ Item {
 
             if (dayOfMonthNumber !== tmpDate) {
                 dayOfMonthNumber = tmpDate;
-                calendar.setDateTime(currentDateTime);
-                clock.setDate(currentDateTime);
+                if (isRealTime) {
+                    calendar.setDateTime(currentDateTime);
+                    clock.setDate(currentDateTime);
+                }
             }
         }
     }
@@ -119,17 +121,17 @@ Item {
         ]
 
     transitions: [
-            Transition {
-                from: "small"; to: "*"
-                NumberAnimation { properties: "scale"; duration: 2700 } //InOutBack
-                NumberAnimation { properties: "x, y "; duration: 700 }
-            },
-            Transition {
-                from: "*"; to: "small"
-                NumberAnimation { properties: "scale"; duration: 1000 }
-                NumberAnimation { properties: "rotation, x, y "; duration: 2700 }
-            }
-        ]
+        Transition {
+            from: "small"; to: "*"
+            NumberAnimation { properties: "scale"; duration: 2700 } //InOutBack
+            NumberAnimation { properties: "x, y "; duration: 700 }
+        },
+        Transition {
+            from: "*"; to: "small"
+            NumberAnimation { properties: "scale"; duration: 700 }
+            NumberAnimation { properties: "rotation, x, y "; duration: 2700 }
+        }
+    ]
 
     function debugMouseArea(dbgParent) {
         if (main.debug) {

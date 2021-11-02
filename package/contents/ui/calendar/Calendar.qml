@@ -269,6 +269,10 @@ Item {
 
         Item {
             id: yearItem
+            x: 58
+            y: 68
+            z: -1
+
             state: plasmoid.configuration.yearState
 
             states: [
@@ -277,17 +281,18 @@ Item {
                     PropertyChanges {
                         target: yearText
                         text: shortYear
-                        x: 100
+                        x: 42
                         width: 28
                     }
                     PropertyChanges {
                         target: yearBackground
-                        x: 95
+                        x: 37
                         width: 36
                     }
                     PropertyChanges {
-                        target: calendarImage
-                        source: "calendarShorYear.png"
+                        target: yearFrame
+                        x: 29
+                        yearFormatString: "Short"
                     }
                 },
                 State {
@@ -295,25 +300,55 @@ Item {
                     PropertyChanges {
                         target: yearText
                         text: fullYear
-                        x: 71
+                        x: 3
                         width: 58
                     }
                     PropertyChanges {
                         target: yearBackground
-                        x: 65
+                        x: 7
                         width: 66
                     }
                     PropertyChanges {
-                        target: calendarImage
-                        source: "calendar.png"
+                        target: yearFrame
+                        x: 0
+                        yearFormatString: "Long"
                     }
                 }
             ]
 
+            transform: Rotation {
+                id: yearFrameRotation
+                axis { x: 1; y: 0; z: 0 }
+                origin.x: 0
+                origin.y: 0
+                angle: 0
+                Behavior on angle {
+                    SpringAnimation {
+                        spring: 4
+                        damping: 0.3
+                        modulus: 360
+                        onRunningChanged: {
+                            if (!running) {
+                                if (yearFrameRotation.angle == 90) {
+                                    yearFrameRotation.angle = 0
+
+                                    if (yearItem.state === "yyyy")
+                                        yearItem.state = "yy"
+                                    else
+                                        yearItem.state = "yyyy"
+
+                                    plasmoid.configuration.yearState = yearItem.state
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             Image {
                 id: yearBackground
-                x: 65
-                y: 71
+                x: 7
+                y: 3
                 width: 66
                 height: 36
                 smooth: true
@@ -341,6 +376,26 @@ Item {
                 font.family: fixedFont.name
                 color: main.textColour
             }
+
+            Item {
+                id: yearFrame
+
+                property string yearFormatString: "Long"
+
+                Image {
+                    id: yearFrameShadowImage
+                    x: 2
+                    y: 2
+                    smooth: true
+                    source: "./calendar" + yearFrame.yearFormatString + "YearShadow.png"
+                }
+
+                Image {
+                    id: yearFrameImage
+                    smooth: true
+                    source: "./calendar" + yearFrame.yearFormatString + "Year.png"
+                }
+            }
         }
 
         Image {
@@ -363,12 +418,7 @@ Item {
                 }
 
                 onClicked: {
-                    if (yearItem.state === "yyyy")
-                        yearItem.state = "yy"
-                    else
-                        yearItem.state = "yyyy"
-
-                    plasmoid.configuration.yearState = yearItem.state
+                    yearFrameRotation.angle = 90
                 }
             }
 
