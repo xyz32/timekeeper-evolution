@@ -53,6 +53,8 @@ Item {
     property bool playSounds: plasmoid.configuration.playSounds
     property double soundVolume: plasmoid.configuration.soundVolume
 
+
+
     property int standardTimezoneOffset: {
         //solve for daylight saving time gap.
         var janDate = new Date((new Date).getFullYear(), 0, 1);
@@ -77,12 +79,13 @@ Item {
 
             if (seconds !== tmpSeconds) {
                 seconds  = tmpSeconds;
-                timekeeper.onTick();
+                timekeeper.onSecondTick();
             }
 
             if (minutes !== tmpMinutes) {
                 minutes  = tmpMinutes;
-                timekeeper.setDate(currentDateTime);
+                //orrery needs an update every minute for planet rotations and month ring position
+                timekeeper.onMinutTick(currentDateTime)
             }
 
             if (hours !== tmpHours) {
@@ -92,6 +95,7 @@ Item {
             if (dayOfMonthNumber !== tmpDate) {
                 dayOfMonthNumber = tmpDate;
                 if (isRealTime) {
+                    timekeeper.onDayTick(currentDateTime);
                     calendar.setDateTime(currentDateTime);
                     clock.setDate(currentDateTime);
                 }
@@ -169,7 +173,8 @@ Item {
         timekeeper.count = 0;
 
         clock.setDate(currentDateTime);
-        timekeeper.setDate(currentDateTime);
+        timekeeper.onDayTick(currentDateTime);
+        timekeeper.onMinutTick(currentDateTime);
         calendar.setDateTime(currentDateTime);
     }
 

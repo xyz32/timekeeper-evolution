@@ -21,25 +21,30 @@ Item {
 
     property int count: 0
     property double ringDegree
-    property int    countAngle
-    property bool   lock: plasmoid.configuration.timekeeprLock
-    property alias  startAngle  : mouse_rotate.start_angle
+    property int countAngle
+    property bool lock: plasmoid.configuration.timekeeprLock
 
     property var monthRingAngles: [0, -31, -62, -93, -123, -153, -182.5, -212, -241.5, -270.5, -299.5, -329.2]
 
-    function setDate(date) {
+    function onDayTick(date) {
         if (!main.isRealTime) {
             return;
         }
-
-        orrery.setDateTime(date);
 
         var month = date.getMonth()
         var dayOfMonth  = date.getDate()-1
         frame.ringDegree = monthRingAngles[month] - dayOfMonth;
     }
 
-    function onTick() {
+    function onMinutTick(date) {
+        if (!main.isRealTime) {
+            return;
+        }
+
+        orrery.setDateTime(date);
+    }
+
+    function onSecondTick() {
         if (!frame.lock && parseInt(currentDateTime.getTime()/1000) % 7 == 0) {
             frame.countAngle = (frame.countAngle + 10) % 360;
             calendar.cogAngle = (calendar.cogAngle + 10) % 360;
