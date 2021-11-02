@@ -62,7 +62,12 @@ Item{
             angle: 360 - ang
             origin.x: cogShadow.width/2; origin.y: cogShadow.height/2;
             Behavior on angle {
-                SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
+                SpringAnimation {
+                    spring: 2
+                    damping: 0.2
+                    epsilon: 0.25
+                    modulus: 360
+                }
             }
         }
     }
@@ -79,8 +84,9 @@ Item{
             Behavior on angle {
                 ParallelAnimation {
                     SpringAnimation {
-                        spring: 2;
-                        damping: 0.2;
+                        spring: 2
+                        damping: 0.2
+                        epsilon: 0.25
                         modulus: 360
                     }
                     ScriptAction { script: {
@@ -100,7 +106,12 @@ Item{
             angle: ang
             origin.x: wheelShadow.width/2; origin.y: wheelShadow.height/2;
             Behavior on angle {
-                SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
+                SpringAnimation {
+                    spring: 2
+                    damping: 0.2
+                    epsilon: 0.25
+                    modulus: 360
+                }
             }
         }
     }
@@ -112,7 +123,12 @@ Item{
             angle: ang
             origin.x: wheel.width/2; origin.y: wheel.height/2;
             Behavior on angle {
-                SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
+                SpringAnimation {
+                    spring: 2
+                    damping: 0.2
+                    epsilon: 0.25
+                    modulus: 360
+                }
             }
         }
     }

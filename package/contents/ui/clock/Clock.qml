@@ -160,7 +160,7 @@ Item {
                     SpringAnimation {
                         spring: 2
                         damping: 0.2
-                        epsilon: 20
+                        epsilon: 15
                         modulus: 360
                     }
                     ScriptAction {

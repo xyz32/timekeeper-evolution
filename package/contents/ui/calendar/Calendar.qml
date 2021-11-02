@@ -111,6 +111,7 @@ Item {
                     SpringAnimation {
                         spring: 2
                         damping: 0.2
+                        epsilon: 2
                         modulus: 360
                     }
                 }
@@ -482,7 +483,11 @@ Item {
                     origin.y: 33
                     angle: 0
                     Behavior on angle {
-                        SpringAnimation { spring: 4; damping: 0.3; modulus: 360 }
+                        SpringAnimation {
+                            spring: 4
+                            damping: 0.3
+                            modulus: 360
+                        }
                     }
                 }
             }
