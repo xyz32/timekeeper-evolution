@@ -141,8 +141,8 @@ Item {
 
     Image {
         id: io
-        width: planetFlip.width / 13
-        height: planetFlip.width / 13
+        width: planetFlip.width / 8
+        height: planetFlip.width / 8
 
         source: "./io/ioFront.png"
 
@@ -164,8 +164,8 @@ Item {
 
     Image {
         id: europa
-        width: planetFlip.width / 15
-        height: planetFlip.width / 15
+        width: planetFlip.width / 9
+        height: planetFlip.width / 9
 
         source: "./europa/europaFront.png"
 
@@ -187,8 +187,8 @@ Item {
 
     Image {
         id: ganymede
-        width: planetFlip.width / 10
-        height: planetFlip.width / 10
+        width: planetFlip.width / 5
+        height: planetFlip.width / 5
 
         source: "./ganymede/ganymedeFront.png"
 
@@ -210,8 +210,8 @@ Item {
 
     Image {
         id: callisto
-        width: planetFlip.width / 11
-        height: planetFlip.width / 11
+        width: planetFlip.width / 6
+        height: planetFlip.width / 6
 
         source: "./calisto/calistoFront.png"
 
