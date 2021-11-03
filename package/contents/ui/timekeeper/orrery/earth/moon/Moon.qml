@@ -38,20 +38,5 @@ Item {
 
         smooth: true;
         source: "luna_" + phase + ".svg"
-
-        MouseArea {
-
-            anchors.fill: parent
-            visible: true;
-
-            cursorShape: Qt.PointingHandCursor
-
-            Component.onCompleted: {
-                debugMouseArea(this);
-            }
-
-            onClicked: {
-            }
-        }
     }
 }

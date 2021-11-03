@@ -75,7 +75,12 @@ Item {
     }
 
     function setDateTime(date) {
+        var time = date.getTime() / 60000; //utc time in minutes
 
+        io.planetTrueAnomaly = 360 - (time / 2547.36) % 360;
+        europa.planetTrueAnomaly = 360 - (time / 5113.44) % 360;
+        ganymede.planetTrueAnomaly = 360 - (time / 10303.2) % 360;
+        callisto.planetTrueAnomaly = 360 - (time / 24032.16) % 360;
     }
 
     Image {
@@ -130,6 +135,98 @@ Item {
             onClicked: {
                 jupiter.state = jupiter.state === "small" ? "big" : "small"
                 plasmoid.configuration.jupiterState = jupiter.state;
+            }
+        }
+    }
+
+    Image {
+        id: io
+        width: planetFlip.width / 13
+        height: planetFlip.width / 13
+
+        source: "./io/ioFront.png"
+
+        property int planetoffset: (planetFlip.height / 2) + (io.height / 2)
+        property int planetTrueAnomaly: 0
+
+        x: planetFlip.x + (planetFlip.width / 2) - (io.width / 2)
+        y: planetFlip.y + (planetFlip.height / 2) - (io.height / 2) + io.planetoffset
+
+        transform: Rotation {
+            origin.x: io.width / 2
+            origin.y: io.height / 2 - io.planetoffset
+            angle: io.planetTrueAnomaly
+            Behavior on angle {
+                SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
+            }
+        }
+    }
+
+    Image {
+        id: europa
+        width: planetFlip.width / 15
+        height: planetFlip.width / 15
+
+        source: "./europa/europaFront.png"
+
+        property int planetoffset: (planetFlip.height / 2) + io.height + (europa.height / 2)
+        property int planetTrueAnomaly: 0
+
+        x: planetFlip.x + (planetFlip.width / 2) - (europa.width / 2)
+        y: planetFlip.y + (planetFlip.height / 2) - (europa.height / 2) + europa.planetoffset
+
+        transform: Rotation {
+            origin.x: europa.width / 2
+            origin.y: europa.height / 2 - europa.planetoffset
+            angle: europa.planetTrueAnomaly
+            Behavior on angle {
+                SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
+            }
+        }
+    }
+
+    Image {
+        id: ganymede
+        width: planetFlip.width / 10
+        height: planetFlip.width / 10
+
+        source: "./ganymede/ganymedeFront.png"
+
+        property int planetoffset: (planetFlip.height / 2) + io.height + europa.height + (ganymede.height / 2)
+        property int planetTrueAnomaly: 0
+
+        x: planetFlip.x + (planetFlip.width / 2) - (ganymede.width / 2)
+        y: planetFlip.y + (planetFlip.height / 2) - (ganymede.height / 2) + ganymede.planetoffset
+
+        transform: Rotation {
+            origin.x: ganymede.width / 2
+            origin.y: ganymede.height / 2 - ganymede.planetoffset
+            angle: ganymede.planetTrueAnomaly
+            Behavior on angle {
+                SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
+            }
+        }
+    }
+
+    Image {
+        id: callisto
+        width: planetFlip.width / 11
+        height: planetFlip.width / 11
+
+        source: "./calisto/calistoFront.png"
+
+        property int planetoffset: (planetFlip.height / 2) + io.height + europa.height + ganymede.height + (callisto.height / 2)
+        property int planetTrueAnomaly: 0
+
+        x: planetFlip.x + (planetFlip.width / 2) - (callisto.width / 2)
+        y: planetFlip.y + (planetFlip.height / 2) - (callisto.height / 2) + callisto.planetoffset
+
+        transform: Rotation {
+            origin.x: callisto.width / 2
+            origin.y: callisto.height / 2 - callisto.planetoffset
+            angle: callisto.planetTrueAnomaly
+            Behavior on angle {
+                SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
             }
         }
     }
