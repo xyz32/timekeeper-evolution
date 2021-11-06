@@ -168,12 +168,15 @@ Item {
     Item {
         id: hourItem
 
+        property int handSize: 55
+        property int pivotOffset: 3
+
         Image {
             id: hourHandShadowImage
             x: 85 - (width / 2)
-            y: 84 - height + 2
+            y: 84 - height + hourItem.pivotOffset
 
-            height: 50
+            height: hourItem.handSize
             fillMode: Image.PreserveAspectFit
             smooth: true
             mipmap: true
@@ -183,7 +186,7 @@ Item {
             transform: Rotation {
                 id: hourShadowRotation
                 origin.x: hourHandShadowImage.paintedWidth / 2
-                origin.y: hourHandShadowImage.paintedHeight - 2
+                origin.y: hourHandShadowImage.paintedHeight - hourItem.pivotOffset
                 angle: (main.hours * 30) + (main.minutes * 0.5)
                 Behavior on angle {
                     SpringAnimation {
@@ -198,9 +201,9 @@ Item {
         Image {
             id: hourHandImage
             x: 83 - (width / 2)
-            y: 82 - height + 2
+            y: 82 - height + hourItem.pivotOffset
 
-            height: 50
+            height: hourItem.handSize
             fillMode: Image.PreserveAspectFit
             smooth: true
             mipmap: true
@@ -210,7 +213,7 @@ Item {
             transform: Rotation {
                 id: hourRotation
                 origin.x: hourHandImage.paintedWidth / 2
-                origin.y: hourHandImage.paintedHeight - 2
+                origin.y: hourHandImage.paintedHeight - hourItem.pivotOffset
                 angle: (main.hours * 30) + (main.minutes * 0.5)
                 Behavior on angle {
                     ParallelAnimation {
@@ -233,13 +236,15 @@ Item {
 
     Item {
         id: minuteItem
+        property int handSize: 68
+        property int pivotOffset: 4
 
         Image {
             id: minuteHandShadowImage
             x: 85 - (width / 2)
-            y: 84 - height + 2
+            y: 84 - height + minuteItem.pivotOffset
 
-            height: 68
+            height: minuteItem.handSize
             fillMode: Image.PreserveAspectFit
             smooth: true
             mipmap: true
@@ -249,7 +254,7 @@ Item {
             transform: Rotation {
                 id: minuteShadowRotation
                 origin.x: minuteHandShadowImage.paintedWidth / 2
-                origin.y: minuteHandShadowImage.paintedHeight - 2
+                origin.y: minuteHandShadowImage.paintedHeight - minuteItem.pivotOffset
                 angle: main.minutes * 6
                 Behavior on angle {
                     SpringAnimation {
@@ -264,9 +269,9 @@ Item {
         Image {
             id: minuteHandImage
             x: 83 - (width / 2)
-            y: 82 - height + 2
+            y: 82 - height + minuteItem.pivotOffset
 
-            height: 68
+            height: minuteItem.handSize
             fillMode: Image.PreserveAspectFit
             smooth: true
             mipmap: true
@@ -276,7 +281,7 @@ Item {
             transform: Rotation {
                 id: minuteRotation
                 origin.x: minuteHandImage.paintedWidth / 2
-                origin.y: minuteHandImage.paintedHeight - 2
+                origin.y: minuteHandImage.paintedHeight - minuteItem.pivotOffset
                 angle: main.minutes * 6
                 Behavior on angle {
                     ParallelAnimation {
