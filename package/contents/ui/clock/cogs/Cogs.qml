@@ -1,4 +1,4 @@
-import QtQuick 2.1
+import QtQuick 2.15
 import QtMultimedia 5.15
 
 Item{
@@ -57,7 +57,8 @@ Item{
         id: cogShadow
         x: 43; y: -5;
         source: "cogShadow.png"
-        smooth: true;
+        smooth: true
+        mipmap: true
         transform: Rotation {
             angle: 360 - ang
             origin.x: cogShadow.width/2; origin.y: cogShadow.height/2;
@@ -76,7 +77,8 @@ Item{
         x: 50; y: -17;
         width: 82; height: 84;
         source: "cog.png"
-        smooth: true;
+        smooth: true
+        mipmap: true
 
         transform: Rotation {
             angle: 360 - ang
@@ -101,7 +103,8 @@ Item{
         id: wheelShadow
         x: 3; y: 2;
         source: "wheelShadow.png"
-        smooth: true;
+        smooth: true
+        mipmap: true
         transform: Rotation {
             angle: ang
             origin.x: wheelShadow.width/2; origin.y: wheelShadow.height/2;
@@ -118,7 +121,8 @@ Item{
     Image {
         id: wheel
         source: "wheel.png"
-        smooth: true;
+        smooth: true
+        mipmap: true
         transform: Rotation {
             angle: ang
             origin.x: wheel.width/2; origin.y: wheel.height/2;
@@ -137,6 +141,7 @@ Item{
         y: 2
         source: "driveBand.png"
         smooth: true
+        mipmap: true
 
         MouseArea {
             id: tiktak_ma

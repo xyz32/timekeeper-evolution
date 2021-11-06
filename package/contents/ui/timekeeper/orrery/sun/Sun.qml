@@ -1,4 +1,4 @@
-import QtQuick 2.1
+import QtQuick 2.15
 
 Item {
     id: sun;
@@ -13,6 +13,7 @@ Item {
         anchors.fill: parent
 
         smooth: true
+        mipmap: true
         source: "./sunTop.png"
 
         MouseArea {

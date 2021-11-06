@@ -1,4 +1,4 @@
-import QtQuick 2.1
+import QtQuick 2.15
 
 Item {
     id: calendarView
@@ -101,8 +101,12 @@ Item {
             y: 4
             width: 84
             height: 84
+
             source: "monthCogShadow.png"
+
             smooth: true
+            mipmap: true
+
             transform: Rotation {
                 angle: {return (cogAngle + 360) % 360;}
                 origin.x: cogShadowImage.width / 2
@@ -124,8 +128,12 @@ Item {
             y: 0
             width: 84
             height: 84
+
             source: "monthCog.png"
+
             smooth: true
+            mipmap: true
+
             transform: Rotation {
                 angle: {return (cogAngle + 360) % 360;}
                 origin.x: cogImage.width / 2
@@ -213,6 +221,7 @@ Item {
                 width: 36
                 height: 36
                 smooth: true
+                mipmap: true
                 source: "./textBackgroundRound.png"
 
                 Rectangle {
@@ -246,6 +255,7 @@ Item {
                 width: 72
                 height: 24
                 smooth: true
+                mipmap: true
                 source: "../clock/textBackground.png"
 
                 Rectangle {
@@ -354,6 +364,7 @@ Item {
                 width: 66
                 height: 36
                 smooth: true
+                mipmap: true
                 source: "./textBackgroundRound.png"
 
                 Rectangle {
@@ -389,12 +400,14 @@ Item {
                     x: 2
                     y: 2
                     smooth: true
+                    mipmap: true
                     source: "./calendar" + yearFrame.yearFormatString + "YearShadow.png"
                 }
 
                 Image {
                     id: yearFrameImage
                     smooth: true
+                    mipmap: true
                     source: "./calendar" + yearFrame.yearFormatString + "Year.png"
                 }
             }
@@ -405,6 +418,7 @@ Item {
             x: 0
             y: 0
             smooth: true
+            mipmap: true
             source: "calendar.png"
 
             MouseArea {
@@ -475,6 +489,7 @@ Item {
                 height: 95
 
                 smooth: true
+                mipmap: true
                 source: "lookingGlassShadow.png"
 
                 transform: Rotation {
@@ -501,12 +516,14 @@ Item {
                 height: 30
 
                 smooth: true
+                mipmap: true
                 source: "../clock/clockglass.png"
             }
 
             Image {
                 id: lookingGlassImage
                 smooth: true
+                mipmap: true
                 source: "lookingGlass.png"
 
                 width: 70

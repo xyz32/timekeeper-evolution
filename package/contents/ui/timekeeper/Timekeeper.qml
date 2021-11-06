@@ -1,4 +1,4 @@
-import QtQuick 2.1
+import QtQuick 2.15
 import QtMultimedia 5.15
 
 import "orrery"
@@ -72,6 +72,7 @@ Item {
         width: 298
         height: 298
         smooth: true
+        mipmap: true
         anchors.centerIn: parent
         fillMode: Image.PreserveAspectFit
         sourceSize.width: 298
@@ -146,19 +147,24 @@ Item {
         sourceSize.height: 294
         source: "frame/innerMetalFrame.png"
         smooth: true
+        mipmap: true
     }
     
     Image {
         x: 0
         y: 0
         source: "frame/innerFrame.png"
+
         smooth: true
+        mipmap: true
         anchors.centerIn: parent
     }
 
     Image {
         source: "frame/woodSurround.png"
+
         smooth: true
+        mipmap: true
     }
 
     Image {
@@ -166,7 +172,10 @@ Item {
         x: 16
         y: 18
         source: "frame/rotatingring.png"
+
         smooth: true
+        mipmap: true
+
         rotation: 122
         transform: Rotation {
             origin.x: 223; origin.y: 223;
@@ -186,6 +195,7 @@ Item {
         y: 71
         source: "frame/counterWheel.png"
         smooth: true
+        mipmap: true
 
         transform: Rotation {
             origin.x: 170.5; origin.y: 170.5;
@@ -293,6 +303,9 @@ Item {
         width: 11
         height: 11
 
+        smooth: true
+        mipmap: true
+
         transform: Rotation {
             origin.x: backgroundSwitchImage.width / 2
             origin.y: backgroundSwitchImage.height / 2
@@ -333,6 +346,9 @@ Item {
         width: 11
         height: 11
 
+        smooth: true
+        mipmap: true
+
         transform: Rotation {
             origin.x: backgroundSwitchImage.width / 2
             origin.y: backgroundSwitchImage.height / 2
@@ -371,6 +387,9 @@ Item {
         y: 387
         width: 11
         height: 11
+
+        smooth: true
+        mipmap: true
 
         transform: Rotation {
             origin.x: backgroundSwitchImage.width / 2

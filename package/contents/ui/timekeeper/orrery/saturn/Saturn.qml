@@ -1,4 +1,4 @@
-import QtQuick 2.1
+import QtQuick 2.15
 
 Item {
     id: saturn;
@@ -86,6 +86,7 @@ Item {
         anchors.centerIn: parent
 
         smooth: true
+        mipmap: true
         source: "../underShadow.png"
     }
 
@@ -105,6 +106,7 @@ Item {
             anchors.fill: parent
 
             smooth: true
+            mipmap: true
             source: "./saturnTop.png"
         }
 
@@ -113,6 +115,7 @@ Item {
             fillMode: Image.PreserveAspectFit
 
             smooth: true
+            mipmap: true
             source: "./saturnFront.png"
         }
 

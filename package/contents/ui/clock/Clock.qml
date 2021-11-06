@@ -1,4 +1,4 @@
-import QtQuick 2.1
+import QtQuick 2.15
 import QtMultimedia 5.15
 
 import "cogs"
@@ -26,7 +26,7 @@ Item {
             name: "in";
             PropertyChanges {
                 target: clock;
-                x: 29;
+                x: 31;
                 y: 60;
             }
         }
@@ -48,11 +48,13 @@ Item {
 
     Image {
         id: weekBackgroundImage;
-        x: 65;
-        y: 102;
-        width: 45;
+        x: 60
+        y: 102
+        width: 45
         height: 20
+
         smooth: true
+        mipmap: true
         source: "textBackground.png"
 
         Rectangle {
@@ -80,14 +82,15 @@ Item {
 
     Image {
         id: background;
-        z: 5
+
         smooth: true
+        mipmap: true
         source: "clock.png"
 
         MouseArea {
             id: inOutSwitch
             x: 62; y: 86
-            z: 7
+
             width: 11; height: 12
             cursorShape: Qt.PointingHandCursor
 
@@ -103,8 +106,9 @@ Item {
 
         MouseArea {
             id: hideClockMechanismSwitch
-            x: 101; y: 86
-            z: 7
+            x: 96
+            y: 86
+
             width: 11; height: 12
             cursorShape: Qt.PointingHandCursor
 
@@ -119,41 +123,23 @@ Item {
         }
     }
 
-    Image {
-        x: 77
-        y: 74
-        z: 5
-        smooth: true
-        source: "center.png"
-
-        MouseArea {
-            id: centerSwitch
-            x: 3
-            y: 3
-            z: 7
-            width: 14
-            height: 14
-            cursorShape: Qt.PointingHandCursor
-
-            Component.onCompleted: {
-                debugMouseArea(this);
-            }
-
-            onClicked:{
-                main.state = main.state == "small" ? "" : "small";
-                plasmoid.configuration.mainState = main.state;
-            }
-        }
-    }
 
     Image {
-        x: 85; y: 32; z: 5
+        id: secondsHandImage
+        x: 81 - (width / 2)
+        y: 52 - height + 2
+
+        height: 20
+        fillMode: Image.PreserveAspectFit
+
         source: "second.png"
         smooth: true
+        mipmap: true
 
         transform: Rotation {
             id: secondRotation
-            origin.x: 2; origin.y: 21;
+            origin.x: secondsHandImage.width / 2
+            origin.y: secondsHandImage.height - 2
             angle: main.seconds * 6
             Behavior on angle {
                 ParallelAnimation {
@@ -179,55 +165,134 @@ Item {
         }
     }
 
-    Image {
-        x: 75; y: 29; z: 5
-        source: "hour.png"
-        smooth: true
+    Item {
+        id: hourItem
 
-        transform: Rotation {
-            id: hourRotation
-            origin.x: 12; origin.y: 53;
-            angle: (main.hours * 30) + (main.minutes * 0.5)
-            Behavior on angle {
-                ParallelAnimation {
+        Image {
+            id: hourHandShadowImage
+            x: 85 - (width / 2)
+            y: 84 - height + 2
+
+            height: 50
+            fillMode: Image.PreserveAspectFit
+            smooth: true
+            mipmap: true
+
+            source: "hourShadow.png"
+
+            transform: Rotation {
+                id: hourShadowRotation
+                origin.x: hourHandShadowImage.paintedWidth / 2
+                origin.y: hourHandShadowImage.paintedHeight - 2
+                angle: (main.hours * 30) + (main.minutes * 0.5)
+                Behavior on angle {
                     SpringAnimation {
                         spring: 2;
                         damping: 0.2;
                         modulus: 360
                     }
-                    ScriptAction {
-                        script: {
-                            sounds.playSound(sounds.hourCogSound);
+                }
+            }
+        }
+
+        Image {
+            id: hourHandImage
+            x: 83 - (width / 2)
+            y: 82 - height + 2
+
+            height: 50
+            fillMode: Image.PreserveAspectFit
+            smooth: true
+            mipmap: true
+
+            source: "hour.png"
+
+            transform: Rotation {
+                id: hourRotation
+                origin.x: hourHandImage.paintedWidth / 2
+                origin.y: hourHandImage.paintedHeight - 2
+                angle: (main.hours * 30) + (main.minutes * 0.5)
+                Behavior on angle {
+                    ParallelAnimation {
+                        SpringAnimation {
+                            spring: 2;
+                            damping: 0.2;
+                            modulus: 360
+                        }
+                        ScriptAction {
+                            script: {
+                                sounds.playSound(sounds.hourCogSound);
+                            }
                         }
                     }
                 }
             }
         }
+
     }
 
-    Image {
-        x: 79; y: 13; z: 5
-        source: "minute.png"
-        smooth: true
+    Item {
+        id: minuteItem
 
-        transform: Rotation {
-            id: minuteRotation
-            origin.x: 8; origin.y: 69;
-            angle: main.minutes * 6
-            Behavior on angle {
-                ParallelAnimation {
+        Image {
+            id: minuteHandShadowImage
+            x: 85 - (width / 2)
+            y: 84 - height + 2
+
+            height: 68
+            fillMode: Image.PreserveAspectFit
+            smooth: true
+            mipmap: true
+
+            source: "minuteShadow.png"
+
+            transform: Rotation {
+                id: minuteShadowRotation
+                origin.x: minuteHandShadowImage.paintedWidth / 2
+                origin.y: minuteHandShadowImage.paintedHeight - 2
+                angle: main.minutes * 6
+                Behavior on angle {
                     SpringAnimation {
                         spring: 2;
                         damping: 0.2;
                         modulus: 360
                     }
-                    ScriptAction {
-                        script: {
-                            sounds.playSound(sounds.minutesCogSound);
-                            if (main.minutes % 60 == 0 && main.seconds == 0) {
-                                sounds.playSound(sounds.chimeSound, ((main.hours) % 12) || 12);
-                            } else if (main.minutes % 30 == 0 && main.seconds == 0) {
-                                sounds.playSound(sounds.chimeSound);
+                }
+            }
+        }
+
+        Image {
+            id: minuteHandImage
+            x: 83 - (width / 2)
+            y: 82 - height + 2
+
+            height: 68
+            fillMode: Image.PreserveAspectFit
+            smooth: true
+            mipmap: true
+
+            source: "minute.png"
+
+            transform: Rotation {
+                id: minuteRotation
+                origin.x: minuteHandImage.paintedWidth / 2
+                origin.y: minuteHandImage.paintedHeight - 2
+                angle: main.minutes * 6
+                Behavior on angle {
+                    ParallelAnimation {
+                        SpringAnimation {
+                            spring: 2;
+                            damping: 0.2;
+                            modulus: 360
+                        }
+                        ScriptAction {
+                            script: {
+                                sounds.playSound(sounds.minutesCogSound);
+                                if (main.minutes % 60 == 0 && main.seconds == 0) {
+                                    sounds.playSound(sounds.chimeSound, ((main.hours) % 12) || 12);
+                                } else if (main.minutes % 30 == 0 && main.seconds == 0) {
+                                    sounds.playSound(sounds.chimeSound);
+                                }
                             }
                         }
                     }
@@ -236,11 +301,51 @@ Item {
         }
     }
 
+    Item {
+        id: centerItem
+
+        Image {
+            id: centerShadowImage
+            x: 85 - (width / 2)
+            y: 84 - (height / 2)
+
+            smooth: true
+            mipmap: true
+            source: "centerShadow.png"
+        }
+
+        Image {
+            id: centerImage
+            x: 83 - (width / 2)
+            y: 82 - (height / 2)
+
+            smooth: true
+            mipmap: true
+            source: "center.png"
+
+            MouseArea {
+                id: centerSwitch
+                anchors.fill: parent
+
+                cursorShape: Qt.PointingHandCursor
+
+                Component.onCompleted: {
+                    debugMouseArea(this);
+                }
+
+                onClicked:{
+                    main.state = main.state == "small" ? "" : "small";
+                    plasmoid.configuration.mainState = main.state;
+                }
+            }
+        }
+    }
+
     Image {
-        x: 26; y
-        : 10;
-        z: 5;
+        x: 26
+        y: 10
         source: "clockglass.png"
         smooth: true
+        mipmap: true
     }
 }

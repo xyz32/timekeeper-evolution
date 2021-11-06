@@ -1,4 +1,4 @@
-import QtQuick 2.1
+import QtQuick 2.15
 
 //moon
 import "moon"
@@ -99,6 +99,7 @@ Item {
         height: parent.height
 
         smooth: true
+        mipmap: true
         source: "../underShadow.png"
     }
 
@@ -119,6 +120,7 @@ Item {
             anchors.fill: parent
 
             smooth: true
+            mipmap: true
             source: "./earthTop.png"
         }
 
@@ -127,6 +129,7 @@ Item {
             anchors.fill: parent
 
             smooth: true
+            mipmap: true
             source: "./animation/earth"+ daytimeRotation + ".png"
         }
 

@@ -1,4 +1,4 @@
-import QtQuick 2.1
+import QtQuick 2.15
 import "phase.js" as Luna
 
 Item {
@@ -29,6 +29,7 @@ Item {
         height: parent.height
 
         smooth: true
+        mipmap: true
         source: "moonUnderShadow.png"
     }
 
@@ -36,7 +37,8 @@ Item {
         sourceSize.width:  parent.width
         sourceSize.height: parent.height
 
-        smooth: true;
+        smooth: true
+        mipmap: true
         source: "luna_" + phase + ".svg"
     }
 }

@@ -1,4 +1,4 @@
-import QtQuick 2.1
+import QtQuick 2.15
 
 Item {
     id: mercury;
@@ -85,6 +85,7 @@ Item {
         height: parent.height
 
         smooth: true
+        mipmap: true
         source: "../underShadow.png"
     }
 
@@ -104,6 +105,7 @@ Item {
             anchors.fill: parent
 
             smooth: true
+            mipmap: true
             source: "./mercuryTop.png"
         }
 
@@ -111,6 +113,7 @@ Item {
             anchors.fill: parent
 
             smooth: true
+            mipmap: true
             source: "./mercuryFront.png"
         }
 

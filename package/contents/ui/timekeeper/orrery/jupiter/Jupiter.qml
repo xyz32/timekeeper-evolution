@@ -1,4 +1,4 @@
-import QtQuick 2.1
+import QtQuick 2.15
 
 Item {
     id: jupiter;
@@ -96,6 +96,7 @@ Item {
         height: parent.height
 
         smooth: true
+        mipmap: true
         source: "../underShadow.png"
     }
 
@@ -115,6 +116,7 @@ Item {
             anchors.fill: parent
 
             smooth: true
+            mipmap: true
             source: "./jupiterTop.png"
 
         }
@@ -123,6 +125,7 @@ Item {
             anchors.fill: parent
 
             smooth: true
+            mipmap: true
             source: "./jupiterFront.png"
 
         }
@@ -150,6 +153,9 @@ Item {
         width: planetFlip.width / 8
         height: planetFlip.width / 8
 
+        smooth: true
+        mipmap: true
+
         source: "./io/ioFront.png"
 
         property int planetoffset: (planetFlip.height / 2) + (io.height / 2)
@@ -172,6 +178,9 @@ Item {
         id: europa
         width: planetFlip.width / 9
         height: planetFlip.width / 9
+
+        smooth: true
+        mipmap: true
 
         source: "./europa/europaFront.png"
 
@@ -196,6 +205,9 @@ Item {
         width: planetFlip.width / 5
         height: planetFlip.width / 5
 
+        smooth: true
+        mipmap: true
+
         source: "./ganymede/ganymedeFront.png"
 
         property int planetoffset: (planetFlip.height / 2) + io.height + europa.height + (ganymede.height / 2)
@@ -218,6 +230,9 @@ Item {
         id: callisto
         width: planetFlip.width / 6
         height: planetFlip.width / 6
+
+        smooth: true
+        mipmap: true
 
         source: "./calisto/calistoFront.png"
 
