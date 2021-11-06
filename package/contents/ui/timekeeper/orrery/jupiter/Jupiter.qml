@@ -77,10 +77,16 @@ Item {
     function setDateTime(date) {
         var time = date.getTime() / 60000; //utc time in minutes
 
-        io.planetTrueAnomaly = 360 - (time / 2547.36) % 360;
-        europa.planetTrueAnomaly = 360 - (time / 5113.44) % 360;
-        ganymede.planetTrueAnomaly = 360 - (time / 10303.2) % 360;
-        callisto.planetTrueAnomaly = 360 - (time / 24032.16) % 360;
+        io.planetTrueAnomaly = getMoonAnomaly(time, 2547.36);
+        europa.planetTrueAnomaly = getMoonAnomaly(time, 5113.44);
+        ganymede.planetTrueAnomaly = getMoonAnomaly(time, 10303.2);
+        callisto.planetTrueAnomaly = getMoonAnomaly(time, 24032.16);
+    }
+
+    function getMoonAnomaly(time, orbitPeriod) {
+        var orbits = time / orbitPeriod;
+        var percentOforbit = orbits - Math.floor(orbits);
+        return 360 - (360 * percentOforbit);
     }
 
     Image {
