@@ -9,6 +9,9 @@ Item {
     state: plasmoid.configuration.clockState
     property string weekDay
 
+    readonly property int handCenterX: 83
+    readonly property int handCenterY: 83
+
     property alias weekBackgroundImage: weekBackgroundImage
 
     states: [
@@ -49,7 +52,7 @@ Item {
         id: weekBackgroundImage;
         x: 60
         y: 102
-        width: 45
+        width: 47
         height: 20
 
         smooth: true
@@ -172,8 +175,8 @@ Item {
 
         Image {
             id: hourHandShadowImage
-            x: 85 - (width / 2)
-            y: 84 - height + hourItem.pivotOffset
+            x: clock.handCenterX + 2 - (width / 2)
+            y: clock.handCenterY + 2 - height + hourItem.pivotOffset
 
             height: hourItem.handSize
             fillMode: Image.PreserveAspectFit
@@ -199,8 +202,8 @@ Item {
 
         Image {
             id: hourHandImage
-            x: 83 - (width / 2)
-            y: 82 - height + hourItem.pivotOffset
+            x: clock.handCenterX - (width / 2)
+            y: clock.handCenterY - height + hourItem.pivotOffset
 
             height: hourItem.handSize
             fillMode: Image.PreserveAspectFit
@@ -240,8 +243,8 @@ Item {
 
         Image {
             id: minuteHandShadowImage
-            x: 85 - (width / 2)
-            y: 84 - height + minuteItem.pivotOffset
+            x: clock.handCenterX + 2 - (width / 2)
+            y: clock.handCenterY + 2 - height + minuteItem.pivotOffset
 
             height: minuteItem.handSize
             fillMode: Image.PreserveAspectFit
@@ -267,8 +270,8 @@ Item {
 
         Image {
             id: minuteHandImage
-            x: 83 - (width / 2)
-            y: 82 - height + minuteItem.pivotOffset
+            x: clock.handCenterX - (width / 2)
+            y: clock.handCenterY - height + minuteItem.pivotOffset
 
             height: minuteItem.handSize
             fillMode: Image.PreserveAspectFit
@@ -310,8 +313,8 @@ Item {
 
         Image {
             id: centerShadowImage
-            x: 85 - (width / 2)
-            y: 84 - (height / 2)
+            x: clock.handCenterX + 2 - (width / 2)
+            y: clock.handCenterY + 2 - (height / 2)
 
             smooth: true
             mipmap: true
@@ -320,8 +323,8 @@ Item {
 
         Image {
             id: centerImage
-            x: 83 - (width / 2)
-            y: 82 - (height / 2)
+            x: clock.handCenterX - (width / 2)
+            y: clock.handCenterY - (height / 2)
 
             smooth: true
             mipmap: true
