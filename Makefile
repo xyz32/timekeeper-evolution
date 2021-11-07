@@ -1,4 +1,4 @@
-VER = 1.1
+VER = 1.2
 ID = kde.plasma.timekeeper
 
 view:
@@ -21,7 +21,7 @@ version:
 
 
 plasmoid: version
-			cd package; zip -9 -r ../TimeKeeperEvolution-$(VER).plasmoid *
+			rm TimeKeeperEvolution*.plasmoid; cd package; zip -9 -r ../TimeKeeperEvolution-$(VER).plasmoid *
 7z: version
 			cd package; 7z a -tzip ../TimeKeeperEvolution-$(VER).plasmoid *
 

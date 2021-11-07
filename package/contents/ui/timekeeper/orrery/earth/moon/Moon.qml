@@ -1,4 +1,4 @@
-import QtQuick 2.15
+import QtQuick 2.3
 import "phase.js" as Luna
 
 Item {
