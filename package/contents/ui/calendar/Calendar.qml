@@ -251,7 +251,7 @@ Item {
             Image {
                 id: monthBackground
                 x: 24
-                y: 44
+                y: 43
                 width: 72
                 height: 24
                 smooth: true

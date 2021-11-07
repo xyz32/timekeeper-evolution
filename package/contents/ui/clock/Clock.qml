@@ -125,8 +125,8 @@ Item {
 
     Image {
         id: secondsHandImage
-        x: 81 - (width / 2)
-        y: 52 - height + 2
+        x: 82 - (width / 2)
+        y: 53 - height + 2
 
         height: 20
         fillMode: Image.PreserveAspectFit
