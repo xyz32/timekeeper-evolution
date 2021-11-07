@@ -53,89 +53,111 @@ Item{
         NumberAnimation { properties: "y"; duration: 800  }
     }
 
-    Image {
-        id: cogShadow
-        x: 43; y: -5;
-        source: "cogShadow.png"
-        smooth: true
-        mipmap: true
-        transform: Rotation {
-            angle: 360 - ang
-            origin.x: cogShadow.width/2; origin.y: cogShadow.height/2;
-            Behavior on angle {
-                SpringAnimation {
-                    spring: 2
-                    damping: 0.2
-                    epsilon: 0.25
-                    modulus: 360
-                }
-            }
-        }
-    }
-    Image {
-        id: cog
-        x: 50; y: -17;
-        width: 82; height: 84;
-        source: "cog.png"
-        smooth: true
-        mipmap: true
+    Item {
+        id: cogItem
+        x: 50
+        y: -17
 
-        transform: Rotation {
-            angle: 360 - ang
-            origin.x: cog.width/2; origin.y: cog.height/2;
-            Behavior on angle {
-                ParallelAnimation {
+        Image {
+            id: cogShadowImage
+            x: 10
+            y: 10
+
+            width: 82
+            height: 82
+
+            source: "cogShadow.png"
+            smooth: true
+            mipmap: true
+            transform: Rotation {
+                angle: 360 - ang
+                origin.x: cogShadowImage.width/2
+                origin.y: cogShadowImage.height/2
+                Behavior on angle {
                     SpringAnimation {
                         spring: 2
                         damping: 0.2
                         epsilon: 0.25
                         modulus: 360
                     }
-                    ScriptAction { script: {
-                            sounds.playSound(sounds.clockMechanismCogSound);
+                }
+            }
+        }
+
+        Image {
+            id: cogImage
+            width: 82
+            height: 82
+
+            source: "cog.png"
+            smooth: true
+            mipmap: true
+
+            transform: Rotation {
+                angle: 360 - ang
+                origin.x: cogImage.width/2; origin.y: cogImage.height/2;
+                Behavior on angle {
+                    ParallelAnimation {
+                        SpringAnimation {
+                            spring: 2
+                            damping: 0.2
+                            epsilon: 0.25
+                            modulus: 360
+                        }
+                        ScriptAction { script: {
+                                sounds.playSound(sounds.clockMechanismCogSound);
+                            }
                         }
                     }
                 }
             }
         }
     }
-    Image {
-        id: wheelShadow
-        x: 3; y: 2;
-        source: "wheelShadow.png"
-        smooth: true
-        mipmap: true
-        transform: Rotation {
-            angle: ang
-            origin.x: wheelShadow.width/2; origin.y: wheelShadow.height/2;
-            Behavior on angle {
-                SpringAnimation {
-                    spring: 2
-                    damping: 0.2
-                    epsilon: 0.25
-                    modulus: 360
+
+    Item {
+        id: wheelItem
+
+        Image {
+            id: wheelShadowImage
+            x: 10
+            y: 10
+            source: "wheelShadow.png"
+            smooth: true
+            mipmap: true
+            transform: Rotation {
+                angle: ang
+                origin.x: wheelShadowImage.width/2; origin.y: wheelShadowImage.height/2;
+                Behavior on angle {
+                    SpringAnimation {
+                        spring: 2
+                        damping: 0.2
+                        epsilon: 0.25
+                        modulus: 360
+                    }
+                }
+            }
+        }
+
+        Image {
+            id: wheelImage
+            source: "wheel.png"
+            smooth: true
+            mipmap: true
+            transform: Rotation {
+                angle: ang
+                origin.x: wheelImage.width/2; origin.y: wheelImage.height/2;
+                Behavior on angle {
+                    SpringAnimation {
+                        spring: 2
+                        damping: 0.2
+                        epsilon: 0.25
+                        modulus: 360
+                    }
                 }
             }
         }
     }
-    Image {
-        id: wheel
-        source: "wheel.png"
-        smooth: true
-        mipmap: true
-        transform: Rotation {
-            angle: ang
-            origin.x: wheel.width/2; origin.y: wheel.height/2;
-            Behavior on angle {
-                SpringAnimation {
-                    spring: 2
-                    damping: 0.2
-                    epsilon: 0.25
-                    modulus: 360
-                }
-            }
-        }
-    }
+
     Image {
         x: 26
         y: 2

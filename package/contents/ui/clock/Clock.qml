@@ -138,8 +138,8 @@ Item {
 
         transform: Rotation {
             id: secondRotation
-            origin.x: secondsHandImage.width / 2
-            origin.y: secondsHandImage.height - 2
+            origin.x: secondsHandImage.paintedWidth / 2
+            origin.y: secondsHandImage.paintedHeight - 2
             angle: main.seconds * 6
             Behavior on angle {
                 ParallelAnimation {

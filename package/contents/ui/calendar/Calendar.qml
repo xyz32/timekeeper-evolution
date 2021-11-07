@@ -494,7 +494,7 @@ Item {
 
                 transform: Rotation {
                     id: lookingGlassShadowImageRotation
-                    origin.x: lookingGlassShadowImage.width / 2
+                    origin.x: lookingGlassShadowImage.paintedWidth / 2
                     origin.y: 33
                     angle: 0
                     Behavior on angle {
@@ -531,7 +531,7 @@ Item {
 
                 transform: Rotation {
                     id: lookingGlassImageRotation
-                    origin.x: lookingGlassImage.width / 2
+                    origin.x: lookingGlassImage.paintedWidth / 2
                     origin.y: 33
                     angle: 0
                     Behavior on angle {
