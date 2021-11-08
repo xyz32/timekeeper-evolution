@@ -1,4 +1,5 @@
 import QtQuick 2.3
+import "jupiter.js" as Moons
 
 Item {
     id: jupiter;
@@ -75,18 +76,12 @@ Item {
     }
 
     function setDateTime(date) {
-        var time = date.getTime() / 60000; //utc time in minutes
+        Moons.setDate(date);
 
-        io.planetTrueAnomaly = getMoonAnomaly(time, 2547.36);
-        europa.planetTrueAnomaly = getMoonAnomaly(time, 5113.44);
-        ganymede.planetTrueAnomaly = getMoonAnomaly(time, 10303.2);
-        callisto.planetTrueAnomaly = getMoonAnomaly(time, 24032.16);
-    }
-
-    function getMoonAnomaly(time, orbitPeriod) {
-        var orbits = time / orbitPeriod;
-        var percentOforbit = orbits - Math.floor(orbits);
-        return 360 - (360 * percentOforbit);
+        io.planetTrueAnomaly = 360 - Moons.moonAngles[0] * (180/Math.PI);
+        europa.planetTrueAnomaly = 360 - Moons.moonAngles[1] * (180/Math.PI);
+        ganymede.planetTrueAnomaly = 360 - Moons.moonAngles[2] * (180/Math.PI);
+        callisto.planetTrueAnomaly = 360 - Moons.moonAngles[3] * (180/Math.PI);
     }
 
     Image {
