@@ -163,8 +163,6 @@ function setDate(initDate)
 this.setDate = setDate;
 
 function daysBetween(d1, d2) {
-    console.error(d1);
-    console.error(d2);
     return ((d2.getTime() - d1.getTime())) / (24.*60.*60.*1000.);
 }
 
