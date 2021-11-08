@@ -13,6 +13,7 @@ Item {
         "frame/backgrounds/glassImmage2.png",
         "frame/backgrounds/glassImmage3.png",
         "frame/backgrounds/glassImmage4.png",
+        "frame/backgrounds/glassImmage5.png",
         "frame/backgrounds/backSky.png",
         plasmoid.configuration.userBackgroundImage,
         "frame/backgrounds/glassTransparent.png"
