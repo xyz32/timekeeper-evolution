@@ -35,19 +35,18 @@ var lambda2;
 function getDate() {
     return curdate;
 }
-this.getDate = getDate;
 
 //
 // Convert an angle (in radians) so that it's between 0 and 2*PI:
 //
 function angle(a)
 {
-if (a < 10000)
-    return oangle(a);
-a = a - 2.*Math.PI * parseInt(a / 2. / Math.PI);
-if (a < 0)
-    a += 2*Math.PI;
-    return a;
+    if (a < 10000)
+        return oangle(a);
+    a = a - 2.*Math.PI * parseInt(a / 2. / Math.PI);
+    if (a < 0)
+        a += 2*Math.PI;
+        return a;
 }
 
 function oangle(a)
@@ -159,15 +158,13 @@ function setDate(initDate)
     moonAngles[3] = angle(moonAngles[3] +
               Math.sin(H) * .845 * Math.PI / 180);
 }
-/* Make the function public: */
-this.setDate = setDate;
+var julDate = new Date(1970, 0, 1, 0, 0, 0);
 
 function daysBetween(d1, d2) {
     return ((d2.getTime() - d1.getTime())) / (24.*60.*60.*1000.);
 }
 
 function getJulianDate(d) {
-    var julDate = new Date(1970, 0, 1, 0, 0, 0);
     return (daysBetween(julDate, d)
     + 2440587.83333333333);
 }
@@ -185,7 +182,7 @@ function XYCoord(x, y) {
 //
 function getMoonXYData(whichmoon)
 {
-var r = moonDist[whichmoon];
+    var r = moonDist[whichmoon];
 
     var moondata = new Object();
 
@@ -198,8 +195,8 @@ var r = moonDist[whichmoon];
         return xy;
     }
 
-moondata.moonx = r * Math.sin(moonAngles[whichmoon]);
-moondata.moony = r * Math.cos(moonAngles[whichmoon]) * Math.sin(De);
+    moondata.moonx = r * Math.sin(moonAngles[whichmoon]);
+    moondata.moony = r * Math.cos(moonAngles[whichmoon]) * Math.sin(De);
 
     // Is the moon directly in front of or behind Jupiter's disk?
     // Then this distance will be <= 1.
@@ -239,11 +236,11 @@ moondata.moony = r * Math.cos(moonAngles[whichmoon]) * Math.sin(De);
     // Is the moon blocked by the planet, so it's invisible?
     //else if (moondata.moonx < 1. && moondata.moonx > -1.)
     else if (diskdist < 1.0)
-{
+    {
         moondata.farside = true;
-    moondata.moonx = moondata.moony = NaN;
-        s += "\nBlocked by the planet";
-}
+        moondata.moonx = moondata.moony = NaN;
+            s += "\nBlocked by the planet";
+    }
 
     // Otherwise, it's on the far side.
     // See if it's eclipsed by the planet's shadow.
@@ -268,28 +265,25 @@ moondata.moony = r * Math.cos(moonAngles[whichmoon]) * Math.sin(De);
     //if (moondata.eclipse) alert(s);
     return moondata;
 }
-this.getMoonXYData = getMoonXYData
 
 //
 // The Great Red Spot, currently at longitude 61 in system II
 //
 function getRedSpotXY(spot_in_deg)
 {
-var spotlong = angle(lambda2 - spot_in_deg*Math.PI/180);
-
+    var spotlong = angle(lambda2 - spot_in_deg*Math.PI/180);
     var coord = new XYCoord();
 
-// See if the spot is visible:
-if (spotlong > Math.PI * .5 && spotlong < Math.PI * 1.5) {
-    coord.x = coord.y = NaN;
-} else {
-    coord.x = Math.sin(spotlong);
-    coord.y = .42;	// completely random wild-assed guess
-}
+    // See if the spot is visible:
+    if (spotlong > Math.PI * .5 && spotlong < Math.PI * 1.5) {
+        coord.x = coord.y = NaN;
+    } else {
+        coord.x = Math.sin(spotlong);
+        coord.y = .42;	// completely random wild-assed guess
+    }
 
     return coord;
 }
-this.getRedSpotXY = getRedSpotXY;
 
 //
 // You might also want to get the location of some arbitrary
@@ -355,7 +349,7 @@ function upcomingEvents(date, tothrs)
 
     for (mins = -30; mins < tothrs * 60; mins += interval) {
         d.setTime(date.getTime() + mins * 60 * 1000);
-        jup.setDate(d);
+        setDate(d);
         if (verbose)
             upcoming += "\n" + d + "\n";
 
@@ -424,7 +418,7 @@ function upcomingEvents(date, tothrs)
     }
 
     if (saveDate != undefined)
-        jup.setDate(saveDate);
+        setDate(saveDate);
     return upcoming;
 }
 
