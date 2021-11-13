@@ -4,6 +4,8 @@ import "cogs"
 
 Item {
     id: clock
+    width: 176
+    height: 180
 
     opacity: plasmoid.configuration.clockOpacity
     state: plasmoid.configuration.clockState
@@ -84,6 +86,8 @@ Item {
 
     Image {
         id: background;
+
+        anchors.fill: parent
 
         smooth: true
         mipmap: true
