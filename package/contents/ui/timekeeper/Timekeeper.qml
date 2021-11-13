@@ -352,7 +352,7 @@ Item {
         transform: Rotation {
             origin.x: backgroundSwitchImage.width / 2
             origin.y: backgroundSwitchImage.height / 2
-            angle: playSounds ? 0 : 180
+            angle: sounds.playSounds ? 0 : 180
             Behavior on angle {
                 SpringAnimation {
                     spring: 2;
@@ -374,8 +374,7 @@ Item {
 
             cursorShape: Qt.PointingHandCursor
             onClicked: {
-                playSounds = !playSounds;
-                plasmoid.configuration.playSounds = playSounds;
+                sounds.toggleSoundOnOff()
             }
         }
     }
@@ -416,7 +415,7 @@ Item {
 
             cursorShape: Qt.PointingHandCursor
             onClicked: {
-                sounds.nextSounfTheme();
+                sounds.nextSoundTheme();
             }
         }
     }

@@ -227,6 +227,10 @@ Item {
                         ScriptAction {
                             script: {
                                 sounds.playSound(sounds.hourCogSound);
+
+                                if (main.seconds == 0 && main.minutes == 0) {
+                                    sounds.playSound(sounds.chimeSound, ((main.hours) % 12) || 12);
+                                }
                             }
                         }
                     }
@@ -295,9 +299,7 @@ Item {
                         ScriptAction {
                             script: {
                                 sounds.playSound(sounds.minutesCogSound);
-                                if (main.minutes % 60 == 0 && main.seconds == 0) {
-                                    sounds.playSound(sounds.chimeSound, ((main.hours) % 12) || 12);
-                                } else if (main.minutes % 30 == 0 && main.seconds == 0) {
+                                if (main.seconds == 0 && main.minutes == 30) {
                                     sounds.playSound(sounds.chimeSound);
                                 }
                             }

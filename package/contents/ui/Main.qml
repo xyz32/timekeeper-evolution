@@ -50,11 +50,6 @@ Item {
     property int seconds: -1
     property int dayOfMonthNumber: -1
 
-    property bool playSounds: plasmoid.configuration.playSounds
-    property double soundVolume: plasmoid.configuration.soundVolume
-
-
-
     property int standardTimezoneOffset: {
         //solve for daylight saving time gap.
         var janDate = new Date((new Date).getFullYear(), 0, 1);
@@ -64,7 +59,7 @@ Item {
 
     Timer {
         id: tickTimer
-        interval: (playSounds && sounds.secondsCogSoundOdd.hasSound) ? 100 : 1000
+        interval: (sounds.playSounds && sounds.secondsCogSoundOdd.hasSound) ? 100 : 1000
         running: true
         repeat: true
         triggeredOnStart: true

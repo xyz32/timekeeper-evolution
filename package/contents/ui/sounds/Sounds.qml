@@ -11,6 +11,8 @@ Item {
     ]
 
     property int soundTheem: plasmoid.configuration.soundTheme
+    property bool playSounds: plasmoid.configuration.playSounds
+    property double soundVolume: plasmoid.configuration.soundVolume
 
     //exported sounds:
     property alias secondsCogSoundOdd: secondsCogSoundOdd
@@ -25,7 +27,7 @@ Item {
     property string soundTheemPath: soundTheems[soundTheem]
 
     function playSound(soundEfect, repeat) {
-        if (main.playSounds && soundEfect && soundEfect.source && soundEfect.hasSound) {
+        if (playSounds && soundEfect && soundEfect.source && soundEfect.hasSound) {
             soundEfect.volume = soundVolume;
             if (!repeat) {
                 repeat = 0;
@@ -37,7 +39,19 @@ Item {
         }
     }
 
-    function nextSounfTheme() {
+    function toggleSoundOnOff() {
+        playSounds = !playSounds;
+        plasmoid.configuration.playSounds = playSounds;
+
+        if (!playSounds) {
+            for (var i = 0; i < sounds.resources.length; i++)
+            {
+                sounds.resources[i].stop();
+            }
+        }
+    }
+
+    function nextSoundTheme() {
         soundTheem = (soundTheem + 1) % soundTheems.length
         plasmoid.configuration.soundTheme = soundTheem;
     }
