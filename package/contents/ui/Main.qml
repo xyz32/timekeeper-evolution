@@ -44,11 +44,14 @@ Item {
     property double nonRealTimeOpacity: 0.2
 
     property bool isRealTime: true
-    property var currentDateTime
+    property var realDateTime
     property int hours: -1
     property int minutes: -1
     property int seconds: -1
     property int dayOfMonthNumber: -1
+
+    property int dayCounter: 0
+    property int minuteCounter: 0
 
     property int standardTimezoneOffset: {
         //solve for daylight saving time gap.
@@ -65,35 +68,13 @@ Item {
         triggeredOnStart: true
 
         onTriggered: {
-            currentDateTime = new Date();
+            realDateTime = new Date();
 
-            var tmpSeconds = currentDateTime.getSeconds();
-            var tmpMinutes = currentDateTime.getMinutes();
-            var tmpHours = currentDateTime.getHours();
-            var tmpDate = currentDateTime.getDate()
+            var tmpSeconds = realDateTime.getSeconds();
 
             if (seconds !== tmpSeconds) {
                 seconds  = tmpSeconds;
-                timekeeper.onSecondTick();
-            }
-
-            if (minutes !== tmpMinutes) {
-                minutes  = tmpMinutes;
-                //orrery needs an update every minute for planet rotations and month ring position
-                timekeeper.onMinutTick(currentDateTime)
-            }
-
-            if (hours !== tmpHours) {
-                hours  = tmpHours;
-            }
-
-            if (dayOfMonthNumber !== tmpDate) {
-                dayOfMonthNumber = tmpDate;
-                if (isRealTime) {
-                    timekeeper.onDayTick(currentDateTime);
-                    calendar.setDateTime(currentDateTime);
-                    clock.setDate(currentDateTime);
-                }
+                onTimeTick(realDateTime);
             }
         }
     }
@@ -161,18 +142,6 @@ Item {
         id: sounds
     }
 
-    function setToRealTime() {
-        //used to reset time to realtime
-
-        main.isRealTime = true;
-        timekeeper.count = 0;
-
-        clock.setDate(currentDateTime);
-        timekeeper.onDayTick(currentDateTime);
-        timekeeper.onMinutTick(currentDateTime);
-        calendar.setDateTime(currentDateTime);
-    }
-
     Item { //main container
         width: mainWidth;
         height: mainHeight
@@ -190,6 +159,55 @@ Item {
         Calendar{
             id: calendar;
             z: 7
+        }
+    }
+
+    function setToRealTime() {
+        dayCounter = 0;
+        minuteCounter = 0;
+        isRealTime = true;
+        clock.ringDegree = 0;
+        onTimeTick(new Date(), true);
+    }
+
+    function updateDayCounter(counter) {
+        isRealTime = false;
+        dayCounter += counter;
+        onTimeTick(new Date(), true);
+    }
+
+    function updateMinuteCounter(counter) {
+        isRealTime = false;
+        minuteCounter += counter;
+        onTimeTick(new Date(), true);
+    }
+
+    function onTimeTick(realtime, forceUpdate) {
+        var updateRequired = forceUpdate ? forceUpdate : false;
+        var tmpMinutes = realtime.getMinutes();
+        var tmpHours = realtime.getHours();
+
+        var showingTime = realtime;
+        if (isRealTime) {
+            showingTime = realtime;
+        } else {
+            showingTime.setDate(showingTime.getDate() + dayCounter);
+            showingTime.setMinutes(showingTime.getMinutes() + (minuteCounter*2));
+        }
+
+        if (minutes !== tmpMinutes) {
+            minutes  = tmpMinutes;
+            updateRequired = true;
+            //orrery needs an update every minute for planet rotations and month ring position
+        }
+
+        if (hours !== tmpHours) {
+            hours  = tmpHours;
+        }
+
+        if (updateRequired) {
+            timekeeper.onCosmosTick(showingTime);
+            updateRequired = false;
         }
     }
 }

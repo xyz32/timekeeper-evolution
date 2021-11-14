@@ -19,33 +19,23 @@ Item {
         "frame/backgrounds/glassTransparent.png"
     ]
 
-    property int count: 0
     property double ringDegree
     property int countAngle
     property bool lock: plasmoid.configuration.timekeeprLock
 
     property var monthRingAngles: [0, -31, -62, -93, -123, -153, -182.5, -212, -241.5, -270.5, -299.5, -329.2]
 
-    function onDayTick(date) {
-        if (!main.isRealTime) {
-            return;
-        }
-
+    function onCosmosTick(date) {
         var month = date.getMonth()
         var dayOfMonth  = date.getDate()-1
         frame.ringDegree = monthRingAngles[month] - dayOfMonth;
-    }
-
-    function onMinutTick(date) {
-        if (!main.isRealTime) {
-            return;
-        }
-
         orrery.setDateTime(date);
+        calendar.setDateTime(date);
+        clock.setDate(date);
     }
 
-    function onSecondTick() {
-        if (!frame.lock && parseInt(currentDateTime.getTime()/1000) % 7 == 0) {
+    function onAnimationTick() {
+        if (!frame.lock && parseInt(main.realDateTime.getTime()/1000) % 7 == 0) {
             frame.countAngle = (frame.countAngle + 10) % 360;
             calendar.cogAngle = (calendar.cogAngle + 10) % 360;
         }
@@ -216,17 +206,6 @@ Item {
                 return (out && inn) ? true : false;
             }
 
-            function ringUpdated(count) {
-                var today = new Date();
-                today.setDate(today.getDate() + count);
-
-                isRealTime = false;
-
-                orrery.setDateTime(today);
-                calendar.setDateTime(today);
-                clock.setDate(today);
-            }
-
             function triAngle(x,y) {
                 x = x - outerRingRadius;
                 y = y - outerRingRadius;
@@ -260,10 +239,11 @@ Item {
                     calendar.cogAngle = b
 
                     c = (aPred - a)
-                    if(c < 90 && -90 < c ) count += c
-                    aPred = a
+                    if(c < 90 && -90 < c ) {
+                        updateDayCounter(c);
+                    }
+                    aPred = a;
 
-                    ringUpdated(count)
                 } else {
                     startAngle = triAngle(mouse.x, mouse.y)
                     ostanov     = frame.ringDegree

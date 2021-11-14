@@ -10,7 +10,7 @@ Item{
     property int ang: 0
     property bool lock: plasmoid.configuration.cogsLock
 
-    function onTick() {
+    function onAnimationTick() {
         if (!clockCogs.lock && clockCogs.state !== "hide") {
             ang = (ang + 10) % 360
         }

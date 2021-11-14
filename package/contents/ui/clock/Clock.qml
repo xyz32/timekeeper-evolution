@@ -12,6 +12,8 @@ Item {
     readonly property int handCenterX: 83
     readonly property int handCenterY: 83
 
+    property double ringDegree: 0
+
     property alias weekBackgroundImage: weekBackgroundImage
 
     states: [
@@ -107,6 +109,102 @@ Item {
         }
 
         Image {
+            id: clockTimeRing;
+
+            x: parent.ojectWidth / 2 - width / 2
+            y: parent.ojectHeight / 2 - height / 2
+
+            width: 131 // 108 for inner radius
+            height: 131 // 108 for inner radius
+
+            smooth: true
+            mipmap: true
+            source: "timeRing.png"
+
+            transform: Rotation {
+                origin.x: clockTimeRing.width / 2
+                origin.y: clockTimeRing.height / 2
+                angle: {return (clock.ringDegree + 360) % 360;}
+                Behavior on angle {
+                    SpringAnimation {
+                        spring: 2
+                        damping: 0.2
+                        modulus: 360
+                    }
+                }
+            }
+
+            MouseArea {//date cog rotation
+                id: mouseRotate
+                anchors.fill: parent
+
+                property int outerRingRadius: parent.paintedWidth / 2
+                property int innerRingRadius: parent.paintedWidth / 2 - 20
+
+                property int startAngle: 0
+                property int ostanov
+                property int aPred
+
+                function inner(x, y) {
+                    var dx = x - outerRingRadius;
+                    var dy = y - outerRingRadius;
+                    var xy = (dx * dx + dy * dy)
+
+                    var out = (outerRingRadius * outerRingRadius) >   xy;
+                    var inn = (innerRingRadius * innerRingRadius) <=  xy;
+
+                    return (out && inn) ? true : false;
+                }
+
+                function triAngle(x,y) {
+                    x = x - outerRingRadius;
+                    y = y - outerRingRadius;
+                    if(x === 0) return (y>0) ? 180 : 0;
+                    var a = Math.atan(y/x)*180/Math.PI;
+                    a = (x > 0) ? a+90 : a+270;
+
+                    return Math.round(a);
+                }
+
+                onPressed: {
+                    if( inner(mouse.x, mouse.y) ){
+                        startAngle = triAngle(mouse.x, mouse.y)
+                        ostanov     = clock.ringDegree
+                        aPred      = startAngle
+                    }
+                }
+
+                onReleased: {
+
+                }
+
+                onPositionChanged: {
+                    var a, b, c
+                    if( inner(mouse.x, mouse.y) ){
+                        a = triAngle(mouse.x, mouse.y)
+
+                        b = ostanov + (a - startAngle)
+                        clock.ringDegree = b
+
+
+                        c = (aPred - a)
+                        if(c < 90 && -90 < c ) {
+                            updateMinuteCounter(c);
+                        }
+                        aPred = a
+                    } else {
+                        startAngle = triAngle(mouse.x, mouse.y)
+                        ostanov     = clock.ringDegree
+                        aPred      = startAngle
+                    }
+                    if(ostanov >  360) ostanov -= 360;
+                    if(ostanov < -360) ostanov += 360;
+                    // console.log(b, ostanov, a, start_angle)
+                }
+            }
+        }
+
+        Image {
             id: background;
 
             width: parent.ojectWidth
@@ -156,113 +254,6 @@ Item {
         }
 
         Image {
-            id: clockTimeRing;
-
-            x: parent.ojectWidth / 2 - width / 2
-            y: parent.ojectHeight / 2 - height / 2
-
-            width: 131 // 108 for inner radius
-            height: 131 // 108 for inner radius
-
-            smooth: true
-            mipmap: true
-            source: "timeRing.png"
-
-            property int count: 0
-            property double ringDegree
-            property int countAngle
-
-            transform: Rotation {
-                origin.x: clockTimeRing.width / 2
-                origin.y: clockTimeRing.height / 2
-                angle: {return (clockTimeRing.ringDegree + 360) % 360;}
-                Behavior on angle {
-                    SpringAnimation {
-                        spring: 2
-                        damping: 0.2
-                        modulus: 360
-                    }
-                }
-            }
-
-            MouseArea {//date cog rotation
-                id: mouseRotate
-                anchors.fill: parent
-
-                property int outerRingRadius: parent.paintedWidth / 2
-                property int innerRingRadius: parent.paintedWidth / 2 - 20
-
-                property int startAngle: 0
-                property int ostanov
-                property int aPred
-
-                function inner(x, y) {
-                    var dx = x - outerRingRadius;
-                    var dy = y - outerRingRadius;
-                    var xy = (dx * dx + dy * dy)
-
-                    var out = (outerRingRadius * outerRingRadius) >   xy;
-                    var inn = (innerRingRadius * innerRingRadius) <=  xy;
-
-                    return (out && inn) ? true : false;
-                }
-
-                function ringUpdated(count) {
-                    var today = new Date();
-                    today.setDate(today.getDate() + count);
-
-                    isRealTime = false;
-                }
-
-                function triAngle(x,y) {
-                    x = x - outerRingRadius;
-                    y = y - outerRingRadius;
-                    if(x === 0) return (y>0) ? 180 : 0;
-                    var a = Math.atan(y/x)*180/Math.PI;
-                    a = (x > 0) ? a+90 : a+270;
-
-                    return Math.round(a);
-                }
-
-                onPressed: {
-                    if( inner(mouse.x, mouse.y) ){
-                        startAngle = triAngle(mouse.x, mouse.y)
-                        ostanov     = clockTimeRing.ringDegree
-                        aPred      = startAngle
-                    }
-                }
-
-                onReleased: {
-
-                }
-
-                onPositionChanged: {
-                    var a, b, c
-                    if( inner(mouse.x, mouse.y) ){
-                        a = triAngle(mouse.x, mouse.y)
-
-                        b = ostanov + (a - startAngle)
-                        clockTimeRing.ringDegree = b
-                        clockTimeRing.countAngle = b
-
-                        c = (aPred - a)
-                        if(c < 90 && -90 < c ) clockTimeRing.count += c
-                        aPred = a
-
-                        ringUpdated(clockTimeRing.count)
-                    } else {
-                        startAngle = triAngle(mouse.x, mouse.y)
-                        ostanov     = clockTimeRing.ringDegree
-                        aPred      = startAngle
-                    }
-                    if(ostanov >  360) ostanov -= 360;
-                    if(ostanov < -360) ostanov += 360;
-                    // console.log(b, ostanov, a, start_angle)
-                }
-            }
-        }
-
-        Image {
             id: secondsHandImage
             x: 82 - (width / 2)
             y: 53 - height + 2
@@ -289,7 +280,8 @@ Item {
                         }
                         ScriptAction {
                             script: {
-                                cogs.onTick();
+                                cogs.onAnimationTick();
+                                timekeeper.onAnimationTick();
 
                                 if (main.seconds % 2 == 0) {
                                     sounds.playSound(sounds.secondsCogSoundEven);
