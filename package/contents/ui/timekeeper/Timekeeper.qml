@@ -151,8 +151,8 @@ Item {
     }
     
     Image {
-        x: 0
-        y: 0
+        width: 475
+        height: 475
         source: "frame/innerFrame.png"
 
         smooth: true
@@ -161,6 +161,9 @@ Item {
     }
 
     Image {
+        width: 478
+        height: 478
+
         source: "frame/woodSurround.png"
 
         smooth: true
@@ -171,6 +174,8 @@ Item {
         id:month_ring
         x: 16
         y: 18
+        width: 446
+        height: 446
         source: "frame/rotatingring.png"
 
         smooth: true
