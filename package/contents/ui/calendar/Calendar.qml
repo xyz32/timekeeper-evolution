@@ -100,8 +100,8 @@ Item {
 
         Image {
             id: cogShadowImage
-            x: 4
-            y: 4
+            x: 6
+            y: 6
             width: parent.ojectWidth
             height: parent.ojectHeight
 
