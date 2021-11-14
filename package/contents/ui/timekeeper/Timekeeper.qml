@@ -171,12 +171,12 @@ Item {
     }
 
     Image {
-        id:month_ring
+        id:monthRing
         x: 16
         y: 18
         width: 446
         height: 446
-        source: "frame/rotatingring.png"
+        source: "frame/monthRing.png"
 
         smooth: true
         mipmap: true
@@ -191,6 +191,87 @@ Item {
                     damping: 0.2
                     modulus: 360
                 }
+            }
+        }
+
+        MouseArea {//date cog rotation
+            id: mouseRotate
+            anchors.fill: parent
+
+            property int outerRingRadius: monthRing.paintedWidth/ 2
+            property int innerRingRadius: (monthRing.paintedWidth/ 2) - 40
+
+            property int startAngle: 0
+            property int ostanov
+            property int aPred
+
+            function inner(x, y) {
+                var dx = x - outerRingRadius;
+                var dy = y - outerRingRadius;
+                var xy = (dx * dx + dy * dy)
+
+                var out = (outerRingRadius * outerRingRadius) >   xy;
+                var inn = (innerRingRadius * innerRingRadius) <=  xy;
+
+                return (out && inn) ? true : false;
+            }
+
+            function ringUpdated(count) {
+                var today = new Date();
+                today.setDate(today.getDate() + count);
+
+                isRealTime = false;
+
+                orrery.setDateTime(today);
+                calendar.setDateTime(today);
+                clock.setDate(today);
+            }
+
+            function triAngle(x,y) {
+                x = x - outerRingRadius;
+                y = y - outerRingRadius;
+                if(x === 0) return (y>0) ? 180 : 0;
+                var a = Math.atan(y/x)*180/Math.PI;
+                a = (x > 0) ? a+90 : a+270;
+
+                return Math.round(a);
+            }
+
+            onPressed: {
+                if( inner(mouse.x, mouse.y) ){
+                    startAngle = triAngle(mouse.x, mouse.y)
+                    ostanov     = frame.ringDegree
+                    aPred      = startAngle
+                }
+            }
+
+            onReleased: {
+
+            }
+
+            onPositionChanged: {
+                var a, b, c
+                if( inner(mouse.x, mouse.y) ){
+                    a = triAngle(mouse.x, mouse.y)
+
+                    b = ostanov + (a - startAngle)
+                    frame.ringDegree = b
+                    frame.countAngle = b
+                    calendar.cogAngle = b
+
+                    c = (aPred - a)
+                    if(c < 90 && -90 < c ) count += c
+                    aPred = a
+
+                    ringUpdated(count)
+                } else {
+                    startAngle = triAngle(mouse.x, mouse.y)
+                    ostanov     = frame.ringDegree
+                    aPred      = startAngle
+                }
+                if(ostanov >  360) ostanov -= 360;
+                if(ostanov < -360) ostanov += 360;
+                // console.log(b, ostanov, a, start_angle)
             }
         }
 
@@ -219,84 +300,6 @@ Item {
                     }
                 }
             }
-        }
-    }
-
-    MouseArea {//date cog rotation
-        id: mouse_rotate
-        x: 16; y: 18
-        width: 446; height: 445
-        property int start_angle: 0
-        property int ostanov
-        property int a_pred
-
-        function inner(x, y) {
-            var dx = x - 223;
-            var dy = y - 223;
-            var xy = (dx * dx + dy * dy)
-
-            var out = (223 * 223) >   xy;
-            var inn = (150 * 150) <=  xy;
-
-            return (out && inn) ? true : false;
-        }
-
-        function ringUpdated(count) {
-            var today = new Date();
-            today.setDate(today.getDate() + count);
-
-            isRealTime = false;
-
-            orrery.setDateTime(today);
-            calendar.setDateTime(today);
-            clock.setDate(today);
-        }
-
-        function tri_angle(x,y) {
-            x = x - 223;
-            y = y - 223;
-            if(x === 0) return (y>0) ? 180 : 0;
-            var a = Math.atan(y/x)*180/Math.PI;
-            a = (x > 0) ? a+90 : a+270;
-
-            return Math.round(a);
-        }
-
-        onPressed: {
-            if( inner(mouse.x, mouse.y) ){
-                start_angle = tri_angle(mouse.x, mouse.y)
-                ostanov     = frame.ringDegree
-                a_pred      = start_angle
-            }
-        }
-
-        onReleased: {
-
-        }
-
-        onPositionChanged: {
-            var a, b, c
-            if( inner(mouse.x, mouse.y) ){
-                a = tri_angle(mouse.x, mouse.y)
-
-                b = ostanov + (a - start_angle)
-                frame.ringDegree = b
-                frame.countAngle = b
-                calendar.cogAngle = b
-
-                c = (a_pred - a)
-                if(c < 90 && -90 < c ) count += c
-                a_pred = a
-
-                ringUpdated(count)
-            } else {
-                start_angle = tri_angle(mouse.x, mouse.y)
-                ostanov     = frame.ringDegree
-                a_pred      = start_angle
-            }
-            if(ostanov >  360) ostanov -= 360;
-            if(ostanov < -360) ostanov += 360;
-            // console.log(b, ostanov, a, start_angle)
         }
     }
 
