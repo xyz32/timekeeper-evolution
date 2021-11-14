@@ -48,8 +48,14 @@ Item{
         }
     ]
     transitions: Transition {
-        NumberAnimation { properties: "x"; duration: 1500 }
-        NumberAnimation { properties: "y"; duration: 800  }
+        NumberAnimation {
+            properties: "x"
+            duration: 1500
+        }
+        NumberAnimation {
+            properties: "y"
+            duration: 800
+        }
     }
 
     Item {
@@ -57,13 +63,16 @@ Item{
         x: 50
         y: -17
 
+        property int ojectWidth: 82
+        property int ojectHeight: 82
+
         Image {
             id: cogShadowImage
             x: 10
             y: 10
 
-            width: 82
-            height: 82
+            width: parent.ojectWidth
+            height: parent.ojectHeight
 
             source: "cogShadow.png"
             smooth: true
@@ -85,8 +94,8 @@ Item{
 
         Image {
             id: cogImage
-            width: 82
-            height: 82
+            width: parent.ojectWidth
+            height: parent.ojectHeight
 
             source: "cog.png"
             smooth: true
@@ -116,10 +125,18 @@ Item{
     Item {
         id: wheelItem
 
+        property int ojectWidth: 92
+        property int ojectHeight: 92
+
         Image {
             id: wheelShadowImage
             x: 10
             y: 10
+
+            width: parent.ojectWidth
+            height: parent.ojectHeight
+
+
             source: "wheelShadow.png"
             smooth: true
             mipmap: true
@@ -139,6 +156,10 @@ Item{
 
         Image {
             id: wheelImage
+
+            width: parent.ojectWidth
+            height: parent.ojectHeight
+
             source: "wheel.png"
             smooth: true
             mipmap: true
@@ -157,40 +178,67 @@ Item{
         }
     }
 
-    Image {
-        x: 26
-        y: 2
-        source: "driveBand.png"
-        smooth: true
-        mipmap: true
+    Item {
+        id: drivebeltItem
 
-        MouseArea {
-            id: tiktak_ma
-            x: 16; y: 36
-            width: 14; height: 14
-            cursorShape: Qt.PointingHandCursor
+        x: 23
+        y: -5
 
-            Component.onCompleted: {
-                debugMouseArea(this);
-            }
+        property int ojectWidth: 73
+        property int ojectHeight: 73
 
-            onClicked: {
-                if(cogs.lock){
-                    cogs.ang = (cogs.ang - 10) % 360
-                    cogs.lock = !cogs.lock
-                } else if(timekeeper.lock){
-                    timekeeper.countAngle = (timekeeper.countAngle + 10) % 360
-                    timekeeper.lock = !timekeeper.lock
-                } else {
-                    cogs.lock = true;
-                    timekeeper.lock = true;
+        Image {
+            x: 5
+            y: 5
 
-                    cogs.ang = (cogs.ang - 10) % 360
-                    timekeeper.countAngle = (timekeeper.countAngle - 10) % 360;
+            width: parent.ojectWidth
+            height: parent.ojectHeight
+
+
+            source: "driveBandShadow.png"
+            smooth: true
+            mipmap: true
+        }
+
+        Image {
+
+            width: parent.ojectWidth
+            height: parent.ojectHeight
+
+            source: "driveBand.png"
+            smooth: true
+            mipmap: true
+
+            MouseArea {
+                id: tiktak_ma
+                x: 15
+                y: 44
+                width: 14; height: 14
+                cursorShape: Qt.PointingHandCursor
+
+                Component.onCompleted: {
+                    debugMouseArea(this);
                 }
-                plasmoid.configuration.timekeeprLock = timekeeper.lock
-                plasmoid.configuration.cogsLock = cogs.lock
+
+                onClicked: {
+                    if(cogs.lock){
+                        cogs.ang = (cogs.ang - 10) % 360
+                        cogs.lock = !cogs.lock
+                    } else if(timekeeper.lock){
+                        timekeeper.countAngle = (timekeeper.countAngle + 10) % 360
+                        timekeeper.lock = !timekeeper.lock
+                    } else {
+                        cogs.lock = true;
+                        timekeeper.lock = true;
+
+                        cogs.ang = (cogs.ang - 10) % 360
+                        timekeeper.countAngle = (timekeeper.countAngle - 10) % 360;
+                    }
+                    plasmoid.configuration.timekeeprLock = timekeeper.lock
+                    plasmoid.configuration.cogsLock = cogs.lock
+                }
             }
         }
+
     }
 }
