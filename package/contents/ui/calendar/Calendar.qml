@@ -95,14 +95,17 @@ Item {
         x: 29
         y: 13
 
+        property int ojectWidth: 86
+        property int ojectHeight: 86
+
         Image {
             id: cogShadowImage
             x: 4
             y: 4
-            width: 84
-            height: 84
+            width: parent.ojectWidth
+            height: parent.ojectHeight
 
-            source: "monthCogShadow.png"
+            source: "../clock/cogs/cogShadow.png"
 
             smooth: true
             mipmap: true
@@ -126,10 +129,10 @@ Item {
             id: cogImage
             x: 0
             y: 0
-            width: 84
-            height: 84
+            width: parent.ojectWidth
+            height: parent.ojectHeight
 
-            source: "monthCog.png"
+            source: "../clock/cogs/cog.png"
 
             smooth: true
             mipmap: true
@@ -303,6 +306,8 @@ Item {
                     PropertyChanges {
                         target: yearFrame
                         x: 29
+                        ojectWidth: 49
+                        ojectHeight: 43
                         yearFormatString: "Short"
                     }
                 },
@@ -322,6 +327,8 @@ Item {
                     PropertyChanges {
                         target: yearFrame
                         x: 0
+                        ojectWidth: 78
+                        ojectHeight: 43
                         yearFormatString: "Long"
                     }
                 }
@@ -393,12 +400,18 @@ Item {
             Item {
                 id: yearFrame
 
+                property int ojectWidth: 78
+                property int ojectHeight: 43
+
                 property string yearFormatString: "Long"
 
                 Image {
                     id: yearFrameShadowImage
                     x: 2
                     y: 2
+                    width: parent.ojectWidth
+                    height: parent.ojectHeight
+
                     smooth: true
                     mipmap: true
                     source: "./calendar" + yearFrame.yearFormatString + "YearShadow.png"
@@ -406,6 +419,10 @@ Item {
 
                 Image {
                     id: yearFrameImage
+
+                    width: parent.ojectWidth
+                    height: parent.ojectHeight
+
                     smooth: true
                     mipmap: true
                     source: "./calendar" + yearFrame.yearFormatString + "Year.png"
@@ -417,6 +434,10 @@ Item {
             id: calendarImage
             x: 0
             y: 0
+
+            width: 182
+            height: 90
+
             smooth: true
             mipmap: true
             source: "calendar.png"
@@ -480,13 +501,16 @@ Item {
             x: 123
             y: 23
 
+            property int ojectWidth: 70
+            property int ojectHeight: 95
+
             Image {
                 id: lookingGlassShadowImage
-                x: 4
-                y: 4
+                x: 3
+                y: 3
 
-                width: 70
-                height: 95
+                width: parent.ojectWidth
+                height: parent.ojectHeight
 
                 smooth: true
                 mipmap: true
@@ -494,7 +518,7 @@ Item {
 
                 transform: Rotation {
                     id: lookingGlassShadowImageRotation
-                    origin.x: lookingGlassShadowImage.paintedWidth / 2
+                    origin.x: lookingGlassShadowImage.width / 2
                     origin.y: 33
                     angle: 0
                     Behavior on angle {
@@ -526,12 +550,12 @@ Item {
                 mipmap: true
                 source: "lookingGlass.png"
 
-                width: 70
-                height: 95
+                width: parent.ojectWidth
+                height: parent.ojectHeight
 
                 transform: Rotation {
                     id: lookingGlassImageRotation
-                    origin.x: lookingGlassImage.paintedWidth / 2
+                    origin.x: lookingGlassImage.width / 2
                     origin.y: 33
                     angle: 0
                     Behavior on angle {
