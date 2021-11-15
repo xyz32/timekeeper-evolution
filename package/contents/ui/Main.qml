@@ -40,8 +40,8 @@ Item {
 
     readonly property double glassOpacity: 0.65
 
-    property string nonRealTimeColour: "#ffff00"
-    property double nonRealTimeOpacity: 0.2
+    property string nonRealTimeColour: "#00C0A3"
+    property double nonRealTimeOpacity: 0.5
 
     property bool isRealTime: true
     property var realDateTime
