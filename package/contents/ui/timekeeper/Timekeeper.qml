@@ -19,8 +19,8 @@ Item {
         "frame/backgrounds/glassTransparent.png"
     ]
 
-    property double ringDegree
-    property int countAngle
+    property double monthRingDegree
+    property double bigCogRingAngle
     property bool lock: plasmoid.configuration.timekeeprLock
 
     property var monthRingAngles: [0, -31, -62, -93, -123, -153, -182.5, -212, -241.5, -270.5, -299.5, -329.2]
@@ -28,7 +28,7 @@ Item {
     function onCosmosTick(date) {
         var month = date.getMonth()
         var dayOfMonth  = date.getDate()-1
-        frame.ringDegree = monthRingAngles[month] - dayOfMonth;
+        frame.monthRingDegree = monthRingAngles[month] - dayOfMonth;
         orrery.setDateTime(date);
         calendar.setDateTime(date);
         clock.setDate(date);
@@ -36,7 +36,7 @@ Item {
 
     function onAnimationTick() {
         if (!frame.lock && parseInt(main.realDateTime.getTime()/1000) % 7 == 0) {
-            frame.countAngle = (frame.countAngle + 10) % 360;
+            frame.bigCogRingAngle = (frame.bigCogRingAngle + 10) % 360;
             calendar.cogAngle = (calendar.cogAngle + 10) % 360;
         }
     }
@@ -133,14 +133,13 @@ Item {
         y: 94
         width: 294
         height: 294
-        sourceSize.width: 294
-        sourceSize.height: 294
         source: "frame/innerMetalFrame.png"
         smooth: true
         mipmap: true
     }
     
     Image {
+        id:innerFrame
         width: 475
         height: 475
         source: "frame/innerFrame.png"
@@ -168,13 +167,20 @@ Item {
         height: 446
         source: "frame/monthRing.png"
 
+
+        property var center : Qt.point(width / 2, height / 2);
+        property int outerRingRadius: monthRing.paintedWidth/ 2
+        property int outerRingRadiusSquare: outerRingRadius * outerRingRadius
+        property int innerRingRadius: (monthRing.paintedWidth/ 2) - 40
+        property int innerRingRadiusSquare: innerRingRadius * innerRingRadius
+
         smooth: true
         mipmap: true
 
         rotation: 122
         transform: Rotation {
             origin.x: 223; origin.y: 223;
-            angle: {return (frame.ringDegree + 360) % 360;}
+            angle: {(frame.monthRingDegree + 360) % 360;}
             Behavior on angle {
                 SpringAnimation { 
                     spring: 2
@@ -188,75 +194,49 @@ Item {
             id: mouseRotate
             anchors.fill: parent
 
-            property int outerRingRadius: monthRing.paintedWidth/ 2
-            property int innerRingRadius: (monthRing.paintedWidth/ 2) - 40
-
-            property int startAngle: 0
-            property int ostanov
-            property int aPred
-
-            function inner(x, y) {
-                var dx = x - outerRingRadius;
-                var dy = y - outerRingRadius;
-                var xy = (dx * dx + dy * dy)
-
-                var out = (outerRingRadius * outerRingRadius) >   xy;
-                var inn = (innerRingRadius * innerRingRadius) <=  xy;
-
-                return (out && inn) ? true : false;
-            }
-
-            function triAngle(x,y) {
-                x = x - outerRingRadius;
-                y = y - outerRingRadius;
-                if(x === 0) return (y>0) ? 180 : 0;
-                var a = Math.atan(y/x)*180/Math.PI;
-                a = (x > 0) ? a+90 : a+270;
-
-                return Math.round(a);
-            }
+            property double cumulatedAngle
+            property double prevAngle
+            property double startAngle
 
             onPressed: {
-                if( inner(mouse.x, mouse.y) ){
-                    startAngle = triAngle(mouse.x, mouse.y)
-                    ostanov     = frame.ringDegree
-                    aPred      = startAngle
+                if( inner(mouse.x, mouse.y, monthRing) ){
+                    var point =  mapToItem (innerFrame, mouse.x, mouse.y);
+                    prevAngle = triAngle(point.x, point.y, monthRing);
+                    cumulatedAngle = 0;
+                    startAngle = prevAngle;
                 }
             }
 
             onReleased: {
-
             }
 
             onPositionChanged: {
-                var a, b, c
-                if( inner(mouse.x, mouse.y) ){
-                    a = triAngle(mouse.x, mouse.y)
+                var angle, delta
+                var point =  mapToItem (innerFrame, mouse.x, mouse.y);
+                if( inner(mouse.x, mouse.y, monthRing) ){
+                    angle = triAngle(point.x, point.y, monthRing)
 
-                    b = ostanov + (a - startAngle)
-                    frame.ringDegree = b
-                    frame.countAngle = b
-                    calendar.cogAngle = b
+                    delta = angleDifference(angle, prevAngle);
+                    cumulatedAngle += delta;
 
-                    c = (aPred - a)
-                    if(c < 90 && -90 < c ) {
-                        updateDayCounter(c);
+                    frame.bigCogRingAngle = (frame.bigCogRingAngle - delta) % 360
+                    calendar.cogAngle = (calendar.cogAngle - delta) % 360
+
+                    if(Math.abs(cumulatedAngle) > 1) {
+                        updateDayCounter(Math.floor(cumulatedAngle));
+                        cumulatedAngle -= Math.floor(cumulatedAngle);
                     }
-                    aPred = a;
 
+                    prevAngle = angle;
                 } else {
-                    startAngle = triAngle(mouse.x, mouse.y)
-                    ostanov     = frame.ringDegree
-                    aPred      = startAngle
+                    prevAngle = triAngle(point.x, point.y, monthRing)
                 }
-                if(ostanov >  360) ostanov -= 360;
-                if(ostanov < -360) ostanov += 360;
-                // console.log(b, ostanov, a, start_angle)
             }
         }
 
     }
     Image {
+        id: bigCogRingImage
         x: 69
         y: 71
         source: "frame/counterWheel.png"
@@ -264,8 +244,9 @@ Item {
         mipmap: true
 
         transform: Rotation {
-            origin.x: 170.5; origin.y: 170.5;
-            angle: {return (360 - frame.countAngle + 360) % 360;}
+            origin.x: bigCogRingImage.width / 2
+            origin.y: bigCogRingImage.height / 2
+            angle: {(360 - frame.bigCogRingAngle + 360) % 360}
             Behavior on angle {
                 ParallelAnimation {
                     SpringAnimation {
@@ -407,12 +388,6 @@ Item {
             }
         }
     }
-
-    states: [
-        State {
-            name: "orrery"
-        }
-    ]
 
     Orrery {
         id: orrery

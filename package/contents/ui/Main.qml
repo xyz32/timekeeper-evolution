@@ -210,4 +210,36 @@ Item {
             updateRequired = false;
         }
     }
+
+    //utility methods
+    function inner(x, y, parent) {
+        var dx = x - parent.center.x;
+        var dy = y - parent.center.y;
+        var xy = (dx * dx + dy * dy)
+
+        var out = parent.outerRingRadiusSquare >   xy;
+        var inn = parent.innerRingRadiusSquare <=  xy;
+
+        return (out && inn) ? true : false;
+    }
+
+    function triAngle(x, y, parent) {
+        x = x - parent.center.x;
+        y = y - parent.center.y;
+
+        if(x === 0) {
+            return (y>0) ? 180 : 0;
+        }
+
+        var angle = Math.atan(y/x)*180/Math.PI;
+        angle = (x > 0) ? angle + 90 : angle + 270;
+
+        return angle;
+    }
+
+    function angleDifference(angle1, angle2)
+    {
+        var diff = ( angle2 - angle1 + 180 ) % 360 - 180;
+        return diff < -180 ? diff + 360 : diff;
+    }
 }

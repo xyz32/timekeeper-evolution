@@ -225,14 +225,14 @@ Item{
                         cogs.ang = (cogs.ang - 10) % 360
                         cogs.lock = !cogs.lock
                     } else if(timekeeper.lock){
-                        timekeeper.countAngle = (timekeeper.countAngle + 10) % 360
+                        timekeeper.bigCogRingAngle = (timekeeper.bigCogRingAngle + 10) % 360
                         timekeeper.lock = !timekeeper.lock
                     } else {
                         cogs.lock = true;
                         timekeeper.lock = true;
 
                         cogs.ang = (cogs.ang - 10) % 360
-                        timekeeper.countAngle = (timekeeper.countAngle - 10) % 360;
+                        timekeeper.bigCogRingAngle = (timekeeper.bigCogRingAngle - 10) % 360;
                     }
                     plasmoid.configuration.timekeeprLock = timekeeper.lock
                     plasmoid.configuration.cogsLock = cogs.lock

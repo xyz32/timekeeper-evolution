@@ -111,19 +111,25 @@ Item {
         Image {
             id: clockTimeRing;
 
-            x: parent.ojectWidth / 2 - width / 2
-            y: parent.ojectHeight / 2 - height / 2
+            x: parent.ojectWidth / 2 - center.x
+            y: parent.ojectHeight / 2 - center.y
 
             width: 131 // 108 for inner radius
             height: 131 // 108 for inner radius
+
+            property var center : Qt.point(width / 2, height / 2);
+            property int outerRingRadius: clockTimeRing.paintedWidth / 2
+            property int outerRingRadiusSquare: outerRingRadius * outerRingRadius
+            property int innerRingRadius: clockTimeRing.paintedWidth / 2 - 20
+            property int innerRingRadiusSquare: innerRingRadius * innerRingRadius
 
             smooth: true
             mipmap: true
             source: "timeRing.png"
 
             transform: Rotation {
-                origin.x: clockTimeRing.width / 2
-                origin.y: clockTimeRing.height / 2
+                origin.x: clockTimeRing.center.x
+                origin.y: clockTimeRing.center.y
                 angle: {return (clock.ringDegree + 360) % 360;}
                 Behavior on angle {
                     SpringAnimation {
@@ -138,68 +144,41 @@ Item {
                 id: mouseRotate
                 anchors.fill: parent
 
-                property int outerRingRadius: parent.paintedWidth / 2
-                property int innerRingRadius: parent.paintedWidth / 2 - 20
-
-                property int startAngle: 0
-                property int ostanov
-                property int aPred
-
-                function inner(x, y) {
-                    var dx = x - outerRingRadius;
-                    var dy = y - outerRingRadius;
-                    var xy = (dx * dx + dy * dy)
-
-                    var out = (outerRingRadius * outerRingRadius) >   xy;
-                    var inn = (innerRingRadius * innerRingRadius) <=  xy;
-
-                    return (out && inn) ? true : false;
-                }
-
-                function triAngle(x,y) {
-                    x = x - outerRingRadius;
-                    y = y - outerRingRadius;
-                    if(x === 0) return (y>0) ? 180 : 0;
-                    var a = Math.atan(y/x)*180/Math.PI;
-                    a = (x > 0) ? a+90 : a+270;
-
-                    return Math.round(a);
-                }
+                property double cumulatedAngle
+                property double prevAngle
+                property double startAngle
 
                 onPressed: {
-                    if( inner(mouse.x, mouse.y) ){
-                        startAngle = triAngle(mouse.x, mouse.y)
-                        ostanov     = clock.ringDegree
-                        aPred      = startAngle
+                    if( inner(mouse.x, mouse.y, clockTimeRing) ){
+                        var point =  mapToItem (background, mouse.x, mouse.y);
+                        prevAngle = triAngle(point.x, point.y, clockTimeRing);
+                        cumulatedAngle = 0;
+                        startAngle = prevAngle;
                     }
                 }
 
                 onReleased: {
-
                 }
 
                 onPositionChanged: {
-                    var a, b, c
-                    if( inner(mouse.x, mouse.y) ){
-                        a = triAngle(mouse.x, mouse.y)
+                    var angle, delta
+                    var point =  mapToItem (background, mouse.x, mouse.y);
+                    if( inner(mouse.x, mouse.y, clockTimeRing) ){
+                        angle = triAngle(point.x, point.y, clockTimeRing)
 
-                        b = ostanov + (a - startAngle)
-                        clock.ringDegree = b
+                        delta = angleDifference(angle, prevAngle);
+                        cumulatedAngle += delta;
+                        clock.ringDegree = (clock.ringDegree - delta) % 360;
 
-
-                        c = (aPred - a)
-                        if(c < 90 && -90 < c ) {
-                            updateMinuteCounter(c);
+                        if(Math.abs(cumulatedAngle) > 1) {
+                            updateMinuteCounter(Math.floor(cumulatedAngle));
+                            cumulatedAngle -= Math.floor(cumulatedAngle);
                         }
-                        aPred = a
+
+                        prevAngle = angle;
                     } else {
-                        startAngle = triAngle(mouse.x, mouse.y)
-                        ostanov     = clock.ringDegree
-                        aPred      = startAngle
+                        prevAngle = triAngle(point.x, point.y, clockTimeRing)
                     }
-                    if(ostanov >  360) ostanov -= 360;
-                    if(ostanov < -360) ostanov += 360;
-                    // console.log(b, ostanov, a, start_angle)
                 }
             }
         }
