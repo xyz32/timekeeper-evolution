@@ -239,6 +239,8 @@ Item {
         id: bigCogRingImage
         x: 69
         y: 71
+        width: 341
+        height: 341
         source: "frame/counterWheel.png"
         smooth: true
         mipmap: true
