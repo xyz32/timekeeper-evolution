@@ -92,7 +92,6 @@ Item {
 
                 PropertyChanges {
                     target: calendar;
-                    state: "in"
                     scale: 0.3
                     x: 40;
                     y: 100;
