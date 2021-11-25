@@ -149,9 +149,11 @@ Item {
                 property double startAngle
 
                 onPressed: {
-                    if( inner(mouse.x, mouse.y, clockTimeRing) ){
+                    if( inner(mouse.x, mouse.y, clockTimeRing) )
+                    {
                         var point =  mapToItem (background, mouse.x, mouse.y);
-                        prevAngle = triAngle(point.x, point.y, clockTimeRing);
+                        prevAngle = triAngle(point.x, point.y, background);
+
                         cumulatedAngle = 0;
                         startAngle = prevAngle;
                     }
@@ -164,7 +166,7 @@ Item {
                     var angle, delta
                     var point =  mapToItem (background, mouse.x, mouse.y);
                     if( inner(mouse.x, mouse.y, clockTimeRing) ){
-                        angle = triAngle(point.x, point.y, clockTimeRing)
+                        angle = triAngle(point.x, point.y, background)
 
                         delta = angleDifference(angle, prevAngle);
                         cumulatedAngle += delta;
@@ -186,6 +188,7 @@ Item {
         Image {
             id: background;
 
+            property var center : Qt.point(width / 2, height / 2);
             width: parent.ojectWidth
             height: parent.ojectHeight
 
