@@ -3,8 +3,8 @@ import QtQuick 2.3
 Item {
     id: sun;
 
-    width: 28
-    height: 28
+    width: 48
+    height: 48
 
     Component.onCompleted: {
     }
