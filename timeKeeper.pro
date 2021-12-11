@@ -1,6 +1,7 @@
 DISTFILES += \
     Makefile \
     README.md \
+    TimeKeeperEvolution-1.4.plasmoid \
     package/LICENSE.GPL3 \
     package/contents/config/config.qml \
     package/contents/config/main.xml \
@@ -240,4 +241,5 @@ DISTFILES += \
     package/contents/ui/timekeeper/orrery/venus/venusFront.png \
     package/contents/ui/timekeeper/orrery/venus/venusTop.png \
     package/metadata.desktop \
-    tk.jpg
+    tk.jpg \
+    tk.qmlproject
