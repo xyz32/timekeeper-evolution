@@ -169,7 +169,7 @@ Item {
         source: "frame/monthRing.png"
 
 
-        property var center : Qt.point(width / 2, height / 2);
+        property point center : Qt.point(width / 2, height / 2);
         property int outerRingRadius: monthRing.paintedWidth/ 2
         property int outerRingRadiusSquare: outerRingRadius * outerRingRadius
         property int innerRingRadius: (monthRing.paintedWidth/ 2) - 40

@@ -111,13 +111,13 @@ Item {
         Image {
             id: clockTimeRing;
 
-            x: parent.ojectWidth / 2 - center.x
-            y: parent.ojectHeight / 2 - center.y
+            x: (parent.ojectWidth / 2 - center.x)
+            y: (parent.ojectHeight / 2 - center.y)
 
             width: 131 // 108 for inner radius
             height: 131 // 108 for inner radius
 
-            property var center : Qt.point(width / 2, height / 2);
+            property point center : Qt.point(width / 2, height / 2);
             property int outerRingRadius: clockTimeRing.paintedWidth / 2
             property int outerRingRadiusSquare: outerRingRadius * outerRingRadius
             property int innerRingRadius: clockTimeRing.paintedWidth / 2 - 20
@@ -188,7 +188,7 @@ Item {
         Image {
             id: background;
 
-            property var center : Qt.point(width / 2, height / 2);
+            property point center : Qt.point(width / 2, height / 2);
             width: parent.ojectWidth
             height: parent.ojectHeight
 
@@ -338,7 +338,7 @@ Item {
                                 script: {
                                     sounds.playSound(sounds.hourCogSound);
 
-                                    if (main.seconds == 0 && main.minutes == 0) {
+                                    if (main.seconds === 0 && main.minutes === 0) {
                                         sounds.playSound(sounds.chimeSound, ((main.hours) % 12) || 12);
                                     }
                                 }
@@ -409,7 +409,7 @@ Item {
                             ScriptAction {
                                 script: {
                                     sounds.playSound(sounds.minutesCogSound);
-                                    if (main.seconds == 0 && main.minutes == 30) {
+                                    if (main.seconds === 0 && main.minutes === 30) {
                                         sounds.playSound(sounds.chimeSound);
                                     }
                                 }
@@ -462,7 +462,7 @@ Item {
                     }
 
                     onClicked:{
-                        main.state = main.state == "small" ? "" : "small";
+                        main.state = main.state === "small" ? "" : "small";
                         plasmoid.configuration.mainState = main.state;
                     }
                 }

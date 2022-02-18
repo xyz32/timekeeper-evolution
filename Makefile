@@ -2,9 +2,9 @@ VER = 1.4
 ID = kde.plasma.timekeeper
 
 view:
-			plasmoidviewer --applet package
+			plasmoidviewer --size 650x600 --applet package
 qml:
-			qmlscene package/contents/ui/main.qml
+			qmlscene ./package/contents/ui/Main.qml
 install: version
 			kpackagetool5 -t Plasma/Applet --install package
 upgrade: version
