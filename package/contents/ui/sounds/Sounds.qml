@@ -27,13 +27,15 @@ Item {
     property string soundTheemPath: soundTheems[soundTheem]
 
     function playSound(soundEfect, repeat) {
-        if (playSounds && soundEfect && soundEfect.source && soundEfect.hasSound) {
+        if (playSounds && soundEfect && soundEfect.source && !soundEfect.muted) {
             soundEfect.volume = soundVolume;
             if (!repeat) {
                 repeat = 0;
             }
 
             soundEfect.loops = repeat;
+
+            soundEfect.source = soundEfect.src;
 
             soundEfect.play();
         }
@@ -56,51 +58,75 @@ Item {
         plasmoid.configuration.soundTheme = soundTheem;
     }
 
-    SoundEffect {
+    Audio {
         id: secondsCogSoundOdd
-        property bool hasSound: plasmoid.configuration.secondHandSound
-        source: "./" + soundTheemPath + "/secondsCogOdd.wav"
+        muted: !plasmoid.configuration.secondHandSound
+        property string src: "./" + soundTheemPath + "/secondsCogOdd.wav"
+        onStopped: {
+            source = "";
+        }
     }
 
-    SoundEffect {
+    Audio {
         id: secondsCogSoundEven
-        property bool hasSound: plasmoid.configuration.secondHandSound
-        source: "./" + soundTheemPath + "/secondsCogEven.wav"
+        muted: !plasmoid.configuration.secondHandSound
+        property string src: "./" + soundTheemPath + "/secondsCogEven.wav"
+        onStopped: {
+            source = "";
+        }
     }
 
-    SoundEffect {
+    Audio {
         id: minutesCogSound
-        property bool hasSound: plasmoid.configuration.minuteHandSound
-        source: "./" + soundTheemPath + "/minutesCog.wav"
+        muted: !plasmoid.configuration.minuteHandSound
+        property string src: "./" + soundTheemPath + "/minutesCog.wav"
+        onStopped: {
+            source = "";
+        }
     }
 
-    SoundEffect {
+    Audio {
         id: hourCogSound
-        property bool hasSound: plasmoid.configuration.hourHandSound
-        source: "./" + soundTheemPath + "/hourCog.wav"
+        muted: !plasmoid.configuration.hourHandSound
+        property string src: "./" + soundTheemPath + "/hourCog.wav"
+        onStopped: {
+            source = "";
+        }
     }
 
-    SoundEffect {
+    Audio {
         id: chimeSound
-        property bool hasSound: plasmoid.configuration.chimeSound
-        source: "./" + soundTheemPath + "/chime.wav"
+        muted: !plasmoid.configuration.chimeSound
+        property string src: "./" + soundTheemPath + "/chime.wav"
+        onStopped: {
+            source = "";
+        }
     }
 
-    SoundEffect {
+    Audio {
         id: clockMechanismCogSound
-        property bool hasSound: plasmoid.configuration.cogsSound
-        source: "./" + soundTheemPath + "/clockMechanismCog.wav"
+        muted: !plasmoid.configuration.cogsSound
+        property string src: "./" + soundTheemPath + "/clockMechanismCog.wav"
+        onStopped: {
+            source = "";
+        }
     }
 
-    SoundEffect {
+    Audio {
         id: bigWheelCogSound
-        property bool hasSound: plasmoid.configuration.cogsSound
-        source: "./" + soundTheemPath + "/bigWheelCog.wav"
+        muted: !plasmoid.configuration.cogsSound
+        property string src: "./" + soundTheemPath + "/bigWheelCog.wav"
+        onStopped: {
+            source = "";
+        }
     }
 
-    SoundEffect {
+    Audio {
         id: switchingSound
-        property bool hasSound: true
-        source: "./switching.wav"
+        muted: false
+        property string src: "./switching.wav"
+        onStopped: {
+            source = "";
+        }
     }
 }
