@@ -54,7 +54,7 @@ Item {
         } else {
             for (var j = 0; j < sounds.resources.length; j++)
             {
-                sounds.resources[i].source = sounds.resources[i].src;
+                sounds.resources[j].source = sounds.resources[j].src;
             }
         }
     }
