@@ -49,6 +49,12 @@ Item {
             for (var i = 0; i < sounds.resources.length; i++)
             {
                 sounds.resources[i].stop();
+                sounds.resources[i].source = "";
+            }
+        } else {
+            for (var j = 0; j < sounds.resources.length; j++)
+            {
+                sounds.resources[i].source = sounds.resources[i].src;
             }
         }
     }
@@ -62,71 +68,47 @@ Item {
         id: secondsCogSoundOdd
         muted: !plasmoid.configuration.secondHandSound
         property string src: "./" + soundTheemPath + "/secondsCogOdd.wav"
-        onStopped: {
-            source = "";
-        }
     }
 
     Audio {
         id: secondsCogSoundEven
         muted: !plasmoid.configuration.secondHandSound
         property string src: "./" + soundTheemPath + "/secondsCogEven.wav"
-        onStopped: {
-            source = "";
-        }
     }
 
     Audio {
         id: minutesCogSound
         muted: !plasmoid.configuration.minuteHandSound
         property string src: "./" + soundTheemPath + "/minutesCog.wav"
-        onStopped: {
-            source = "";
-        }
     }
 
     Audio {
         id: hourCogSound
         muted: !plasmoid.configuration.hourHandSound
         property string src: "./" + soundTheemPath + "/hourCog.wav"
-        onStopped: {
-            source = "";
-        }
     }
 
     Audio {
         id: chimeSound
         muted: !plasmoid.configuration.chimeSound
         property string src: "./" + soundTheemPath + "/chime.wav"
-        onStopped: {
-            source = "";
-        }
     }
 
     Audio {
         id: clockMechanismCogSound
         muted: !plasmoid.configuration.cogsSound
         property string src: "./" + soundTheemPath + "/clockMechanismCog.wav"
-        onStopped: {
-            source = "";
-        }
     }
 
     Audio {
         id: bigWheelCogSound
         muted: !plasmoid.configuration.cogsSound
         property string src: "./" + soundTheemPath + "/bigWheelCog.wav"
-        onStopped: {
-            source = "";
-        }
     }
 
     Audio {
         id: switchingSound
         muted: false
         property string src: "./switching.wav"
-        onStopped: {
-            source = "";
-        }
     }
 }
