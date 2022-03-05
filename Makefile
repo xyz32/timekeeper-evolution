@@ -1,4 +1,4 @@
-VER = 1.4
+VER = 1.5
 ID = kde.plasma.timekeeper
 
 view:
