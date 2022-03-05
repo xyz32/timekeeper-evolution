@@ -109,13 +109,25 @@ Item {
         }
 
         Image {
+            id: background;
+
+            property point center : Qt.point(width / 2, height / 2);
+            width: parent.ojectWidth
+            height: parent.ojectHeight
+
+            smooth: true
+            mipmap: true
+            source: "clock.png"
+        }
+
+        Image {
             id: clockTimeRing;
 
             x: (parent.ojectWidth / 2 - center.x)
             y: (parent.ojectHeight / 2 - center.y)
 
-            width: 131 // 108 for inner radius
-            height: 131 // 108 for inner radius
+            width: 130 // 108 for inner radius
+            height: 130 // 108 for inner radius
 
             property point center : Qt.point(width / 2, height / 2);
             property int outerRingRadius: clockTimeRing.paintedWidth / 2
@@ -151,11 +163,14 @@ Item {
                 onPressed: {
                     if( inner(mouse.x, mouse.y, clockTimeRing) )
                     {
+                        mouse.accepted = true;
                         var point =  mapToItem (background, mouse.x, mouse.y);
                         prevAngle = triAngle(point.x, point.y, background);
 
                         cumulatedAngle = 0;
                         startAngle = prevAngle;
+                    } else {
+                        mouse.accepted = false;
                     }
                 }
 
@@ -186,23 +201,22 @@ Item {
         }
 
         Image {
-            id: background;
+            id: buttonLeftImage
 
-            property point center : Qt.point(width / 2, height / 2);
-            width: parent.ojectWidth
-            height: parent.ojectHeight
+            x: 57
+            y: 85
+
+            width: 12
+            height: 12
 
             smooth: true
             mipmap: true
-            source: "clock.png"
+            source: "button.png"
 
             MouseArea {
                 id: inOutSwitch
-                x: 57
-                y: 86
+                anchors.fill: parent
 
-                width: 12
-                height: 12
                 cursorShape: Qt.PointingHandCursor
 
                 Component.onCompleted: {
@@ -214,14 +228,26 @@ Item {
                     plasmoid.configuration.clockState = clock.state
                 }
             }
+        }
+
+        Image {
+            id: buttonRightImage
+
+            x: 97
+            y: 85
+
+            width: 12
+            height: 12
+
+            smooth: true
+            mipmap: true
+            rotation: 180
+            source: "button.png"
 
             MouseArea {
                 id: hideClockMechanismSwitch
-                x: 97
-                y: 86
+                anchors.fill: parent
 
-                width: 12
-                height: 12
                 cursorShape: Qt.PointingHandCursor
 
                 Component.onCompleted: {

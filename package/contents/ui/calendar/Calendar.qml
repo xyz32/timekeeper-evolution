@@ -19,7 +19,7 @@ Item {
             PropertyChanges {
                 target: calendarView
                 x: 345
-                y: 186
+                y: 188
             }
             PropertyChanges {
                 target: cogAnimationTimer
@@ -41,7 +41,7 @@ Item {
             PropertyChanges {
                 target: calendarView
                 x: 285
-                y: 186
+                y: 188
             }
             PropertyChanges {
                 target: cogAnimationTimer
