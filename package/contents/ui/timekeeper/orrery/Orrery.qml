@@ -25,6 +25,7 @@ Item {
     }
 
     function setDateTime(date) {
+        sun.setDateTime(date);
         for (var i = 0; i < planetarium.planets.length; i++) {
             var planet = planetarium.planets[i];
             planet.planetTrueAnomaly = 360 - Planets.getTrueAnomaly(i, date)

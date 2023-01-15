@@ -10,6 +10,7 @@ Sounds are from [quicksounds.com](https://quicksounds.com/library/sounds/clock).
 Graphics in this plasmoid originate from [Steampunk orrery](https://www.deviantart.com/yereverluvinuncleber/art/Steampunk-Orrery-Calendar-Clock-Yahoo-Widget-MkII-455720507) by yereverluvinunclebert.  
 For the Moon, graphics from [Luna QML](http://kde-apps.org/content/show.php?content=140204) were used.  
 Planets texture are from [celestiamotherlode](http://celestiamotherlode.net/).  
+Sun Image Credit & Copyright: Peter Ward (Barden Ridge Observatory)
 
 [Video preview](https://youtu.be/LrrGhD7O5EM)
 
