@@ -62,6 +62,11 @@ xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
 			<label>yearState</label>
 			<default>yyyy</default>
 		</entry>
+
+        <entry name="sunState" type="String">
+            <label>sunState</label>
+                    <default>small</default>
+            </entry>
         
         <entry name="mercuryState" type="String">
             <label>mercuryState</label>
