@@ -36,6 +36,7 @@ package/contents/ui/clock/second.png
 package/contents/ui/clock/textBackground.png
 package/contents/ui/clock/timeRing.png
 package/contents/ui/configplasma/cfgMain.qml
+package/contents/ui/configplasma/cfgSupport.qml
 package/contents/ui/font/Engravers_MT.ttf
 package/contents/ui/sounds/Sounds.qml
 package/contents/ui/sounds/grandfather-clock/bigWheelCog.wav
