@@ -27,8 +27,6 @@ Item {
     width: mainWidth
     height: mainHeight
 
-    Layout.minimumWidth: mainWidth
-    Layout.minimumHeight: mainHeight
     Layout.preferredWidth: mainWidth
     Layout.preferredHeight: mainHeight
 
