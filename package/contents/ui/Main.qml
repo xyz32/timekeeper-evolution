@@ -15,6 +15,7 @@ import "sounds"
 
 Item {
     id: main
+    anchors.fill: parent
 
     readonly property bool debug: false
 
@@ -30,8 +31,6 @@ Item {
     Layout.minimumHeight: mainHeight
     Layout.preferredWidth: mainWidth
     Layout.preferredHeight: mainHeight
-    Layout.maximumWidth: mainWidth
-    Layout.maximumHeight: mainHeight
 
     Plasmoid.backgroundHints: "NoBackground"
 
@@ -142,8 +141,9 @@ Item {
     }
 
     Item { //main container
-        width: mainWidth;
-        height: mainHeight
+        id: parentContainer
+        anchors.fill: parent
+        property double scaleFactor: Math.min(width / mainWidth, height / mainHeight)
 
         Timekeeper{ // frame backgroound
             id: timekeeper;

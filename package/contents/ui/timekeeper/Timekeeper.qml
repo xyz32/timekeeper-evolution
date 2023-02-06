@@ -4,8 +4,8 @@ import "orrery"
 
 Item {
     id: frame
-    width: parent.width
-    height: parent.height
+
+    anchors.fill: parent
 
     readonly property var backgroundImages: [
         "frame/backgrounds/glassImmage0.png",
@@ -58,27 +58,23 @@ Item {
     
     Image {
         id: backgroundImg
-        x: 0
-        y: 0
-        width: 298
-        height: 298
+        x: 91 * parentContainer.scaleFactor
+        y: 92 * parentContainer.scaleFactor
+        width: 298 * parentContainer.scaleFactor
+        height: 298 * parentContainer.scaleFactor
         smooth: true
         mipmap: true
-        anchors.centerIn: parent
-        fillMode: Image.PreserveAspectFit
-        sourceSize.width: 298
-        sourceSize.height: 298
+
         property string selected: plasmoid.configuration.backgroundImage
     }
     
     Rectangle {
         id: backgroundImgAnimator
-        x: 0
-        y: 0
+        x: backgroundImg.x
+        y: backgroundImg.y
         opacity: 0
-        width: 298
-        height: 298
-        anchors.centerIn: parent
+        width: backgroundImg.width
+        height: backgroundImg.height
         color: "black"
 
         property int selectedImg: 0
@@ -130,10 +126,10 @@ Item {
     
     Image {
         id: innerMetalFrame
-        x: 92
-        y: 94
-        width: 294
-        height: 294
+        x: 91 * parentContainer.scaleFactor
+        y: 92 * parentContainer.scaleFactor
+        width: 294 * parentContainer.scaleFactor
+        height: 295 * parentContainer.scaleFactor
         source: "frame/innerMetalFrame.png"
         smooth: true
         mipmap: true
@@ -141,18 +137,17 @@ Item {
     
     Image {
         id:innerFrame
-        width: 475
-        height: 475
+        width: 475 * parentContainer.scaleFactor
+        height: 475 * parentContainer.scaleFactor
         source: "frame/innerFrame.png"
 
         smooth: true
         mipmap: true
-        anchors.centerIn: parent
     }
 
     Image {
-        width: 478
-        height: 478
+        width: 478 * parentContainer.scaleFactor
+        height: 478 * parentContainer.scaleFactor
 
         source: "frame/woodSurround.png"
 
@@ -162,17 +157,17 @@ Item {
 
     Image {
         id:monthRing
-        x: 16
-        y: 18
-        width: 446
-        height: 446
+        x: 16 * parentContainer.scaleFactor
+        y: 18 * parentContainer.scaleFactor
+        width: 446 * parentContainer.scaleFactor
+        height: 446 * parentContainer.scaleFactor
         source: "frame/monthRing.png"
 
 
         property point center : Qt.point(width / 2, height / 2);
         property int outerRingRadius: monthRing.paintedWidth/ 2
         property int outerRingRadiusSquare: outerRingRadius * outerRingRadius
-        property int innerRingRadius: (monthRing.paintedWidth/ 2) - 40
+        property int innerRingRadius: (monthRing.paintedWidth/ 2) - 40 * parentContainer.scaleFactor
         property int innerRingRadiusSquare: innerRingRadius * innerRingRadius
 
         smooth: true
@@ -180,7 +175,8 @@ Item {
 
         rotation: 122
         transform: Rotation {
-            origin.x: 223; origin.y: 223;
+            origin.x: monthRing.width / 2
+            origin.y: monthRing.height / 2
             angle: {(frame.monthRingDegree + 360) % 360;}
             Behavior on angle {
                 SpringAnimation { 
@@ -238,10 +234,10 @@ Item {
     }
     Image {
         id: bigCogRingImage
-        x: 69
-        y: 71
-        width: 341
-        height: 341
+        x: 69 * parentContainer.scaleFactor
+        y: 71 * parentContainer.scaleFactor
+        width: 341 * parentContainer.scaleFactor
+        height: 341 * parentContainer.scaleFactor
         source: "frame/counterWheel.png"
         smooth: true
         mipmap: true
@@ -270,10 +266,10 @@ Item {
     Image {
         id: backgroundSwitchImage
         source: "./frame/knob.png"
-        x: 331
-        y: 85
-        width: 11
-        height: 11
+        x: 330 * parentContainer.scaleFactor
+        y: 84 * parentContainer.scaleFactor
+        width: 11 * parentContainer.scaleFactor
+        height: 11 * parentContainer.scaleFactor
 
         smooth: true
         mipmap: true
@@ -313,10 +309,10 @@ Item {
     Image {
         id: soundSwitchImage
         source: "./frame/knob.png"
-        x: 136
-        y: 387
-        width: 11
-        height: 11
+        x: 135 * parentContainer.scaleFactor
+        y: 386 * parentContainer.scaleFactor
+        width: 11 * parentContainer.scaleFactor
+        height: 11 * parentContainer.scaleFactor
 
         smooth: true
         mipmap: true
@@ -354,10 +350,10 @@ Item {
     Image {
         id: soundThemeSwitchImage
         source: "./frame/knob.png"
-        x: 331
-        y: 387
-        width: 11
-        height: 11
+        x: 329 * parentContainer.scaleFactor
+        y: 386 * parentContainer.scaleFactor
+        width: 11 * parentContainer.scaleFactor
+        height: 11 * parentContainer.scaleFactor
 
         smooth: true
         mipmap: true
@@ -397,7 +393,7 @@ Item {
         x: innerMetalFrame.x
         y: innerMetalFrame.y
         z: 5
-        width: 294
-        height: 294
+        width: 294 * parentContainer.scaleFactor
+        height: 294 * parentContainer.scaleFactor
     }
 }

@@ -21,8 +21,8 @@ Item {
             name: "out";
             PropertyChanges {
                 target: clock;
-                x: -9;
-                y: 42;
+                x: -9 * parentContainer.scaleFactor
+                y: 42 * parentContainer.scaleFactor
             }
         },
 
@@ -30,8 +30,8 @@ Item {
             name: "in";
             PropertyChanges {
                 target: clock;
-                x: 31;
-                y: 60;
+                x: 31 * parentContainer.scaleFactor
+                y: 60 * parentContainer.scaleFactor
             }
         }
     ]
@@ -47,8 +47,8 @@ Item {
 
     Cogs {
         id: cogs
-        x: -26
-        y: 137
+        x: -26 * parentContainer.scaleFactor
+        y: 137 * parentContainer.scaleFactor
     }
 
     Item {

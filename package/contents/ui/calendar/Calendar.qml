@@ -18,8 +18,8 @@ Item {
             name: "out"
             PropertyChanges {
                 target: calendarView
-                x: 345
-                y: 188
+                x: 345 * parentContainer.scaleFactor
+                y: 188 * parentContainer.scaleFactor
             }
             PropertyChanges {
                 target: cogAnimationTimer
@@ -40,8 +40,8 @@ Item {
             name: "in"
             PropertyChanges {
                 target: calendarView
-                x: 285
-                y: 188
+                x: 285 * parentContainer.scaleFactor
+                y: 188 * parentContainer.scaleFactor
             }
             PropertyChanges {
                 target: cogAnimationTimer
@@ -92,8 +92,8 @@ Item {
 
     Item {
         id: cogWithShadow
-        x: 29
-        y: 13
+        x: 29 * parentContainer.scaleFactor
+        y: 13 * parentContainer.scaleFactor
 
         property int ojectWidth: 86
         property int ojectHeight: 86

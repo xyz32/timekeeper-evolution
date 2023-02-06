@@ -16,7 +16,7 @@ import "neptune"
 Item {
     id: home;
 
-    property int shadowOffset: 5;
+    property int shadowOffset: 5 * parentContainer.scaleFactor
     property int zoomAnimationDurationMS: 500
     property int planetSmallLargeRasio: 5
 
@@ -43,16 +43,19 @@ Item {
             id: sun;
             x: parent.width/2 - width/2;
             y: parent.height/2 - height/2;
+
+            property double centerX: sun.x + (width / 2)
+            property double centerY: sun.y + (height / 2)
         }
 
         Mercury {
             id: mercury
 
-            property int planetoffset: 36
+            property int planetoffset: 36 * parentContainer.scaleFactor
             property int planetTrueAnomaly: 0
 
-            x: sun.x + (sun.width / 2) - (this.width / 2)
-            y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
+            x: sun.centerX - (this.width / 2)
+            y: sun.centerY - (this.height / 2) - planetoffset
 
             transform: Rotation {
                 origin.x: mercury.width / 2
@@ -67,11 +70,11 @@ Item {
         Venus {
             id: venus;
 
-            property int planetoffset: 54
+            property int planetoffset: 54 * parentContainer.scaleFactor
             property int planetTrueAnomaly: 0
 
-            x: sun.x + (sun.width / 2) - (this.width / 2)
-            y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
+            x: sun.centerX - (this.width / 2)
+            y: sun.centerY - (this.height / 2) - planetoffset
 
             transform: Rotation {
                 origin.x: venus.width / 2
@@ -86,11 +89,11 @@ Item {
         Earth {
             id: earth;
 
-            property int planetoffset: 72
+            property int planetoffset: 72 * parentContainer.scaleFactor
             property int planetTrueAnomaly: 0
 
-            x: sun.x + (sun.width / 2) - (this.width / 2)
-            y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
+            x: sun.centerX - (this.width / 2)
+            y: sun.centerY - (this.height / 2) - planetoffset
 
             transform: Rotation {
                 origin.x: earth.width / 2
@@ -105,11 +108,11 @@ Item {
         Mars {
             id: mars;
 
-            property int planetoffset: 88
+            property int planetoffset: 88 * parentContainer.scaleFactor
             property int planetTrueAnomaly: 0
 
-            x: sun.x + (sun.width / 2) - (this.width / 2)
-            y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
+            x: sun.centerX - (this.width / 2)
+            y: sun.centerY - (this.height / 2) - planetoffset
 
             transform: Rotation {
                 origin.x: mars.width / 2
@@ -124,11 +127,11 @@ Item {
         Jupiter {
             id: jupiter;
 
-            property int planetoffset: 104
+            property int planetoffset: 104 * parentContainer.scaleFactor
             property int planetTrueAnomaly: 0
 
-            x: sun.x + (sun.width / 2) - (this.width / 2)
-            y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
+            x: sun.centerX - (this.width / 2)
+            y: sun.centerY - (this.height / 2) - planetoffset
 
             transform: Rotation {
                 origin.x: jupiter.width / 2
@@ -143,11 +146,11 @@ Item {
         Saturn {
             id: saturn;
 
-            property int planetoffset: 118
+            property int planetoffset: 118 * parentContainer.scaleFactor
             property int planetTrueAnomaly: 0
 
-            x: sun.x + (sun.width / 2) - (this.width / 2)
-            y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
+            x: sun.centerX - (this.width / 2)
+            y: sun.centerY - (this.height / 2) - planetoffset
 
             transform: Rotation {
                 origin.x: saturn.width / 2
@@ -162,11 +165,11 @@ Item {
         Uranus {
             id: uranus;
 
-            property int planetoffset: 132
+            property int planetoffset: 132 * parentContainer.scaleFactor
             property int planetTrueAnomaly: 0
 
-            x: sun.x + (sun.width / 2) - (this.width / 2)
-            y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
+            x: sun.centerX - (this.width / 2)
+            y: sun.centerY - (this.height / 2) - planetoffset
 
             transform: Rotation {
                 origin.x: uranus.width / 2
@@ -181,11 +184,11 @@ Item {
         Neptune {
             id: neptune;
 
-            property int planetoffset: 144
+            property int planetoffset: 144 * parentContainer.scaleFactor
             property int planetTrueAnomaly: 0
 
-            x: sun.x + (sun.width / 2) - (this.width / 2)
-            y: sun.y + (sun.height / 2) - (this.height / 2) - planetoffset
+            x: sun.centerX - (this.width / 2)
+            y: sun.centerY - (this.height / 2) - planetoffset
 
             transform: Rotation {
                 origin.x: neptune.width / 2
