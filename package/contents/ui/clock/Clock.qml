@@ -132,7 +132,7 @@ Item {
             property point center : Qt.point(width / 2, height / 2);
             property int outerRingRadius: clockTimeRing.paintedWidth / 2
             property int outerRingRadiusSquare: outerRingRadius * outerRingRadius
-            property int innerRingRadius: clockTimeRing.paintedWidth / 2 - 20
+            property int innerRingRadius: clockTimeRing.paintedWidth / 2 - 20 * parentContainer.scaleFactor
             property int innerRingRadiusSquare: innerRingRadius * innerRingRadius
 
             smooth: true

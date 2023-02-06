@@ -5,7 +5,9 @@ import "orrery"
 Item {
     id: frame
 
-    anchors.fill: parent
+    //if removed breaks small - large animation
+    width: parent.width
+    height: parent.height
 
     readonly property var backgroundImages: [
         "frame/backgrounds/glassImmage0.png",

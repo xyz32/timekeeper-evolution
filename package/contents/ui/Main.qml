@@ -85,15 +85,15 @@ Item {
                     target: timekeeper
                     scale: 0.3
                     rotation: 360
-                    x: -119;
-                    y: -88
+                    x: -100 * parentContainer.scaleFactor
+                    y: -80 * parentContainer.scaleFactor
                 }
 
                 PropertyChanges {
                     target: calendar;
                     scale: 0.3
-                    x: 40;
-                    y: 100;
+                    x: 40 * parentContainer.scaleFactor
+                    y: 100 * parentContainer.scaleFactor
                 }
             }
         ]
@@ -101,7 +101,7 @@ Item {
     transitions: [
         Transition {
             from: "small"; to: "*"
-            NumberAnimation { properties: "scale"; duration: 2700 } //InOutBack
+            NumberAnimation { properties: "scale"; duration: 1000 } //InOutBack
             NumberAnimation { properties: "x, y "; duration: 700 }
         },
         Transition {
