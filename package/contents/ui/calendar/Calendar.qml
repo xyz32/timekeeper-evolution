@@ -95,13 +95,13 @@ Item {
         x: 29 * parentContainer.scaleFactor
         y: 13 * parentContainer.scaleFactor
 
-        property int ojectWidth: 86
-        property int ojectHeight: 86
+        property int ojectWidth: 86 * parentContainer.scaleFactor
+        property int ojectHeight: 86 * parentContainer.scaleFactor
 
         Image {
             id: cogShadowImage
-            x: 6
-            y: 6
+            x: 6 * parentContainer.scaleFactor
+            y: 6 * parentContainer.scaleFactor
             width: parent.ojectWidth
             height: parent.ojectHeight
 
@@ -127,8 +127,8 @@ Item {
 
         Image {
             id: cogImage
-            x: 0
-            y: 0
+            x: 0 * parentContainer.scaleFactor
+            y: 0 * parentContainer.scaleFactor
             width: parent.ojectWidth
             height: parent.ojectHeight
 
@@ -219,10 +219,10 @@ Item {
 
             Image {
                 id: dayBackground
-                x: 95
-                y: 7
-                width: 36
-                height: 36
+                x: 95 * parentContainer.scaleFactor
+                y: 7 * parentContainer.scaleFactor
+                width: 36 * parentContainer.scaleFactor
+                height: 36 * parentContainer.scaleFactor
                 smooth: true
                 mipmap: true
                 source: "./textBackgroundRound.png"
@@ -242,7 +242,7 @@ Item {
                 text: day
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
-                font.pointSize: 13
+                font.pointSize: 13 * parentContainer.scaleFactor
                 font.family: fixedFont.name
                 color: main.textColour
             }
@@ -253,10 +253,10 @@ Item {
 
             Image {
                 id: monthBackground
-                x: 24
-                y: 43
-                width: 72
-                height: 24
+                x: 24 * parentContainer.scaleFactor
+                y: 43 * parentContainer.scaleFactor
+                width: 72 * parentContainer.scaleFactor
+                height: 24 * parentContainer.scaleFactor
                 smooth: true
                 mipmap: true
                 source: "../clock/textBackground.png"
@@ -275,7 +275,7 @@ Item {
                 text: month
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
-                font.pointSize: 14
+                font.pointSize: 14 * parentContainer.scaleFactor
                 font.family: fixedFont.name
                 color: main.textColour
             }
@@ -283,8 +283,8 @@ Item {
 
         Item {
             id: yearItem
-            x: 58
-            y: 68
+            x: 58 * parentContainer.scaleFactor
+            y: 68 * parentContainer.scaleFactor
             z: -1
 
             state: plasmoid.configuration.yearState
@@ -295,19 +295,19 @@ Item {
                     PropertyChanges {
                         target: yearText
                         text: shortYear
-                        x: 42
-                        width: 28
+                        x: 42 * parentContainer.scaleFactor
+                        width: 28 * parentContainer.scaleFactor
                     }
                     PropertyChanges {
                         target: yearBackground
-                        x: 37
-                        width: 36
+                        x: 37 * parentContainer.scaleFactor
+                        width: 36 * parentContainer.scaleFactor
                     }
                     PropertyChanges {
                         target: yearFrame
-                        x: 29
-                        ojectWidth: 49
-                        ojectHeight: 43
+                        x: 29 * parentContainer.scaleFactor
+                        ojectWidth: 49 * parentContainer.scaleFactor
+                        ojectHeight: 43 * parentContainer.scaleFactor
                         yearFormatString: "Short"
                     }
                 },
@@ -316,19 +316,19 @@ Item {
                     PropertyChanges {
                         target: yearText
                         text: fullYear
-                        x: 3
-                        width: 58
+                        x: 3 * parentContainer.scaleFactor
+                        width: 58 * parentContainer.scaleFactor
                     }
                     PropertyChanges {
                         target: yearBackground
-                        x: 7
-                        width: 66
+                        x: 7 * parentContainer.scaleFactor
+                        width: 66 * parentContainer.scaleFactor
                     }
                     PropertyChanges {
                         target: yearFrame
-                        x: 0
-                        ojectWidth: 78
-                        ojectHeight: 43
+                        x: 0 * parentContainer.scaleFactor
+                        ojectWidth: 78 * parentContainer.scaleFactor
+                        ojectHeight: 43 * parentContainer.scaleFactor
                         yearFormatString: "Long"
                     }
                 }
@@ -366,10 +366,10 @@ Item {
 
             Image {
                 id: yearBackground
-                x: 7
-                y: 3
-                width: 66
-                height: 36
+                x: 7 * parentContainer.scaleFactor
+                y: 3 * parentContainer.scaleFactor
+                width: 66 * parentContainer.scaleFactor
+                height: 36 * parentContainer.scaleFactor
                 smooth: true
                 mipmap: true
                 source: "./textBackgroundRound.png"
@@ -392,7 +392,7 @@ Item {
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
 
-                font.pointSize: 14
+                font.pointSize: 14 * parentContainer.scaleFactor
                 font.family: fixedFont.name
                 color: main.textColour
             }
@@ -400,15 +400,15 @@ Item {
             Item {
                 id: yearFrame
 
-                property int ojectWidth: 78
-                property int ojectHeight: 43
+                property int ojectWidth: 78 * parentContainer.scaleFactor
+                property int ojectHeight: 43 * parentContainer.scaleFactor
 
                 property string yearFormatString: "Long"
 
                 Image {
                     id: yearFrameShadowImage
-                    x: 2
-                    y: 2
+                    x: 2 * parentContainer.scaleFactor
+                    y: 2 * parentContainer.scaleFactor
                     width: parent.ojectWidth
                     height: parent.ojectHeight
 
@@ -432,11 +432,11 @@ Item {
 
         Image {
             id: calendarImage
-            x: 0
-            y: 0
+            x: 0 * parentContainer.scaleFactor
+            y: 0 * parentContainer.scaleFactor
 
-            width: 182
-            height: 90
+            width: 182 * parentContainer.scaleFactor
+            height: 90 * parentContainer.scaleFactor
 
             smooth: true
             mipmap: true
@@ -444,10 +444,10 @@ Item {
 
             MouseArea {
                 id: yearFormat
-                x: 129
-                y: 81
-                width: 8
-                height: 8
+                x: 129 * parentContainer.scaleFactor
+                y: 81 * parentContainer.scaleFactor
+                width: 8 * parentContainer.scaleFactor
+                height: 8 * parentContainer.scaleFactor
                 cursorShape: Qt.PointingHandCursor
 
                 Component.onCompleted: {
@@ -461,10 +461,10 @@ Item {
 
             MouseArea {
                 id: colorSwitch
-                x: 131
-                y: 25
-                width: 9
-                height: 9
+                x: 131 * parentContainer.scaleFactor
+                y: 25 * parentContainer.scaleFactor
+                width: 9 * parentContainer.scaleFactor
+                height: 9 * parentContainer.scaleFactor
                 cursorShape: Qt.PointingHandCursor
 
                 Component.onCompleted: {
@@ -480,10 +480,10 @@ Item {
 
             MouseArea {
                 id: realTimeSwitch
-                x: 0
-                y: 49
-                width: 13
-                height: 14
+                x: 0 * parentContainer.scaleFactor
+                y: 49 * parentContainer.scaleFactor
+                width: 13 * parentContainer.scaleFactor
+                height: 14 * parentContainer.scaleFactor
                 cursorShape: Qt.PointingHandCursor
 
                 Component.onCompleted: {
@@ -498,16 +498,16 @@ Item {
 
         Item {
             id: lookingGlassItem
-            x: 123
-            y: 23
+            x: 123 * parentContainer.scaleFactor
+            y: 23 * parentContainer.scaleFactor
 
-            property int ojectWidth: 70
-            property int ojectHeight: 95
+            property int ojectWidth: 70 * parentContainer.scaleFactor
+            property int ojectHeight: 95 * parentContainer.scaleFactor
 
             Image {
                 id: lookingGlassShadowImage
-                x: 3
-                y: 3
+                x: 3 * parentContainer.scaleFactor
+                y: 3 * parentContainer.scaleFactor
 
                 width: parent.ojectWidth
                 height: parent.ojectHeight
@@ -519,7 +519,7 @@ Item {
                 transform: Rotation {
                     id: lookingGlassShadowImageRotation
                     origin.x: lookingGlassShadowImage.width / 2
-                    origin.y: 33
+                    origin.y: 33 * parentContainer.scaleFactor
                     angle: 0
                     Behavior on angle {
                         SpringAnimation {
@@ -533,11 +533,11 @@ Item {
 
             Image {
                 id: lookingGlassGlassImage
-                x: 12
-                y: 10
+                x: 12 * parentContainer.scaleFactor
+                y: 10 * parentContainer.scaleFactor
 
-                width: 46
-                height: 30
+                width: 46 * parentContainer.scaleFactor
+                height: 30 * parentContainer.scaleFactor
 
                 smooth: true
                 mipmap: true
@@ -556,7 +556,7 @@ Item {
                 transform: Rotation {
                     id: lookingGlassImageRotation
                     origin.x: lookingGlassImage.width / 2
-                    origin.y: 33
+                    origin.y: 33 * parentContainer.scaleFactor
                     angle: 0
                     Behavior on angle {
                         ParallelAnimation {
@@ -576,10 +576,10 @@ Item {
 
                 MouseArea {
                     id: lookingGlassHandleSwitch
-                    x: 31
-                    y: 70
-                    width: 10
-                    height: 24
+                    x: 31 * parentContainer.scaleFactor
+                    y: 70 * parentContainer.scaleFactor
+                    width: 10 * parentContainer.scaleFactor
+                    height: 24 * parentContainer.scaleFactor
                     cursorShape: Qt.PointingHandCursor
 
                     Component.onCompleted: {
@@ -594,10 +594,10 @@ Item {
 
                 MouseArea {
                     id: lookingGlassButtonSwitch
-                    x: 54
-                    y: 10
-                    width: 12
-                    height: 12
+                    x: 54 * parentContainer.scaleFactor
+                    y: 10 * parentContainer.scaleFactor
+                    width: 12 * parentContainer.scaleFactor
+                    height: 12 * parentContainer.scaleFactor
                     cursorShape: Qt.PointingHandCursor
 
                     visible: false
