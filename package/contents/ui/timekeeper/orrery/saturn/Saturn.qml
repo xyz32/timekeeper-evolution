@@ -6,7 +6,7 @@ Item {
     width: smallWidth
     height: smallHeight
 
-    readonly property int smallWidth: 26  * parentContainer.scaleFactor //bigger then jupiter if we include rings
+    readonly property int smallWidth: 26 * parentContainer.scaleFactor //bigger then jupiter if we include rings
     readonly property int smallHeight: 26 * parentContainer.scaleFactor
 
     readonly property int largeWidth: smallWidth * (planetSmallLargeRasio - 1) * 2.8985
@@ -79,11 +79,11 @@ Item {
     }
 
     Image {
-        x: 0 //(parent.width - parent.height) / 2
-        y: - shadowOffset
+        x: saturn.width / 4 //(parent.width - parent.height) / 2
+        y: saturn.height / 4 - shadowOffset
 
-        width: parent.width
-        height: parent.height
+        width: saturn.width / 2
+        height: saturn.height / 2
 
         smooth: true
         mipmap: true
