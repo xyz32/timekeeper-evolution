@@ -13,8 +13,8 @@ Item {
     property int framesPerHour: earthNumFrames / 24
     property int framesPerMin: 60 / framesPerHour
 
-    readonly property int smallWidth: 15
-    readonly property int smallHeight: 15
+    readonly property int smallWidth: 15 * parentContainer.scaleFactor
+    readonly property int smallHeight: 15 * parentContainer.scaleFactor
 
     readonly property int largeWidth: smallWidth * planetSmallLargeRasio
     readonly property int largeHeight: smallHeight * planetSmallLargeRasio

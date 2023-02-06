@@ -6,8 +6,8 @@ Item {
     width: smallWidth
     height: smallHeight
 
-    readonly property int smallWidth: 48
-    readonly property int smallHeight: 48
+    readonly property int smallWidth: 48 * parentContainer.scaleFactor
+    readonly property int smallHeight: 48 * parentContainer.scaleFactor
 
     readonly property int largeWidth: smallWidth * planetSmallLargeRasio
     readonly property int largeHeight: smallHeight * planetSmallLargeRasio

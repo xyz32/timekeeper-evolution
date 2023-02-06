@@ -6,8 +6,8 @@ Item {
     width: smallWidth
     height: smallHeight
 
-    readonly property int smallWidth: 26 //bigger then jupiter if we include rings
-    readonly property int smallHeight: 26
+    readonly property int smallWidth: 26  * parentContainer.scaleFactor //bigger then jupiter if we include rings
+    readonly property int smallHeight: 26 * parentContainer.scaleFactor
 
     readonly property int largeWidth: smallWidth * (planetSmallLargeRasio - 1) * 2.8985
     readonly property int largeHeight: smallHeight * (planetSmallLargeRasio - 1)
@@ -81,9 +81,9 @@ Item {
     Image {
         x: 0 //(parent.width - parent.height) / 2
         y: - shadowOffset
-        anchors.fill: parent
-        fillMode: Image.PreserveAspectFit
-        anchors.centerIn: parent
+
+        width: parent.width
+        height: parent.height
 
         smooth: true
         mipmap: true
