@@ -2,8 +2,8 @@ import QtQuick 2.3
 
 Item{
     id:clockCogs
-    width: 132;
-    height: 93
+    width: 132 * parentContainer.scaleFactor
+    height: 93 * parentContainer.scaleFactor
 
     state: plasmoid.configuration.cogsState
 
@@ -21,16 +21,16 @@ Item{
             name: "hide";
             PropertyChanges {
                 target: clockCogs;
-                x: 10;
-                y: 25;
+                x: 10 * parentContainer.scaleFactor
+                y: 25 * parentContainer.scaleFactor
             }
         },
         State {
             name: "in";
             PropertyChanges {
                 target: clockCogs;
-                x: -26;
-                y: 137;
+                x: -26 * parentContainer.scaleFactor
+                y: 137 * parentContainer.scaleFactor
             }
             when: {
                 clock.state === "in" && clockCogs.state != "hide"
@@ -40,7 +40,7 @@ Item{
             name: "out";
             PropertyChanges {
                 target: clockCogs;
-                x: -5;
+                x: -5 * parentContainer.scaleFactor
             }
             when: {
                 clock.state === "out" && clockCogs.state != "hide"
@@ -60,16 +60,16 @@ Item{
 
     Item {
         id: cogItem
-        x: 50
-        y: -17
+        x: 50 * parentContainer.scaleFactor
+        y: -17 * parentContainer.scaleFactor
 
-        property int ojectWidth: 82
-        property int ojectHeight: 82
+        property int ojectWidth: 82 * parentContainer.scaleFactor
+        property int ojectHeight: 82 * parentContainer.scaleFactor
 
         Image {
             id: cogShadowImage
-            x: 10
-            y: 10
+            x: 10 * parentContainer.scaleFactor
+            y: 10 * parentContainer.scaleFactor
 
             width: parent.ojectWidth
             height: parent.ojectHeight
@@ -125,13 +125,13 @@ Item{
     Item {
         id: wheelItem
 
-        property int ojectWidth: 92
-        property int ojectHeight: 92
+        property int ojectWidth: 92 * parentContainer.scaleFactor
+        property int ojectHeight: 92 * parentContainer.scaleFactor
 
         Image {
             id: wheelShadowImage
-            x: 10
-            y: 10
+            x: 10 * parentContainer.scaleFactor
+            y: 10 * parentContainer.scaleFactor
 
             width: parent.ojectWidth
             height: parent.ojectHeight
@@ -181,15 +181,15 @@ Item{
     Item {
         id: drivebeltItem
 
-        x: 23
-        y: -5
+        x: 23 * parentContainer.scaleFactor
+        y: -5 * parentContainer.scaleFactor
 
-        property int ojectWidth: 73
-        property int ojectHeight: 73
+        property int ojectWidth: 73 * parentContainer.scaleFactor
+        property int ojectHeight: 73 * parentContainer.scaleFactor
 
         Image {
-            x: 5
-            y: 5
+            x: 5 * parentContainer.scaleFactor
+            y: 5 * parentContainer.scaleFactor
 
             width: parent.ojectWidth
             height: parent.ojectHeight
@@ -211,9 +211,11 @@ Item{
 
             MouseArea {
                 id: tiktak_ma
-                x: 15
-                y: 44
-                width: 14; height: 14
+                x: 15 * parentContainer.scaleFactor
+                y: 44 * parentContainer.scaleFactor
+                width: 14 * parentContainer.scaleFactor
+                height: 14 * parentContainer.scaleFactor
+
                 cursorShape: Qt.PointingHandCursor
 
                 Component.onCompleted: {

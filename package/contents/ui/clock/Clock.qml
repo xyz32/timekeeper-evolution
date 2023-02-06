@@ -9,8 +9,8 @@ Item {
     state: plasmoid.configuration.clockState
     property string weekDay
 
-    readonly property int handCenterX: 83
-    readonly property int handCenterY: 83
+    readonly property int handCenterX: 83 * parentContainer.scaleFactor
+    readonly property int handCenterY: 83 * parentContainer.scaleFactor
 
     property double ringDegree: 0
 
@@ -54,14 +54,14 @@ Item {
     Item {
         id: clockItem
 
-        property int ojectWidth: 164
-        property int ojectHeight: 164
+        property int ojectWidth: 164 * parentContainer.scaleFactor
+        property int ojectHeight: 164 * parentContainer.scaleFactor
 
         Image {
             id: backgroundShadow;
 
-            x:12
-            y:12
+            x:12 * parentContainer.scaleFactor
+            y:12 * parentContainer.scaleFactor
 
             width: parent.ojectWidth
             height: parent.ojectHeight
@@ -75,10 +75,10 @@ Item {
             id: cloackWeekDay
             Image {
                 id: weekBackgroundImage;
-                x: 60
-                y: 102
-                width: 47
-                height: 20
+                x: 60 * parentContainer.scaleFactor
+                y: 102 * parentContainer.scaleFactor
+                width: 47 * parentContainer.scaleFactor
+                height: 20 * parentContainer.scaleFactor
 
                 smooth: true
                 mipmap: true
@@ -101,7 +101,7 @@ Item {
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
 
-                font.pointSize: 9
+                font.pointSize: 9 * parentContainer.scaleFactor
                 font.family: fixedFont.name
                 font.bold: true
                 color: main.textColour
@@ -126,8 +126,8 @@ Item {
             x: (parent.ojectWidth / 2 - center.x)
             y: (parent.ojectHeight / 2 - center.y)
 
-            width: 130 // 108 for inner radius
-            height: 130 // 108 for inner radius
+            width: 130 * parentContainer.scaleFactor // 108 for inner radius
+            height: 130 * parentContainer.scaleFactor // 108 for inner radius
 
             property point center : Qt.point(width / 2, height / 2);
             property int outerRingRadius: clockTimeRing.paintedWidth / 2
@@ -203,11 +203,11 @@ Item {
         Image {
             id: buttonLeftImage
 
-            x: 57
-            y: 85
+            x: 57 * parentContainer.scaleFactor
+            y: 85 * parentContainer.scaleFactor
 
-            width: 12
-            height: 12
+            width: 12 * parentContainer.scaleFactor
+            height: 12 * parentContainer.scaleFactor
 
             smooth: true
             mipmap: true
@@ -233,11 +233,11 @@ Item {
         Image {
             id: buttonRightImage
 
-            x: 97
-            y: 85
+            x: 97 * parentContainer.scaleFactor
+            y: 85 * parentContainer.scaleFactor
 
-            width: 12
-            height: 12
+            width: 12 * parentContainer.scaleFactor
+            height: 12 * parentContainer.scaleFactor
 
             smooth: true
             mipmap: true
@@ -263,10 +263,10 @@ Item {
 
         Image {
             id: secondsHandImage
-            x: 82 - (width / 2)
-            y: 53 - height + 2
+            x: 82 * parentContainer.scaleFactor - (width / 2)
+            y: 53 * parentContainer.scaleFactor - height + 2
 
-            height: 20
+            height: 20 * parentContainer.scaleFactor
             fillMode: Image.PreserveAspectFit
 
             source: "second.png"
@@ -306,8 +306,8 @@ Item {
         Item {
             id: hourItem
 
-            property int handSize: 55
-            property int pivotOffset: 3
+            property int handSize: 55 * parentContainer.scaleFactor
+            property int pivotOffset: 3 * parentContainer.scaleFactor
 
             Image {
                 id: hourHandShadowImage
@@ -378,8 +378,8 @@ Item {
 
         Item {
             id: minuteItem
-            property int handSize: 68
-            property int pivotOffset: 4
+            property int handSize: 68 * parentContainer.scaleFactor
+            property int pivotOffset: 4 * parentContainer.scaleFactor
 
             Image {
                 id: minuteHandShadowImage
@@ -452,13 +452,13 @@ Item {
             x: clock.handCenterX - (ojectWidth / 2)
             y: clock.handCenterY - (ojectHeight / 2)
 
-            property int ojectWidth: 14
-            property int ojectHeight: 14
+            property int ojectWidth: 14 * parentContainer.scaleFactor
+            property int ojectHeight: 14 * parentContainer.scaleFactor
 
             Image {
                 id: centerShadowImage
-                x: 2
-                y: 2
+                x: 2 * parentContainer.scaleFactor
+                y: 2 * parentContainer.scaleFactor
                 width: parent.ojectWidth
                 height: parent.ojectHeight
 
@@ -496,11 +496,11 @@ Item {
         }
 
         Image {
-            x: 26
-            y: 10
+            x: 26 * parentContainer.scaleFactor
+            y: 10 * parentContainer.scaleFactor
 
-            width: 122
-            height: 74
+            width: 122 * parentContainer.scaleFactor
+            height: 74 * parentContainer.scaleFactor
 
             source: "clockglass.png"
             smooth: true
