@@ -3,6 +3,9 @@ import QtQuick 2.3
 Item {
     id: calendarView
 
+    width: 368 * parentContainer.scaleFactor
+    height: 180 * parentContainer.scaleFactor
+
     opacity: plasmoid.configuration.calendarOpacity
     state: plasmoid.configuration.calendarState
 

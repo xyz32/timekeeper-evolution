@@ -3,11 +3,10 @@ import QtQuick 2.3
 import "orrery"
 
 Item {
-    id: frame
+    id: timekeeprView
 
-    //if removed breaks small - large animation
-    width: parent.width
-    height: parent.height
+    width: mainWidth * parentContainer.scaleFactor
+    height: mainHeight * parentContainer.scaleFactor
 
     readonly property var backgroundImages: [
         "frame/backgrounds/glassImmage0.png",
@@ -31,15 +30,15 @@ Item {
     function onCosmosTick(date) {
         var month = date.getMonth()
         var dayOfMonth  = date.getDate()-1
-        frame.monthRingDegree = monthRingAngles[month] - dayOfMonth;
+        timekeeprView.monthRingDegree = monthRingAngles[month] - dayOfMonth;
         orrery.setDateTime(date);
         calendar.setDateTime(date);
         clock.setDate(date);
     }
 
     function onAnimationTick() {
-        if (!frame.lock && parseInt(main.realDateTime.getTime()/1000) % 7 == 0) {
-            frame.bigCogRingAngle = (frame.bigCogRingAngle + 10) % 360;
+        if (!timekeeprView.lock && parseInt(main.realDateTime.getTime()/1000) % 7 == 0) {
+            timekeeprView.bigCogRingAngle = (timekeeprView.bigCogRingAngle + 10) % 360;
             calendar.cogAngle = (calendar.cogAngle + 10) % 360;
         }
     }
@@ -47,15 +46,15 @@ Item {
     Component.onCompleted: {
 
         //set the background based on what is stored in the configs, and remove the user defined backgorund if empoty.
-        for (var i = 0; i < frame.backgroundImages.length; i++) {
-            if (frame.backgroundImages[i] && plasmoid.configuration.backgroundImage === frame.backgroundImages[i]) {
+        for (var i = 0; i < timekeeprView.backgroundImages.length; i++) {
+            if (timekeeprView.backgroundImages[i] && plasmoid.configuration.backgroundImage === timekeeprView.backgroundImages[i]) {
                 backgroundImgAnimator.selectedImg = i;
                 break;
             }
         }
 
-        backgroundImg.source = frame.backgroundImages[backgroundImgAnimator.selectedImg];
-        backgroundImg.selected = frame.backgroundImages[backgroundImgAnimator.selectedImg];
+        backgroundImg.source = timekeeprView.backgroundImages[backgroundImgAnimator.selectedImg];
+        backgroundImg.selected = timekeeprView.backgroundImages[backgroundImgAnimator.selectedImg];
     }
     
     Image {
@@ -84,14 +83,14 @@ Item {
         function changeImage() {
             if (!imageFlipAnnimation.running) {
                 do {
-                    if (selectedImg < frame.backgroundImages.length) {
+                    if (selectedImg < timekeeprView.backgroundImages.length) {
                         selectedImg ++;
                     } else {
                         selectedImg = 0;
                     }
                 }
-                while (frame.backgroundImages[selectedImg] === "" || !frame.backgroundImages[selectedImg]);
-                backgroundImg.selected = frame.backgroundImages[selectedImg];
+                while (timekeeprView.backgroundImages[selectedImg] === "" || !timekeeprView.backgroundImages[selectedImg]);
+                backgroundImg.selected = timekeeprView.backgroundImages[selectedImg];
 
                 state = "onChangeIn";
             }
@@ -179,7 +178,7 @@ Item {
         transform: Rotation {
             origin.x: monthRing.width / 2
             origin.y: monthRing.height / 2
-            angle: {(frame.monthRingDegree + 360) % 360;}
+            angle: {(timekeeprView.monthRingDegree + 360) % 360;}
             Behavior on angle {
                 SpringAnimation { 
                     spring: 2
@@ -218,7 +217,7 @@ Item {
                     delta = angleDifference(angle, prevAngle);
                     cumulatedAngle += delta;
 
-                    frame.bigCogRingAngle = (frame.bigCogRingAngle - delta) % 360
+                    timekeeprView.bigCogRingAngle = (timekeeprView.bigCogRingAngle - delta) % 360
                     calendar.cogAngle = (calendar.cogAngle - delta) % 360
 
                     if(Math.abs(cumulatedAngle) > 1) {
@@ -247,7 +246,7 @@ Item {
         transform: Rotation {
             origin.x: bigCogRingImage.width / 2
             origin.y: bigCogRingImage.height / 2
-            angle: {(360 - frame.bigCogRingAngle + 360) % 360}
+            angle: {(360 - timekeeprView.bigCogRingAngle + 360) % 360}
             Behavior on angle {
                 ParallelAnimation {
                     SpringAnimation {

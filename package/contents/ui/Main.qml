@@ -15,7 +15,6 @@ import "sounds"
 
 Item {
     id: main
-    anchors.fill: parent
 
     readonly property bool debug: false
 
@@ -84,14 +83,14 @@ Item {
                     scale: 0.3
                     rotation: 360
                     x: -100 * parentContainer.scaleFactor
-                    y: -80 * parentContainer.scaleFactor
+                    y: -90 * parentContainer.scaleFactor
                 }
 
                 PropertyChanges {
                     target: calendar;
                     scale: 0.3
-                    x: 40 * parentContainer.scaleFactor
-                    y: 100 * parentContainer.scaleFactor
+                    x: -40 * parentContainer.scaleFactor
+                    y: 40 * parentContainer.scaleFactor
                 }
             }
         ]
@@ -104,8 +103,8 @@ Item {
         },
         Transition {
             from: "*"; to: "small"
-            NumberAnimation { properties: "scale"; duration: 700 }
-            NumberAnimation { properties: "rotation, x, y "; duration: 2700 }
+            NumberAnimation { properties: "scale"; duration: 1500 }
+            NumberAnimation { properties: "rotation, x, y "; duration: 2000 }
         }
     ]
 
@@ -144,7 +143,7 @@ Item {
         property double scaleFactor: Math.min(width / mainWidth, height / mainHeight)
 
         Timekeeper{ // frame backgroound
-            id: timekeeper;
+            id: timekeeper
             z: 1
         }
 
