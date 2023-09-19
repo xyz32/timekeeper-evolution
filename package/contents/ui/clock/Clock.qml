@@ -100,8 +100,7 @@ Item {
 
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
-
-                font.pointSize: 9 * parentContainer.scaleFactor
+                font.pixelSize: 11 * parentContainer.scaleFactor
                 font.family: fixedFont.name
                 font.bold: true
                 color: main.textColour

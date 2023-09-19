@@ -245,7 +245,7 @@ Item {
                 text: day
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
-                font.pointSize: 13 * parentContainer.scaleFactor
+                font.pixelSize: 14 * parentContainer.scaleFactor
                 font.family: fixedFont.name
                 color: main.textColour
             }
@@ -278,7 +278,7 @@ Item {
                 text: month
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
-                font.pointSize: 14 * parentContainer.scaleFactor
+                font.pixelSize: 14 * parentContainer.scaleFactor
                 font.family: fixedFont.name
                 color: main.textColour
             }
@@ -395,7 +395,7 @@ Item {
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
 
-                font.pointSize: 14 * parentContainer.scaleFactor
+                font.pixelSize: 14 * parentContainer.scaleFactor
                 font.family: fixedFont.name
                 color: main.textColour
             }
