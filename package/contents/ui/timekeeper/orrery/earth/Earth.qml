@@ -162,13 +162,20 @@ Item {
         x: planetFlip.x + (planetFlip.width / 2) - (moon.width / 2)
         y: planetFlip.y + (planetFlip.height / 2) - (moon.height / 2) + moon.planetoffset
 
-        transform: Rotation {
-            origin.x: moon.width / 2
-            origin.y: moon.height / 2 - moon.planetoffset
-            angle: moon.planetTrueAnomaly
-            Behavior on angle {
-                SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
+        transform: [
+            Rotation {
+                origin.x: moon.width / 2
+                origin.y: moon.height / 2
+                angle: 180
+            },
+            Rotation {
+                origin.x: moon.width / 2
+                origin.y: moon.height / 2 - moon.planetoffset
+                angle: moon.planetTrueAnomaly
+                Behavior on angle {
+                    SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
+                }
             }
-        }
+        ]
     }
 }
