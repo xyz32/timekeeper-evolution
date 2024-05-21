@@ -6,7 +6,7 @@ DISTFILES += \
     package/contents/config/config.qml \
     package/contents/config/main.xml \
     package/contents/screenshot.png \
-    package/contents/ui/Main.qml \
+    package/contents/ui/main.qml \
     package/contents/ui/calendar/Calendar.qml \
     package/contents/ui/calendar/calendar.png \
     package/contents/ui/calendar/calendarLongYear.png \

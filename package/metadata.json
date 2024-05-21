@@ -1,0 +1,19 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "xyz.relativity@gmail.com",
+                "Name": "Radu"
+            }
+        ],
+        "Category": "Date and Time",
+        "Description": "It provides a clock and calendar functions via a steampunk interface.",
+        "Icon": "desktop",
+        "Id": "com.github.xyz32.timekeeper",
+        "Name": "Time Keeper Evolution",
+        "Version": "3.0",
+        "Website": "https://github.com/xyz32/timekeeper"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "KPackageStructure": "Plasma/Applet"
+}

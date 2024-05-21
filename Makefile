@@ -24,3 +24,4 @@ plasmoid:
 clean:
 			find . -type f -name '*.qmlc' -delete
 			find . -type f -name '*.jsc'  -delete
+

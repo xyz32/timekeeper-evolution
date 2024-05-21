@@ -1,5 +1,5 @@
 import QtQuick 2.3
-import QtMultimedia 5.0
+import QtMultimedia
 
 Item {
     id: sounds
@@ -64,51 +64,43 @@ Item {
         plasmoid.configuration.soundTheme = soundTheem;
     }
 
-    Audio {
+    MediaPlayer {
         id: secondsCogSoundOdd
-        muted: !plasmoid.configuration.secondHandSound
         property string src: "./" + soundTheemPath + "/secondsCogOdd.wav"
     }
 
-    Audio {
+    MediaPlayer {
         id: secondsCogSoundEven
-        muted: !plasmoid.configuration.secondHandSound
         property string src: "./" + soundTheemPath + "/secondsCogEven.wav"
     }
 
-    Audio {
+    MediaPlayer {
         id: minutesCogSound
-        muted: !plasmoid.configuration.minuteHandSound
         property string src: "./" + soundTheemPath + "/minutesCog.wav"
     }
 
-    Audio {
+    MediaPlayer {
         id: hourCogSound
-        muted: !plasmoid.configuration.hourHandSound
         property string src: "./" + soundTheemPath + "/hourCog.wav"
     }
 
-    Audio {
+    MediaPlayer {
         id: chimeSound
-        muted: !plasmoid.configuration.chimeSound
         property string src: "./" + soundTheemPath + "/chime.wav"
     }
 
-    Audio {
+    MediaPlayer {
         id: clockMechanismCogSound
-        muted: !plasmoid.configuration.cogsSound
         property string src: "./" + soundTheemPath + "/clockMechanismCog.wav"
     }
 
-    Audio {
+    MediaPlayer {
         id: bigWheelCogSound
-        muted: !plasmoid.configuration.cogsSound
         property string src: "./" + soundTheemPath + "/bigWheelCog.wav"
     }
 
-    Audio {
+    MediaPlayer {
         id: switchingSound
-        muted: false
         property string src: "./switching.wav"
     }
 }

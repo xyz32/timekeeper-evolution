@@ -1,7 +1,7 @@
-import QtQuick 2.3
-import QtQuick.Layouts 1.0
-import org.kde.plasma.components 3.0
-import org.kde.plasma.plasmoid 2.0
+import QtQuick
+import QtQuick.Layouts
+import org.kde.plasma.components
+import org.kde.plasma.plasmoid
 
 //background
 import "timekeeper"
@@ -125,7 +125,6 @@ Item {
 
     FontLoader {
         id:   fixedFont;
-        name: fontName;
         source: "font/Engravers_MT.ttf";
         onStatusChanged: {
             if (fixedFont.status == FontLoader.Error) console.log("Cannot load font");
