@@ -1,6 +1,5 @@
 import QtQuick
 import QtMultimedia
-import QtQuick3D.SpatialAudio
 
 Item {
     id: sounds
