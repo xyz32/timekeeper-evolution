@@ -1,5 +1,5 @@
-APP_VERSION := $(shell grep "X-KDE-PluginInfo-Version" ./package/metadata.desktop | sed -E  's/(.*)=(.*)/\2/')
-APP_ID := $(shell grep "X-KDE-PluginInfo-Name" ./package/metadata.desktop | sed -E  's/(.*)=(.*)/\2/')
+APP_VERSION := $(shell sed -e '/"Version"/!d' -e 's/.*\: //' -e 's/,//' ./package/metadata.json | tr -d '"')
+APP_ID := $(shell sed -e '/"Id"/!d' -e 's/.*\: //' -e 's/,//' ./package/metadata.json | tr -d '"')
 
 view:
 			plasmoidviewer --size 650x600 --applet package

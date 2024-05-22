@@ -1,5 +1,6 @@
 import QtQuick
 import QtMultimedia
+import QtQuick3D.SpatialAudio
 
 Item {
     id: sounds
@@ -12,7 +13,6 @@ Item {
 
     property int soundTheem: plasmoid.configuration.soundTheme
     property bool playSounds: plasmoid.configuration.playSounds
-    property double soundVolume: plasmoid.configuration.soundVolume
 
     //exported sounds:
     property alias secondsCogSoundOdd: secondsCogSoundOdd
@@ -28,7 +28,6 @@ Item {
 
     function playSound(soundEfect, repeat) {
         if (playSounds && soundEfect && soundEfect.source && !soundEfect.muted) {
-            soundEfect.volume = soundVolume;
             if (!repeat) {
                 repeat = 0;
             }
@@ -66,41 +65,49 @@ Item {
 
     SoundEffect {
         id: secondsCogSoundOdd
+        volume: plasmoid.configuration.soundVolume
         property string src: "./" + soundTheemPath + "/secondsCogOdd.wav"
     }
 
     SoundEffect {
         id: secondsCogSoundEven
+        volume: plasmoid.configuration.soundVolume
         property string src: "./" + soundTheemPath + "/secondsCogEven.wav"
     }
 
     SoundEffect {
         id: minutesCogSound
+        volume: plasmoid.configuration.soundVolume
         property string src: "./" + soundTheemPath + "/minutesCog.wav"
     }
 
     SoundEffect {
         id: hourCogSound
+        volume: plasmoid.configuration.soundVolume
         property string src: "./" + soundTheemPath + "/hourCog.wav"
     }
 
     SoundEffect {
         id: chimeSound
+        volume: plasmoid.configuration.soundVolume
         property string src: "./" + soundTheemPath + "/chime.wav"
     }
 
     SoundEffect {
         id: clockMechanismCogSound
+        volume: plasmoid.configuration.soundVolume
         property string src: "./" + soundTheemPath + "/clockMechanismCog.wav"
     }
 
     SoundEffect {
         id: bigWheelCogSound
+        volume: plasmoid.configuration.soundVolume
         property string src: "./" + soundTheemPath + "/bigWheelCog.wav"
     }
 
     SoundEffect {
         id: switchingSound
+        volume: plasmoid.configuration.soundVolume
         property string src: "./switching.wav"
     }
 }
