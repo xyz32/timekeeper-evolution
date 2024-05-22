@@ -8,7 +8,7 @@
         ],
         "Category": "Date and Time",
         "Description": "It provides a clock and calendar functions via a steampunk interface.",
-        "Icon": "desktop",
+        "Icon": "org.kde.plasma.analogclock",
         "Id": "com.github.xyz32.timekeeper",
         "Name": "Time Keeper Evolution",
         "Version": "3.0",

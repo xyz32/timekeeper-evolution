@@ -6,13 +6,13 @@ view:
 qml:
 			qmlscene ./package/contents/ui/Main.qml
 install:
-			kpackagetool5 -t Plasma/Applet --install package
+			kpackagetool6 -t Plasma/Applet --install package
 upgrade:
-			kpackagetool5 -t Plasma/Applet --upgrade package
+			kpackagetool6 -t Plasma/Applet --upgrade package
 remove:
-			kpackagetool5 -t Plasma/Applet --remove $(APP_ID)
+			kpackagetool6 -t Plasma/Applet --remove $(APP_ID)
 ls:
-			kpackagetool5 --list --type Plasma/Applet
+			kpackagetool6 --list --type Plasma/Applet
 
 plasmoid:
 			rm TimeKeeperEvolution*.plasmoid; cd package; zip -9 -r ../TimeKeeperEvolution-$(APP_VERSION).plasmoid *
@@ -24,4 +24,3 @@ plasmoid:
 clean:
 			find . -type f -name '*.qmlc' -delete
 			find . -type f -name '*.jsc'  -delete
-
