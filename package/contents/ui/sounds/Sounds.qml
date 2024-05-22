@@ -64,42 +64,42 @@ Item {
         plasmoid.configuration.soundTheme = soundTheem;
     }
 
-    MediaPlayer {
+    SoundEffect {
         id: secondsCogSoundOdd
         property string src: "./" + soundTheemPath + "/secondsCogOdd.wav"
     }
 
-    MediaPlayer {
+    SoundEffect {
         id: secondsCogSoundEven
         property string src: "./" + soundTheemPath + "/secondsCogEven.wav"
     }
 
-    MediaPlayer {
+    SoundEffect {
         id: minutesCogSound
         property string src: "./" + soundTheemPath + "/minutesCog.wav"
     }
 
-    MediaPlayer {
+    SoundEffect {
         id: hourCogSound
         property string src: "./" + soundTheemPath + "/hourCog.wav"
     }
 
-    MediaPlayer {
+    SoundEffect {
         id: chimeSound
         property string src: "./" + soundTheemPath + "/chime.wav"
     }
 
-    MediaPlayer {
+    SoundEffect {
         id: clockMechanismCogSound
         property string src: "./" + soundTheemPath + "/clockMechanismCog.wav"
     }
 
-    MediaPlayer {
+    SoundEffect {
         id: bigWheelCogSound
         property string src: "./" + soundTheemPath + "/bigWheelCog.wav"
     }
 
-    MediaPlayer {
+    SoundEffect {
         id: switchingSound
         property string src: "./switching.wav"
     }
