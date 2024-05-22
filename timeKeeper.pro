@@ -1,11 +1,18 @@
 DISTFILES += \
     Makefile \
     README.md \
+    TimeKeeper.cflags \
+    TimeKeeper.cxxflags \
     TimeKeeperEvolution-1.4.plasmoid \
+    TimeKeeperEvolution-2.0.zip \
     package/LICENSE.GPL3 \
     package/contents/config/config.qml \
     package/contents/config/main.xml \
+    package/contents/config/support.png \
+    package/contents/icon.png \
     package/contents/screenshot.png \
+    package/contents/ui/clock/button.png \
+    package/contents/ui/configplasma/cfgSupport.qml \
     package/contents/ui/main.qml \
     package/contents/ui/calendar/Calendar.qml \
     package/contents/ui/calendar/calendar.png \
@@ -241,5 +248,6 @@ DISTFILES += \
     package/contents/ui/timekeeper/orrery/venus/venusFront.png \
     package/contents/ui/timekeeper/orrery/venus/venusTop.png \
     package/metadata.desktop \
+    package/metadata.json \
     tk.jpg \
     tk.qmlproject

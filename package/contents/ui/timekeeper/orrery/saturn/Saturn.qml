@@ -1,4 +1,5 @@
-import QtQuick 2.3
+import QtQuick
+import org.kde.plasma.plasmoid
 
 Item {
     id: saturn;

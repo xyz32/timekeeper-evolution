@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
-import org.kde.plasma.components
 import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
 
 //background
 import "timekeeper"
@@ -13,7 +13,7 @@ import "calendar"
 //Sounds
 import "sounds"
 
-Item {
+PlasmoidItem {
     id: main
 
     readonly property bool debug: false
@@ -29,7 +29,7 @@ Item {
     Layout.preferredWidth: mainWidth
     Layout.preferredHeight: mainHeight
 
-    Plasmoid.backgroundHints: "NoBackground"
+    Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
     readonly property string fontName:   "Engravers MT"
     readonly property string textColour:   "#111111"
