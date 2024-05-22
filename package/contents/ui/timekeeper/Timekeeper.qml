@@ -53,9 +53,8 @@ Item {
             }
         }
 
-        console.log(timekeeprView.backgroundImages[backgroundImgAnimator.selectedImg]);
-        // backgroundImg.source = timekeeprView.backgroundImages[backgroundImgAnimator.selectedImg];
-        // backgroundImg.selected = timekeeprView.backgroundImages[backgroundImgAnimator.selectedImg];
+        backgroundImg.source = timekeeprView.backgroundImages[backgroundImgAnimator.selectedImg];
+        backgroundImg.selected = timekeeprView.backgroundImages[backgroundImgAnimator.selectedImg];
     }
     
     Image {
@@ -66,7 +65,6 @@ Item {
         height: 298 * parentContainer.scaleFactor
         smooth: true
         mipmap: true
-        source: "frame/backgrounds/glassImmage0.png"
 
         property string selected: plasmoid.configuration.backgroundImage
     }
