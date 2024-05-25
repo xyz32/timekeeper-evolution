@@ -220,7 +220,7 @@ ColumnLayout {
         id: fileDialog
         title: i18n("Please choose a file")
         nameFilters: [ "Image files (*.jpg *.png)", "All files (*)" ]
-        selectMultiple: false
+        fileMode: FileDialog.OpenFile
         onAccepted: {
             backImg.text = fileDialog.fileUrls[0]
             Qt.quit()
