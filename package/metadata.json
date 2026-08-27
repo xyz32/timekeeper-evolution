@@ -12,7 +12,7 @@
         "Id": "com.github.xyz32.timekeeper",
         "Name": "Time Keeper Evolution",
         "Version": "3.2",
-        "Website": "https://github.com/xyz32/timekeeper"
+        "Website": "https://github.com/xyz32/timekeeper-evolution"
     },
     "X-Plasma-API-Minimum-Version": "6.0",
     "KPackageStructure": "Plasma/Widget"
