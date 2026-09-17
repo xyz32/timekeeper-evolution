@@ -45,12 +45,12 @@ Item {
     }
 
     function toggleSoundOnOff() {
-        playSounds = !playSounds;
-        plasmoid.configuration.playSounds = playSounds;
-
-        if (!playSounds) {
+        if (playSounds) {
             stopAllSounds();
         }
+
+        playSounds = !playSounds;
+        plasmoid.configuration.playSounds = playSounds;
     }
 
     function nextSoundTheme() {
@@ -64,7 +64,7 @@ Item {
         volume: plasmoid.configuration.soundVolume
         muted: !plasmoid.configuration.secondHandSound
         property url src: Qt.resolvedUrl("./" + soundTheemPath + "/secondsCogOdd.wav")
-        source: src
+        source: sounds.playSounds ? src : ""
     }
 
     SoundEffect {
@@ -72,7 +72,7 @@ Item {
         volume: plasmoid.configuration.soundVolume
         muted: !plasmoid.configuration.secondHandSound
         property url src: Qt.resolvedUrl("./" + soundTheemPath + "/secondsCogEven.wav")
-        source: src
+        source: sounds.playSounds ? src : ""
     }
 
     SoundEffect {
@@ -80,7 +80,7 @@ Item {
         volume: plasmoid.configuration.soundVolume
         muted: !plasmoid.configuration.minuteHandSound
         property url src: Qt.resolvedUrl("./" + soundTheemPath + "/minutesCog.wav")
-        source: src
+        source: sounds.playSounds ? src : ""
     }
 
     SoundEffect {
@@ -88,7 +88,7 @@ Item {
         volume: plasmoid.configuration.soundVolume
         muted: !plasmoid.configuration.hourHandSound
         property url src: Qt.resolvedUrl("./" + soundTheemPath + "/hourCog.wav")
-        source: src
+        source: sounds.playSounds ? src : ""
     }
 
     SoundEffect {
@@ -96,7 +96,7 @@ Item {
         volume: plasmoid.configuration.soundVolume
         muted: !plasmoid.configuration.chimeSound
         property url src: Qt.resolvedUrl("./" + soundTheemPath + "/chime.wav")
-        source: src
+        source: sounds.playSounds ? src : ""
     }
 
     SoundEffect {
@@ -104,7 +104,7 @@ Item {
         volume: plasmoid.configuration.soundVolume
         muted: !plasmoid.configuration.cogsSound
         property url src: Qt.resolvedUrl("./" + soundTheemPath + "/clockMechanismCog.wav")
-        source: src
+        source: sounds.playSounds ? src : ""
     }
 
     SoundEffect {
@@ -112,13 +112,13 @@ Item {
         volume: plasmoid.configuration.soundVolume
         muted: !plasmoid.configuration.cogsSound
         property url src: Qt.resolvedUrl("./" + soundTheemPath + "/bigWheelCog.wav")
-        source: src
+        source: sounds.playSounds ? src : ""
     }
 
     SoundEffect {
         id: switchingSound
         volume: plasmoid.configuration.soundVolume
         property url src: Qt.resolvedUrl("./switching.wav")
-        source: src
+        source: sounds.playSounds ? src : ""
     }
 }
