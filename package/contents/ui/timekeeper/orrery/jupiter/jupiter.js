@@ -12,7 +12,6 @@
 const NUM_MOONS = 4;
 
 var curdate;        // javascript Date object
-var d;		// days since epoch, 1899 Dec 31 12h ET
 
 // Angles of each of the Galilean satellites, in radians,
 // expressed relative to each satellite's inferior conjunction:
@@ -44,9 +43,10 @@ function angle(a)
     if (a < 10000)
         return oangle(a);
     a = a - 2.*Math.PI * parseInt(a / 2. / Math.PI);
-    if (a < 0)
-        a += 2*Math.PI;
-        return a;
+    if (a < 0) {
+        a += 2 * Math.PI;
+    }
+    return a;
 }
 
 function oangle(a)
@@ -185,6 +185,7 @@ function getMoonXYData(whichmoon)
     var r = moonDist[whichmoon];
 
     var moondata = new Object();
+    var xy;
 
     function getShadowXY(angle)
     {
@@ -200,9 +201,9 @@ function getMoonXYData(whichmoon)
 
     // Is the moon directly in front of or behind Jupiter's disk?
     // Then this distance will be <= 1.
-    diskdist = dist(moondata.moonx, moondata.moony);
+    var diskdist = dist(moondata.moonx, moondata.moony);
 
-    s = "moon " + whichmoon;
+    var s = "moon " + whichmoon;
     s += "\nDist = " + r;
     s += "\nmoonAngle = " + moonAngles[whichmoon];
     s += " = " + moonAngles[whichmoon] * 180. / Math.PI;
@@ -252,7 +253,7 @@ function getMoonXYData(whichmoon)
         // at the same distance, would cast a shadow on the planet.
         // If so, the actual moon is eclipsed.
         //atmoslop = 1.0;   // .83 might be worth pursuing
-        atmoslop = .9;
+        var atmoslop = .9;
         xy = getShadowXY(angle(moonAngles[whichmoon] + Math.PI));
         moondata.eclipse = (dist(xy.x, xy.y) < atmoslop);
         s += "\nActual moon at (" + moondata.moonx + ", " + moondata.moony + ")";
@@ -309,11 +310,12 @@ function dist(x, y)
 
 function prettytime(tothrs)
 {
-    if (tothrs < 24)
+    var pt;
+    if (tothrs < 24) {
         pt = tothrs + " hours";
-    else {
-        hrs = tothrs % 24;
-        days = (tothrs-hrs) / 24;
+    } else {
+        var hrs = tothrs % 24;
+        var days = (tothrs - hrs) / 24;
         pt = days + " day";
         if (days != 1)
             pt += "s";
@@ -329,96 +331,58 @@ function prettytime(tothrs)
 //
 // Build a table of upcoming moon events for a given interval.
 //
-function upcomingEvents(date, tothrs)
-{
-    var saveDate = jup.curdate;
-    if (!saveDate) {
-        saveDate = date;
-    }
+function upcomingEvents(date, tothrs) {
+    var saveDate = curdate || date;
+    var interval = 1;
+    var upcoming = "<b>Moon events in the next " + prettytime(tothrs) + "</b>\n\n";
+    var moonNames = [ "Io", "Europa", "Ganymede", "Callisto" ];
+    var eventDate = new Date(date);
+    var lastMoonData = [ null, null, null, null ];
 
-    interval = 1;   // minutes
-    upcoming = "<b>Moon events in the next " + prettytime(tothrs) + "</b>\n\n";
+    for (var mins = -30; mins < tothrs * 60; mins += interval) {
+        eventDate.setTime(date.getTime() + mins * 60 * 1000);
+        setDate(eventDate);
 
-    moonnames = [ "Io", "Europa", "Ganymede", "Callisto" ];
+        var shadowCount = 0;
+        var transitCount = 0;
+        var eventDescription = "";
+        for (var whichmoon = 0; whichmoon < NUM_MOONS; ++whichmoon) {
+            var moonData = getMoonXYData(whichmoon);
 
-    d = new Date(date);
-    lastmoondata  = [ null, null, null, null ];
-    // Moon data includes moonx, moony, shadowx, shadowy, farside, and eclipsed.
+            if (lastMoonData[whichmoon]) {
+                if (moonData.shadowx)
+                    ++shadowCount;
+                if (moonData.transit)
+                    ++transitCount;
 
-    var verbose = false;
+                if (!moonData.moonx && lastMoonData[whichmoon].moonx)
+                    eventDescription += eventDate + ": " + moonNames[whichmoon] + " disappears\n";
+                else if (moonData.moonx && !lastMoonData[whichmoon].moonx && !moonData.eclipse)
+                    eventDescription += eventDate + ": " + moonNames[whichmoon] + " reappears\n";
+                else if (moonData.transit && !lastMoonData[whichmoon].transit)
+                    eventDescription += eventDate + ": " + moonNames[whichmoon] + " begins transit\n";
+                else if (!moonData.transit && lastMoonData[whichmoon].transit)
+                    eventDescription += eventDate + ": " + moonNames[whichmoon] + " ends transit\n";
+                else if (moonData.eclipse && !lastMoonData[whichmoon].eclipse)
+                    eventDescription += eventDate + ": " + moonNames[whichmoon] + " enters eclipse\n";
+                else if (!moonData.eclipse && lastMoonData[whichmoon].eclipse)
+                    eventDescription += eventDate + ": " + moonNames[whichmoon] + " leaves eclipse\n";
 
-    for (mins = -30; mins < tothrs * 60; mins += interval) {
-        d.setTime(date.getTime() + mins * 60 * 1000);
-        setDate(d);
-        if (verbose)
-            upcoming += "\n" + d + "\n";
-
-        // Keep track of how many moons are involved in events
-        nshadows = 0;
-        ntransits = 0;
-
-        thisevent = "";
-        for (var whichmoon = 0; whichmoon < 4; ++whichmoon) {
-            moondata = jup.getMoonXYData(whichmoon);
-            if (verbose) {
-                upcoming += " (" + whichmoon + "):\n";
-                upcoming += JSON.stringify(moondata) + "\n";
+                if (!moonData.shadowx && lastMoonData[whichmoon].shadowx)
+                    eventDescription += eventDate + ": " + moonNames[whichmoon] + "'s shadow disappears\n";
+                else if (moonData.shadowx && !lastMoonData[whichmoon].shadowx)
+                    eventDescription += eventDate + ": " + moonNames[whichmoon] + "'s shadow appears\n";
             }
 
-            if (lastmoondata[whichmoon]) {
-                // Count total events
-                if (moondata.shadowx)
-                    ++nshadows;
-                if (moondata.transit)
-                    ++ntransits;
+            lastMoonData[whichmoon] = JSON.parse(JSON.stringify(moonData));
+        }
 
-                if (!moondata.moonx && lastmoondata[whichmoon].moonx)
-                    thisevent += d + ": "
-                                + moonnames[whichmoon] + " disappears\n";
-                else if (moondata.moonx && ! lastmoondata[whichmoon].moonx) {
-                    if (! moondata.eclipse)
-                        thisevent += d + ": "
-                                    + moonnames[whichmoon] + " reappears\n";
-                }
-
-                else if (moondata.transit && ! lastmoondata[whichmoon].transit)
-                    thisevent += d + ": " + moonnames[whichmoon]
-                                + " begins transit\n";
-                else if (! moondata.transit && lastmoondata[whichmoon].transit)
-                    thisevent += d + ": " + moonnames[whichmoon]
-                                + " ends transit\n";
-
-                else if (moondata.eclipse && ! lastmoondata[whichmoon].eclipse)
-                    thisevent += d + ": " + moonnames[whichmoon]
-                                + " enters eclipse\n";
-                else if (! moondata.eclipse && lastmoondata[whichmoon].eclipse)
-                    thisevent += d + ": " + moonnames[whichmoon]
-                                + " leaves eclipse\n";
-
-                if (!moondata.shadowx && lastmoondata[whichmoon].shadowx)
-                    thisevent += d + ": " + moonnames[whichmoon]
-                                + "'s shadow disappears\n";
-                else if (moondata.shadowx && !lastmoondata[whichmoon].shadowx)
-                    thisevent += d + ": " + moonnames[whichmoon]
-                                + "'s shadow appears\n";
-
-                //if (verbose)
-                //    upcoming += JSON.stringify(lastmoondata[whichmoon]) + "\n"
-            }
-
-            // Ick! This is supposedly the most efficient way to clone
-            // an object in javascript. Can you believe it?
-            lastmoondata[whichmoon] = JSON.parse(JSON.stringify(moondata));
-        } // end loop over whichmoon
-
-        if (thisevent && (nshadows + ntransits > 1))
-            upcoming += "<b>" + pluralize(ntransits, "transit")
-                       + ", " + pluralize(nshadows, "shadow") + ":</b>\n";
-        upcoming += thisevent;
+        if (eventDescription && (shadowCount + transitCount > 1))
+            upcoming += "<b>" + pluralize(transitCount, "transit") + ", " + pluralize(shadowCount, "shadow") + ":</b>\n";
+        upcoming += eventDescription;
     }
 
-    if (saveDate != undefined)
-        setDate(saveDate);
+    setDate(saveDate);
     return upcoming;
 }
 

@@ -4,7 +4,7 @@ APP_ID := $(shell sed -e '/"Id"/!d' -e 's/.*\: //' -e 's/,//' ./package/metadata
 view:
 			plasmoidviewer --size 650x600 --applet package
 qml:
-			qmlscene ./package/contents/ui/Main.qml
+			qmlscene ./package/contents/ui/main.qml
 install:
 			kpackagetool6 -t Plasma/Applet --install package
 upgrade:
@@ -15,7 +15,7 @@ ls:
 			kpackagetool6 --list --type Plasma/Applet
 
 plasmoid:
-			rm TimeKeeperEvolution*.plasmoid; cd package; zip -9 -r ../TimeKeeperEvolution-$(APP_VERSION).plasmoid *
+			rm -f TimeKeeperEvolution*.plasmoid; cd package; zip -9 -r ../TimeKeeperEvolution-$(APP_VERSION).plasmoid *
 7z:
 			cd package; 7z a -tzip ../TimeKeeperEvolution-$(APP_VERSION).plasmoid *
 
