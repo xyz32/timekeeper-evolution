@@ -1,3 +1,4 @@
 .kiro/settings/cli.json
 .qmake.stash
 .qtc_clangd/compile_commands.json
+*.plasmoid

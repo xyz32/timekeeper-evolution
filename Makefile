@@ -16,10 +16,6 @@ ls:
 
 plasmoid:
 			rm -f TimeKeeperEvolution*.plasmoid; cd package; zip -9 -r ../TimeKeeperEvolution-$(APP_VERSION).plasmoid *
-7z:
-			cd package; 7z a -tzip ../TimeKeeperEvolution-$(APP_VERSION).plasmoid *
-
-
 
 clean:
 			find . -type f -name '*.qmlc' -delete
