@@ -15,5 +15,5 @@
         "Website": "https://github.com/xyz32/timekeeper-evolution"
     },
     "X-Plasma-API-Minimum-Version": "6.0",
-    "KPackageStructure": "Plasma/Widget"
+    "KPackageStructure": "Plasma/Applet"
 }
