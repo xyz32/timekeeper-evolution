@@ -196,7 +196,7 @@ Item {
             property double prevAngle
             property double startAngle
 
-            onPressed: {
+            onPressed: function(mouse) {
                 if( inner(mouse.x, mouse.y, monthRing) ){
                     var point =  mapToItem (innerFrame, mouse.x, mouse.y);
                     prevAngle = triAngle(point.x, point.y, monthRing);
@@ -208,7 +208,7 @@ Item {
             onReleased: {
             }
 
-            onPositionChanged: {
+            onPositionChanged: function(mouse) {
                 var angle, delta
                 var point =  mapToItem (innerFrame, mouse.x, mouse.y);
                 if( inner(mouse.x, mouse.y, monthRing) ){

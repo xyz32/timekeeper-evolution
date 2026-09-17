@@ -160,7 +160,7 @@ Item {
                 property double prevAngle
                 property double startAngle
 
-                onPressed: {
+                onPressed: function(mouse) {
                     if( inner(mouse.x, mouse.y, clockTimeRing) )
                     {
                         mouse.accepted = true;
@@ -177,7 +177,7 @@ Item {
                 onReleased: {
                 }
 
-                onPositionChanged: {
+                onPositionChanged: function(mouse) {
                     var angle, delta
                     var point =  mapToItem (background, mouse.x, mouse.y);
                     if( inner(mouse.x, mouse.y, clockTimeRing) ){
