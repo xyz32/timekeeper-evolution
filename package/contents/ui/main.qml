@@ -51,7 +51,7 @@ PlasmoidItem {
 
     Timer {
         id: tickTimer
-        interval: (sounds.playSounds && sounds.secondsCogSoundOdd.hasSound) ? 100 : 1000
+        interval: 1000
         running: true
         repeat: true
         triggeredOnStart: true
