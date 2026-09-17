@@ -222,11 +222,7 @@ ColumnLayout {
         nameFilters: [ "Image files (*.jpg *.png)", "All files (*)" ]
         fileMode: FileDialog.OpenFile
         onAccepted: {
-            backImg.text = fileDialog.fileUrls[0]
-            Qt.quit()
-        }
-        onRejected: {
-            Qt.quit()
+            backImg.text = fileDialog.selectedFile
         }
     }
 }

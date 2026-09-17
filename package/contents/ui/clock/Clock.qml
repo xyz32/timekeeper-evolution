@@ -187,9 +187,10 @@ Item {
                         cumulatedAngle += delta;
                         clock.ringDegree = (clock.ringDegree - delta) % 360;
 
-                        if(Math.abs(cumulatedAngle) > 1) {
-                            updateMinuteCounter(Math.floor(cumulatedAngle));
-                            cumulatedAngle -= Math.floor(cumulatedAngle);
+                        if (Math.abs(cumulatedAngle) > 1) {
+                            var wholeAngle = Math.trunc(cumulatedAngle);
+                            updateMinuteCounter(wholeAngle);
+                            cumulatedAngle -= wholeAngle;
                         }
 
                         prevAngle = angle;

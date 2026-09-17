@@ -220,9 +220,10 @@ Item {
                     timekeeprView.bigCogRingAngle = (timekeeprView.bigCogRingAngle - delta) % 360
                     calendar.cogAngle = (calendar.cogAngle - delta) % 360
 
-                    if(Math.abs(cumulatedAngle) > 1) {
-                        updateDayCounter(Math.floor(cumulatedAngle));
-                        cumulatedAngle -= Math.floor(cumulatedAngle);
+                    if (Math.abs(cumulatedAngle) > 1) {
+                        var wholeAngle = Math.trunc(cumulatedAngle);
+                        updateDayCounter(wholeAngle);
+                        cumulatedAngle -= wholeAngle;
                     }
 
                     prevAngle = angle;

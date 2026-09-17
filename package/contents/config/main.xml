@@ -13,7 +13,7 @@ xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
         
 		<entry name="backgroundImage" type="Path">
             <label>backgroundImage</label>
-			<default>frame/backgrounds/glassImmage.png</default>
+			<default>frame/backgrounds/glassImmage0.png</default>
 		</entry>
         
         <entry name="userBackgroundImage" type="Path">

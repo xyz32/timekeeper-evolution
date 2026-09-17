@@ -65,42 +65,49 @@ Item {
     SoundEffect {
         id: secondsCogSoundOdd
         volume: plasmoid.configuration.soundVolume
+        muted: !plasmoid.configuration.secondHandSound
         property string src: "./" + soundTheemPath + "/secondsCogOdd.wav"
     }
 
     SoundEffect {
         id: secondsCogSoundEven
         volume: plasmoid.configuration.soundVolume
+        muted: !plasmoid.configuration.secondHandSound
         property string src: "./" + soundTheemPath + "/secondsCogEven.wav"
     }
 
     SoundEffect {
         id: minutesCogSound
         volume: plasmoid.configuration.soundVolume
+        muted: !plasmoid.configuration.minuteHandSound
         property string src: "./" + soundTheemPath + "/minutesCog.wav"
     }
 
     SoundEffect {
         id: hourCogSound
         volume: plasmoid.configuration.soundVolume
+        muted: !plasmoid.configuration.hourHandSound
         property string src: "./" + soundTheemPath + "/hourCog.wav"
     }
 
     SoundEffect {
         id: chimeSound
         volume: plasmoid.configuration.soundVolume
+        muted: !plasmoid.configuration.chimeSound
         property string src: "./" + soundTheemPath + "/chime.wav"
     }
 
     SoundEffect {
         id: clockMechanismCogSound
         volume: plasmoid.configuration.soundVolume
+        muted: !plasmoid.configuration.cogsSound
         property string src: "./" + soundTheemPath + "/clockMechanismCog.wav"
     }
 
     SoundEffect {
         id: bigWheelCogSound
         volume: plasmoid.configuration.soundVolume
+        muted: !plasmoid.configuration.cogsSound
         property string src: "./" + soundTheemPath + "/bigWheelCog.wav"
     }
 

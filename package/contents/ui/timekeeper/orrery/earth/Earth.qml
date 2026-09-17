@@ -84,10 +84,10 @@ Item {
     function setDateTime(date) {
         moon.setDateTime(date);
 
-        var hours    = date.getHours();
-        var minutes  = date.getMinutes();
+        var hours = date.getUTCHours();
+        var minutes = date.getUTCMinutes();
 
-        earth.daytimeRotation = (hours * earth.framesPerHour + Math.round((minutes + standardTimezoneOffset) / earth.framesPerMin)) % earth.earthNumFrames;
+        earth.daytimeRotation = (hours * earth.framesPerHour + Math.round(minutes / earth.framesPerMin)) % earth.earthNumFrames;
 
         moon.planetTrueAnomaly = 360 - (moon.degreesPerPhase * moon.phase);
     }

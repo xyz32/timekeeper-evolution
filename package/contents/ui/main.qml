@@ -49,13 +49,6 @@ PlasmoidItem {
     property int dayCounter: 0
     property int minuteCounter: 0
 
-    property int standardTimezoneOffset: {
-        //solve for daylight saving time gap.
-        var janDate = new Date((new Date).getFullYear(), 0, 1);
-        var julDate = new Date((new Date).getFullYear(), 6, 1);
-        return Math.max(janDate.getTimezoneOffset(), julDate.getTimezoneOffset());
-    }
-
     Timer {
         id: tickTimer
         interval: (sounds.playSounds && sounds.secondsCogSoundOdd.hasSound) ? 100 : 1000
