@@ -11,7 +11,7 @@
         "Icon": "org.kde.plasma.analogclock",
         "Id": "com.github.xyz32.timekeeper",
         "Name": "Time Keeper Evolution",
-        "Version": "3.2",
+        "Version": "3.3",
         "Website": "https://github.com/xyz32/timekeeper-evolution"
     },
     "X-Plasma-API-Minimum-Version": "6.0",

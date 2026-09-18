@@ -15,7 +15,7 @@ ls:
 			kpackagetool6 --list --type Plasma/Applet
 
 plasmoid:
-			rm -f TimeKeeperEvolution*.plasmoid; cd package; zip -9 -r ../TimeKeeperEvolution-$(APP_VERSION).plasmoid *
+			rm -f TimeKeeperEvolution*.plasmoid; cd package; zip -9 -r ../TimeKeeperEvolution.plasmoid *
 
 clean:
 			find . -type f -name '*.qmlc' -delete
